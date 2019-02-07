@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
+import java.util.Optional;
 import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
@@ -80,67 +81,16 @@ public class UserService {
 		}
 	}
 	
-	/* TODO: Convert to DAO pattern
-
-	public boolean addUser(User user) {
-		String query = "insert into ACCOUNTS (USERNAME, USER_PASSWORD, FIRST_NAME, LAST_NAME) VALUES('" + user.getUsername() + "','" + user.getPassword() + "','" + user.getFirstName() + "','" + user.getLastName() + "')";
-		logger.debug("SQL: Running query - "+query );
-		try(Statement stmt = this.conn.createStatement()) {
-			stmt.executeUpdate(query);
-			logger.debug("Added user to database!");
-			return true;
-		} catch(SQLException e) {
-			logger.debug("SQL Exception");
-			return false;
-		}
-	}
-	
-	public void removeUser() {
-		// TODO: SQL query to remove user
-	}
-	
-	public boolean validateUser(String username, String encryptedPassword) {
-		String query = "select * from ACCOUNTS where USERNAME = '" + username + "'";
-		
-		try(Statement stmt = this.conn.createStatement()) {
-			ResultSet rs = stmt.executeQuery(query);
-			if(rs.next()) {
-				if(rs.getString("USER_PASSWORD").equals(encryptedPassword)) {
-					return true;
-				}
-				return false;
-			}
-		} catch(SQLException e) {
-			logger.debug("SQL Exception");
-			return false;
-		}
-		return false;
-	}
-	
-	public boolean checkUser(String username) {
-		logger.debug("Checking if username exists: "+username);
-		String query = "select * from ACCOUNTS where USERNAME = '" + username + "'";
-		
-		try(Statement stmt = this.conn.createStatement()) {
-			ResultSet rs = stmt.executeQuery(query);
-			if(rs.next()) {
-				logger.debug(username + " exists");
-				return true;
-			}
-		} catch(SQLException e) {
-			logger.debug("SQL Exception");
-			return false;
-		}
-		return false;
-	}
-	*/
-	
 	public boolean addUser(User user) {
 		return userDao.addUser(user);
 	}
 	
 	public boolean validateUser(String username, String password) {
 		return userDao.validateUser(username, password);
+	}
+	
+	public Optional<User> retrieveUser(String username, String password) {
+		return userDao.retrieveUser(username, password);
 	}
 	
 	public boolean checkUser(String username) {

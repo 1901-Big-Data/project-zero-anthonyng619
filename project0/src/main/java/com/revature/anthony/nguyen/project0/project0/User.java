@@ -26,10 +26,6 @@ public class User {
 		this.lastName = lastName;
 	}
 	
-	public void setup() {
-		// TODO: Setup name, phone, balance, all from database
-	}
-	
 	//---- Getters
 	public String getUsername() {
 		return this.username;
@@ -47,10 +43,17 @@ public class User {
 		return this.lastName;
 	}
 
+	public String getBankAccountId() {
+		return this.bankAccountID;
+	}
 
 	//---- Setters
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	public void setFirstName(String firstName) {
@@ -59,6 +62,10 @@ public class User {
 	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public void setBankAccountId(String id) {
+		this.bankAccountID = id;
 	}
 	
 }

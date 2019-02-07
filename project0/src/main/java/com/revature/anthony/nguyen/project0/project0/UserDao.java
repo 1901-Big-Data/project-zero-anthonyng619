@@ -9,6 +9,8 @@ public interface UserDao {
 	
 	public boolean validateUser(String username, String password);
 	
+	public Optional<User> retrieveUser(String username, String password);
+	
 	public boolean checkUsername(String username);
 	
 	

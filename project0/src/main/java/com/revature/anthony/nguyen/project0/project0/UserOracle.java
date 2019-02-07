@@ -48,7 +48,7 @@ public class UserOracle implements UserDao{
 
 	@Override
 	public boolean validateUser(String username, String password) {
-		String query = "select * from BANKUSERS where USERNAME = ? and ";
+		String query = "select * from BANKUSERS where USERNAME = ? and PASSCODE = ?";
 		
 		try(PreparedStatement stmt = UserService.get().getConnection().prepareStatement(query)) {
 			stmt.setString(1, username);
@@ -64,6 +64,30 @@ public class UserOracle implements UserDao{
 		return false;
 	}
 
+	@Override
+	public Optional<User> retrieveUser(String username, String password) {
+		String query = "select * from BANKUSERS where USERNAME = ? and PASSCODE = ?";
+		
+		try(PreparedStatement stmt = UserService.get().getConnection().prepareStatement(query)) {
+			stmt.setString(1, username);
+			stmt.setString(2, password);
+			ResultSet rs = stmt.executeQuery();
+			User user = new User();
+			if(rs.next()) {
+				user.setUsername(rs.getString("USERNAME"));
+				user.setPassword(rs.getString("PASSCODE"));
+				user.setFirstName(rs.getString("FIRSTNAME"));
+				user.setLastName(rs.getString("LASTNAME"));
+				user.setBankAccountId(rs.getString("BANK_ACCOUNT_ID"));
+				return Optional.of(user);
+			}
+		} catch(SQLException e) {
+			System.err.println("SQL Exception");
+			return Optional.empty();
+		}
+		return Optional.empty();
+	}
+	
 	@Override
 	public boolean checkUsername(String username) {
 		String query = "select * from BANKUSERS where USERNAME = ?";

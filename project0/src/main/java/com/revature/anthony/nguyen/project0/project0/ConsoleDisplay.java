@@ -1,17 +1,19 @@
 package com.revature.anthony.nguyen.project0.project0;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ConsoleDisplay {
 	private Scanner input;
 	private User user;
+	private AccountChecking accountChecking;
 	
 	public ConsoleDisplay() {
 		input = new Scanner(System.in);
 	}
 	
 	public void start() {
-		loginRegister();
+		mainMenu();
 	}
 	
 	public void loginRegister() {
@@ -58,8 +60,12 @@ public class ConsoleDisplay {
 		
 		UserService.get().addUser(user);
 		
-		
-		mainMenu1();
+		try {
+			user = UserService.get().retrieveUser(username, password).get();
+		} catch (NoSuchElementException e) {
+			System.err.println(e);
+			return;
+		}
 	}
 	
 	public void login() {
@@ -69,7 +75,6 @@ public class ConsoleDisplay {
 		String username = input.nextLine();
 		System.out.print("Password:");
 		String password = input.nextLine();
-		
 		while(!UserService.get().validateUser(username, password)) {
 			
 			System.out.println("Username or password is incorrect.");
@@ -78,16 +83,20 @@ public class ConsoleDisplay {
 			System.out.print("Password:");
 			password = input.nextLine();
 		}
-		
-		
-		
-		mainMenu1();
+		try {
+			user = UserService.get().retrieveUser(username, password).get();
+		} catch (NoSuchElementException e) {
+			System.err.println(e);
+			return;
+		}
 	}
 	
-	public void mainMenu1() {
+	public void mainMenu() {
+		if(user == null) {
+			loginRegister();
+		}
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println("Welcome, " + user.getFirstName() + user.getLastName() + "!");
+		System.out.println("Welcome, " + user.getFirstName() + " " + user.getLastName() + "!");
 		System.out.println("How can we service you today?");
-		
 	}
 }
