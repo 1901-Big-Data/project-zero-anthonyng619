@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class ConsoleDisplay {
 	private Scanner input;
+	private User user;
 	
 	public ConsoleDisplay() {
 		input = new Scanner(System.in);
@@ -19,7 +20,7 @@ public class ConsoleDisplay {
     	System.out.println("    1. Register a new account");
     	System.out.println("    2. Login to an existing account");
     	System.out.print("\nPick an option: ");
-    	String choice = input.next();
+    	String choice = input.nextLine();
     
 		switch(choice) {
     	case "1":
@@ -29,7 +30,7 @@ public class ConsoleDisplay {
     		login();
     		break;
     	default:
-    		System.out.print("Please pick a valid option.");
+    		System.out.println("Please pick a valid option.");
     		loginRegister();
     		break;
     	}
@@ -45,8 +46,7 @@ public class ConsoleDisplay {
 		System.out.print("Enter a username: ");
 		String username = input.nextLine();
 		
-		boolean nameChecking = true;
-		while(nameChecking) {
+		while(UserService.get().checkUser(username)) {
 			System.out.println("That username is unavailable. Please enter another one.");
 			System.out.print("Enter a username: ");
 			username = input.nextLine();
@@ -54,12 +54,9 @@ public class ConsoleDisplay {
 		System.out.print("Enter a password: ");
 		String password = input.nextLine(); // TODO: Hash this in the future.
 		
-		User user = User.get(username, password);
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setBalance(0.0);
+		user = new User(username, password, firstName, lastName);
 		
-		DBConnection.getDBConnection().addUser(user);
+		UserService.get().addUser(user);
 		
 		
 		mainMenu1();
@@ -73,9 +70,8 @@ public class ConsoleDisplay {
 		System.out.print("Password:");
 		String password = input.nextLine();
 		
-		boolean validated = false;
-		while(!validated) {
-			validated = DBConnection.getDBConnection().validateUser(username, password) ? true: false;
+		while(!UserService.get().validateUser(username, password)) {
+			
 			System.out.println("Username or password is incorrect.");
 			System.out.print("Username:");
 			username = input.nextLine();
@@ -90,11 +86,7 @@ public class ConsoleDisplay {
 	
 	public void mainMenu1() {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		if(User.get() == null) { // Null check 
-			register();
-			return;
-		}
-		System.out.println("Welcome, " + User.get().getFirstName() + User.get().getLastName() + "!");
+		System.out.println("Welcome, " + user.getFirstName() + user.getLastName() + "!");
 		System.out.println("How can we service you today?");
 		
 	}

@@ -14,7 +14,7 @@ public class App
         System.out.println("Initializing the Bank of Revature.");
         System.out.println("Establishing connection... Please wait.");
         
-        DBConnection dbConn = DBConnection.getDBConnection();
+        UserService dbConn = UserService.get();
         if(!dbConn.connect()) {
         	System.out.println("Connection to the bank's database failed.");
         	return;

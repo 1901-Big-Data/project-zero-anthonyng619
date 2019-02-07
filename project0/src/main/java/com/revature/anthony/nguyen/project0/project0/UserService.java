@@ -10,8 +10,9 @@ import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class DBConnection {
-	private static DBConnection dbConn;
+public class UserService {
+	private static UserService dbConn;
+	private UserDao userDao;
 	private Connection conn;
 	private Properties props;
 	private Logger logger;
@@ -19,18 +20,19 @@ public class DBConnection {
 	/**
 	 * Private constructor for DBConnection.
 	 */
-	private DBConnection() {
+	private UserService() {
 		this.props = new Properties();
 		logger = LogManager.getRootLogger();
+		userDao = UserOracle.get();
 	}
 	
 	/**
 	 * Creates a singleton for DBConnection.
 	 * @return DBConnection The singleton
 	 */
-	public static DBConnection getDBConnection() {
+	public static UserService get() {
 		if(dbConn == null) {
-			dbConn = new DBConnection();
+			dbConn = new UserService();
 			return dbConn;
 		}
 		else {
@@ -78,8 +80,10 @@ public class DBConnection {
 		}
 	}
 	
+	/* TODO: Convert to DAO pattern
+
 	public boolean addUser(User user) {
-		String query = "insert into ACCOUNTS (USERNAME, USER_PASSWORD, FIRST_NAME, LAST_NAME, BALANCE) VALUES('" + user.getUsername() + "','" + user.getPassword() + "','" + user.getFirstName() + "','" + user.getLastName() + "'," + user.getBalance() + ")";
+		String query = "insert into ACCOUNTS (USERNAME, USER_PASSWORD, FIRST_NAME, LAST_NAME) VALUES('" + user.getUsername() + "','" + user.getPassword() + "','" + user.getFirstName() + "','" + user.getLastName() + "')";
 		logger.debug("SQL: Running query - "+query );
 		try(Statement stmt = this.conn.createStatement()) {
 			stmt.executeUpdate(query);
@@ -120,6 +124,7 @@ public class DBConnection {
 		try(Statement stmt = this.conn.createStatement()) {
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()) {
+				logger.debug(username + " exists");
 				return true;
 			}
 		} catch(SQLException e) {
@@ -128,9 +133,19 @@ public class DBConnection {
 		}
 		return false;
 	}
+	*/
 	
+	public boolean addUser(User user) {
+		return userDao.addUser(user);
+	}
 	
+	public boolean validateUser(String username, String password) {
+		return userDao.validateUser(username, password);
+	}
 	
+	public boolean checkUser(String username) {
+		return userDao.checkUsername(username);
+	}
 	
 	public Connection getConnection() {
 		return this.conn;
