@@ -1,4 +1,4 @@
-package com.revature.anthony.nguyen.project0.project0;
+package com.revature.anthony.nguyen.project0.project0.model;
 
 public class User {
 	

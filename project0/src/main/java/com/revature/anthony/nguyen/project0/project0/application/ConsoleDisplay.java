@@ -1,7 +1,11 @@
-package com.revature.anthony.nguyen.project0.project0;
+package com.revature.anthony.nguyen.project0.project0.application;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import com.revature.anthony.nguyen.project0.project0.model.AccountChecking;
+import com.revature.anthony.nguyen.project0.project0.model.User;
+import com.revature.anthony.nguyen.project0.project0.service.UserService;
 
 public class ConsoleDisplay {
 	private Scanner input;

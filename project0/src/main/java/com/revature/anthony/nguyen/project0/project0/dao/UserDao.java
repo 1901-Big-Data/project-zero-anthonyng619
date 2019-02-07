@@ -1,6 +1,8 @@
-package com.revature.anthony.nguyen.project0.project0;
+package com.revature.anthony.nguyen.project0.project0.dao;
 
 import java.util.Optional;
+
+import com.revature.anthony.nguyen.project0.project0.model.User;
 
 public interface UserDao {
 	public boolean addUser(User user);

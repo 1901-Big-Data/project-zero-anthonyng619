@@ -1,6 +1,10 @@
-package com.revature.anthony.nguyen.project0.project0;
+package com.revature.anthony.nguyen.project0.project0.application;
 
 import java.util.Scanner;
+
+import com.revature.anthony.nguyen.project0.project0.service.UserService;
+import com.revature.anthony.nguyen.project0.project0.util.DBConnection;
+
 import java.sql.*;
 
 /**
@@ -13,9 +17,8 @@ public class App
     {
         System.out.println("Initializing the Bank of Revature.");
         System.out.println("Establishing connection... Please wait.");
-        
-        UserService dbConn = UserService.get();
-        if(!dbConn.connect()) {
+       
+        if(!DBConnection.get().connect()) {
         	System.out.println("Connection to the bank's database failed.");
         	return;
         }

@@ -1,4 +1,4 @@
-package com.revature.anthony.nguyen.project0.project0;
+package com.revature.anthony.nguyen.project0.project0.dao;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
+
+import com.revature.anthony.nguyen.project0.project0.model.User;
+import com.revature.anthony.nguyen.project0.project0.service.UserService;
+import com.revature.anthony.nguyen.project0.project0.util.DBConnection;
 
 public class UserOracle implements UserDao{
 	private static UserOracle userOracle;
@@ -26,7 +30,7 @@ public class UserOracle implements UserDao{
 	public boolean addUser(User user) {
 		String query = "call insertIntoUser(?, ?, ?, ?)";
 		System.out.println("SQL: Running query - "+query );
-		try(CallableStatement stmt = UserService.get().getConnection().prepareCall(query)) {
+		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
 			stmt.setString(1, user.getUsername());
 			stmt.setString(2, user.getPassword());
 			stmt.setString(3, user.getFirstName());
@@ -50,7 +54,7 @@ public class UserOracle implements UserDao{
 	public boolean validateUser(String username, String password) {
 		String query = "select * from BANKUSERS where USERNAME = ? and PASSCODE = ?";
 		
-		try(PreparedStatement stmt = UserService.get().getConnection().prepareStatement(query)) {
+		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();
@@ -68,7 +72,7 @@ public class UserOracle implements UserDao{
 	public Optional<User> retrieveUser(String username, String password) {
 		String query = "select * from BANKUSERS where USERNAME = ? and PASSCODE = ?";
 		
-		try(PreparedStatement stmt = UserService.get().getConnection().prepareStatement(query)) {
+		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();
@@ -92,7 +96,7 @@ public class UserOracle implements UserDao{
 	public boolean checkUsername(String username) {
 		String query = "select * from BANKUSERS where USERNAME = ?";
 		
-		try(PreparedStatement stmt = UserService.get().getConnection().prepareStatement(query)) {
+		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
 			stmt.setString(1, username);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {

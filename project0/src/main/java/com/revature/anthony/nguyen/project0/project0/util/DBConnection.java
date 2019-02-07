@@ -1,43 +1,33 @@
-package com.revature.anthony.nguyen.project0.project0;
+package com.revature.anthony.nguyen.project0.project0.util;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.*;
-import java.util.Optional;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.SQLTimeoutException;
 import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class UserService {
-	private static UserService dbConn;
-	private UserDao userDao;
+public class DBConnection {
+	private static DBConnection dbcon;
 	private Connection conn;
 	private Properties props;
 	private Logger logger;
-
-	/**
-	 * Private constructor for DBConnection.
-	 */
-	private UserService() {
+	
+	private DBConnection() {
 		this.props = new Properties();
 		logger = LogManager.getRootLogger();
-		userDao = UserOracle.get();
 	}
 	
-	/**
-	 * Creates a singleton for DBConnection.
-	 * @return DBConnection The singleton
-	 */
-	public static UserService get() {
-		if(dbConn == null) {
-			dbConn = new UserService();
-			return dbConn;
-		}
-		else {
-			return dbConn;
+	public static DBConnection get() {
+		if(dbcon == null) {
+			dbcon = new DBConnection();
+			return dbcon;
+		} else {
+			return dbcon;
 		}
 	}
 	
@@ -79,22 +69,6 @@ public class UserService {
 		} catch(Exception e) {
 			logger.debug("Reached an error loading config");
 		}
-	}
-	
-	public boolean addUser(User user) {
-		return userDao.addUser(user);
-	}
-	
-	public boolean validateUser(String username, String password) {
-		return userDao.validateUser(username, password);
-	}
-	
-	public Optional<User> retrieveUser(String username, String password) {
-		return userDao.retrieveUser(username, password);
-	}
-	
-	public boolean checkUser(String username) {
-		return userDao.checkUsername(username);
 	}
 	
 	public Connection getConnection() {
