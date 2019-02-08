@@ -1,18 +1,18 @@
 package com.revature.anthony.nguyen.project0.project0.model;
 
 public class AccountChecking {
-	private String bankAccountId;
+	private int bankAccountId;
 	private double balance;
 	
 	public AccountChecking() {
 	}
 	
-	public AccountChecking(String bankAccountId, double balance) {
+	public AccountChecking(int bankAccountId, double balance) {
 		this.bankAccountId = bankAccountId;
 		this.balance = balance;
 	}
 	
-	public String getBankAccountId() {
+	public int getBankAccountId() {
 		return this.bankAccountId;
 	}
 	
@@ -20,7 +20,7 @@ public class AccountChecking {
 		return this.balance;
 	}
 	
-	public void setBankAccountId(String id) {
+	public void setBankAccountId(int id) {
 		this.bankAccountId = id;
 	}
 	

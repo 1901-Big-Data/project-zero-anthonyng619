@@ -1,5 +1,6 @@
 package com.revature.anthony.nguyen.project0.project0.service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingDao;
@@ -23,11 +24,11 @@ public class AccountCheckingService {
 		}
 	}
 	
-	public boolean withdraw(double amt, String bankId) {
+	public Optional<AccountChecking> withdraw(double amt, int bankId) throws NoSuchElementException {
 		return AccountCheckingOracle.get().withdraw(amt, bankId);
 	}
 	
-	public Optional<AccountChecking> retrieveAccount(String bankId) {
+	public Optional<AccountChecking> retrieveAccount(int bankId) {
 		return AccountCheckingOracle.get().retrieveAccount(bankId);
 	}
 }

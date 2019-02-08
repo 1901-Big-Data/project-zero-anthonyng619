@@ -5,7 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.Optional;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.revature.anthony.nguyen.project0.project0.model.User;
 import com.revature.anthony.nguyen.project0.project0.service.UserService;
@@ -13,6 +17,7 @@ import com.revature.anthony.nguyen.project0.project0.util.DBConnection;
 
 public class UserOracle implements UserDao{
 	private static UserOracle userOracle;
+	private Logger log = LogManager.getLogger(UserOracle.class);
 	
 	private UserOracle() {
 	}
@@ -27,31 +32,40 @@ public class UserOracle implements UserDao{
 	}
 	
 	@Override
-	public boolean addUser(User user) {
-		String query = "call insertIntoUser(?, ?, ?, ?)";
+	public Optional<User> addUser(String username, String password, String firstname, String lastname) {
+		String query = "call insertIntoUser(?, ?, ?, ?, ?, ?)";
 		System.out.println("SQL: Running query - "+query );
 		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
-			stmt.setString(1, user.getUsername());
-			stmt.setString(2, user.getPassword());
-			stmt.setString(3, user.getFirstName());
-			stmt.setString(4, user.getLastName());			
+			stmt.setString(1, username);
+			stmt.setString(2, password);
+			stmt.setString(3, firstname);
+			stmt.setString(4, lastname);	
+			stmt.registerOutParameter(5, Types.INTEGER);
+			stmt.registerOutParameter(6, Types.INTEGER);
 			stmt.execute();
-			System.out.println("Added user to database!");
-			return true;
+			
+			Integer userid = stmt.getInt(5);
+			Integer bankid = stmt.getInt(6);
+			
+			log.debug("Added user to database with user id: " + userid);
+			
+			// Create user
+			User user = new User(username, password, firstname, lastname, userid, bankid);
+			return Optional.of(user);
 		} catch(SQLException e) {
 			System.out.println("SQL Exception");
-			return false;
+			return Optional.empty();
 		}
 	}
 
 	@Override
-	public boolean removeUser(User user) {
+	public Optional<User> removeUser(User user) {
 		// TODO: Remove user
-		return false;
+		return Optional.empty();
 	}
 
 	@Override
-	public boolean validateUser(String username, String password) {
+	public Optional<User> loginUser(String username, String password) {
 		String query = "select * from BANKUSERS where USERNAME = ? and PASSCODE = ?";
 		
 		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
@@ -59,15 +73,21 @@ public class UserOracle implements UserDao{
 			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
-				return true;
+				String firstName = rs.getString("FIRSTNAME");
+				String lastName = rs.getString("LASTNAME");
+				int userid = rs.getInt("USER_ID");
+				int bankid = rs.getInt("BANK_ACCOUNT_ID");
+				User user = new User(username, password, firstName, lastName, userid, bankid);
+				return Optional.of(user);
 			}
 		} catch(SQLException e) {
 			System.err.println("SQL Exception");
-			return false;
+			return Optional.empty();
 		}
-		return false;
+		return Optional.empty();
 	}
 
+	/*
 	@Override
 	public Optional<User> retrieveUser(String username, String password) {
 		String query = "select * from BANKUSERS where USERNAME = ? and PASSCODE = ?";
@@ -90,7 +110,7 @@ public class UserOracle implements UserDao{
 			return Optional.empty();
 		}
 		return Optional.empty();
-	}
+	}*/
 	
 	@Override
 	public boolean checkUsername(String username) {

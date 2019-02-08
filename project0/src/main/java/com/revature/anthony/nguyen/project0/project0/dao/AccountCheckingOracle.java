@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
@@ -30,27 +31,32 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 	}
 	
 	@Override
-	public boolean deposit(double amt, String bankId) {
+	public Optional<AccountChecking> deposit(double amt, int bankId) {
 		// TODO Auto-generated method stub
-		return false;
+		return Optional.empty();
 	}
 
 	@Override
-	public boolean withdraw(double amt, String bankId) {
-		String query = "call withdrawmoney(?, ?)";
+	public Optional<AccountChecking> withdraw(double amt, int bankId) {
+		String query = "call withdrawmoney(?, ?, ?)";
 		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
 			stmt.setDouble(1, amt);
-			stmt.setString(2, bankId);
+			stmt.setInt(2, bankId);
+			stmt.registerOutParameter(3, Types.DOUBLE);
 			stmt.execute();
-			return true;
+			
+			Double newBalance = stmt.getDouble(3);
+			
+			AccountChecking account = new AccountChecking(bankId, newBalance);
+			return Optional.of(account);
 		} catch (SQLException e) {
 			log.catching(e);
-			return false;
+			return Optional.empty();
 		}
 	}
 
 	@Override
-	public boolean transfer(double amt, String sourceBankId, String targetBankId) {
+	public Optional<AccountChecking> transfer(double amt, int sourceBankId, int targetBankId) {
 		/*String query = "select BALANCE from ACCOUNTSCHECKING where BANK_ACCOUNT_ID = ?";
 		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
 			stmt.setString(1, bankAccountId);
@@ -64,9 +70,10 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 		}
 		return false;
 		*/
-		return false;
+		return Optional.empty();
 	}
 
+	/*
 	@Override
 	public Optional<Double> getBalance(String bankAccountId) {
 		String query = "select BALANCE from ACCOUNTS_CHECKING where BANK_ACCOUNT_ID = ?";
@@ -82,16 +89,16 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 		}
 		return Optional.empty();
 	}
-
+	 */
 	@Override
-	public Optional<AccountChecking> retrieveAccount(String bankAccountId) {
+	public Optional<AccountChecking> retrieveAccount(int bankAccountId) {
 		String query = "select * from ACCOUNTS_CHECKING where BANK_ACCOUNT_ID = ?";
 		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
-			stmt.setString(1, bankAccountId);
+			stmt.setInt(1, bankAccountId);
 			ResultSet rs = stmt.executeQuery();
 			AccountChecking account = new AccountChecking();
 			if(rs.next()) {
-				account.setBankAccountId(rs.getString("BANK_ACCOUNT_ID"));
+				account.setBankAccountId(rs.getInt("BANK_ACCOUNT_ID"));
 				account.setBalance(rs.getDouble("BALANCE"));
 				return Optional.of(account);
 			}

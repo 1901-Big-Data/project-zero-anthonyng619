@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -40,17 +41,17 @@ public class UserService {
 		}
 	}
 	
-	public boolean addUser(User user) {
-		return userDao.addUser(user);
+	public Optional<User> addUser(String username, String password, String firstname, String lastname) throws NoSuchElementException {
+		return userDao.addUser(username, password, firstname, lastname);
 	}
 	
-	public boolean validateUser(String username, String password) {
-		return userDao.validateUser(username, password);
+	public Optional<User> loginUser(String username, String password) throws NoSuchElementException{
+		return userDao.loginUser(username, password);
 	}
 	
-	public Optional<User> retrieveUser(String username, String password) {
+	/*public Optional<User> retrieveUser(String username, String password) {
 		return userDao.retrieveUser(username, password);
-	}
+	}*/
 	
 	public boolean checkUser(String username) {
 		return userDao.checkUsername(username);

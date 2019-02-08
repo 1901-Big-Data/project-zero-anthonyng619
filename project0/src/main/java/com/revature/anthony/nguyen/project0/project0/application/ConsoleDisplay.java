@@ -79,18 +79,15 @@ public class ConsoleDisplay {
 		String password = input.nextLine(); // TODO: Hash this in the future.
 		if(password.equals("")) return;
 		
-		user = new User(username, password, firstName, lastName);
-
-		UserService.get().addUser(user);
-		log.debug("User finished registering for new account. Username: "+username);
-		
 		try {
-			user = UserService.get().retrieveUser(username, password).get();
+			user = UserService.get().addUser(username, password, firstName, lastName).get();
 			accountChecking = AccountCheckingService.get().retrieveAccount(user.getBankAccountId()).get();
 		} catch (NoSuchElementException e) {
-			log.debug("Cannot retrieve user from sql read.");
+			System.out.println("Username is taken.");
 			return;
 		}
+		log.debug("User finished registering for new account. Username: "+username);
+		
 		mainMenu();
 	}
 	
@@ -102,23 +99,15 @@ public class ConsoleDisplay {
 		System.out.print("Password:");
 		String password = input.nextLine();
 		if(username.equals("") && password.equals("")) return;
-		while(!UserService.get().validateUser(username, password)) {
-			
-			System.out.println("Username or password is incorrect.");
-			System.out.print("Username:");
-			username = input.nextLine();
-			System.out.print("Password:");
-			password = input.nextLine();
-			if(username.equals("") && password.equals("")) return;
-		}
+		
 		try {
-			user = UserService.get().retrieveUser(username, password).get();
+			user = UserService.get().loginUser(username, password).get();
 			accountChecking = AccountCheckingService.get().retrieveAccount(user.getBankAccountId()).get();
-			log.debug("User logged in. Username: "+username);
 		} catch (NoSuchElementException e) {
-			log.debug("Cannot retrieve user from sql read.");
+			System.out.println("Wrong username or passowrd.");
 			return;
 		}
+		
 		mainMenu();
 	}
 	
@@ -140,7 +129,12 @@ public class ConsoleDisplay {
 			String choice = input.nextLine();
 			switch(choice) {
 			case "1":
-				bankingAccounts();
+				try {
+					bankingAccounts();
+				} catch (NoSuchElementException e) {
+					System.out.println("Session timed out. Please log in again.");
+					breaker = true;
+				}
 				break;
 			case "0":
 				breaker = true;
@@ -150,7 +144,7 @@ public class ConsoleDisplay {
 		}
 	}
 	
-	public void bankingAccounts() {
+	public void bankingAccounts() throws NoSuchElementException {
 		boolean breaker = false;
 		while(!breaker) {
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -166,9 +160,13 @@ public class ConsoleDisplay {
 			case "1":
 				System.out.println("How much would you like to withdraw?");
 				String amt = input.nextLine();
-				// Need to catch exceptions...
-				AccountCheckingService.get().withdraw(Double.parseDouble(amt), accountChecking.getBankAccountId());
-				accountChecking = AccountCheckingService.get().retrieveAccount(user.getBankAccountId()).get();
+				
+				try {
+					accountChecking = AccountCheckingService.get().withdraw(Double.parseDouble(amt), user.getBankAccountId()).get();
+				} catch (NoSuchElementException e) {
+					accountChecking = AccountCheckingService.get().retrieveAccount(user.getBankAccountId()).get();
+				}
+				
 				displayBalance();
 				break;
 			case "0":
