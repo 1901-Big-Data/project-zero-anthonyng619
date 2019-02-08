@@ -5,12 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.anthony.nguyen.project0.project0.model.AccountChecking;
+import com.revature.anthony.nguyen.project0.project0.model.AccountInformation;
 import com.revature.anthony.nguyen.project0.project0.model.User;
 import com.revature.anthony.nguyen.project0.project0.util.DBConnection;
 
@@ -32,7 +36,7 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 	
 	@Override
 	public Optional<AccountChecking> deposit(double amt, int bankId) {
-		String query = "call depositmoney(?, ?, ?)";
+		/*String query = "call depositmoney(?, ?, ?)";
 		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
 			stmt.setDouble(1, amt);
 			stmt.setInt(2, bankId);
@@ -46,11 +50,14 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 		} catch (SQLException e) {
 			log.catching(e);
 			return Optional.empty();
-		}
+		}*/
+		
+		return Optional.empty();
 	}
 
 	@Override
 	public Optional<AccountChecking> withdraw(double amt, int bankId) {
+		/*
 		String query = "call withdrawmoney(?, ?, ?)";
 		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
 			stmt.setDouble(1, amt);
@@ -69,6 +76,9 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			log.catching(e);
 			return Optional.empty();
 		}
+		
+		*/
+		return Optional.empty();
 	}
 
 	@Override
@@ -107,22 +117,55 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 	}
 	 */
 	@Override
-	public Optional<AccountChecking> retrieveAccount(int bankAccountId) {
-		String query = "select * from ACCOUNTS_CHECKING where BANK_ACCOUNT_ID = ?";
+	public Optional<AccountChecking> retrieveAccounts(int userId) {
+		String query = "select * from p0_checking where user_id = ?";
 		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
-			stmt.setInt(1, bankAccountId);
+			stmt.setInt(1, userId);
 			ResultSet rs = stmt.executeQuery();
-			AccountChecking account = new AccountChecking();
-			if(rs.next()) {
-				account.setBankAccountId(rs.getInt("BANK_ACCOUNT_ID"));
-				account.setBalance(rs.getDouble("BALANCE"));
-				return Optional.of(account);
+			ArrayList<AccountInformation> accountlist = new ArrayList<AccountInformation>();
+			double totalBalance = 0;
+			
+			boolean rsempty = true; // Used to check if resultset is empty
+			
+			while(rs.next()) {
+				rsempty = false;
+				int bankid = rs.getInt("BANK_ACCOUNT_ID");
+				double balance = rs.getDouble("BALANCE");
+				totalBalance += balance;
+				AccountInformation acc_info = new AccountInformation(bankid, balance);
+				accountlist.add(acc_info);
 			}
+			
+			if(rsempty) {
+				return Optional.empty();
+			}
+			
+			AccountChecking account = new AccountChecking(accountlist, totalBalance);
+			return Optional.of(account);
 		} catch(SQLException e) {
 			log.catching(e);
 			return Optional.empty();
 		}
-		return Optional.empty();
+	}
+
+	@Override
+	public Optional<AccountInformation> createAccount(int userId) {
+		String query = "call createcheckingaccount(?, ?)";
+		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
+			stmt.setInt(1, userId);
+			stmt.registerOutParameter(2, Types.INTEGER);
+			
+			stmt.execute();
+			
+			Integer bankid = stmt.getInt(2);
+
+			AccountInformation account = new AccountInformation(bankid, 0.0);
+			
+			return Optional.of(account);
+		} catch (SQLException e) {
+			log.catching(e);
+			return Optional.empty();
+		}
 	}
 	
 }

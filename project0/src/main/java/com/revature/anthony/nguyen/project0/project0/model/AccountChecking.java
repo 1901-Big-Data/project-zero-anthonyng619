@@ -1,30 +1,34 @@
 package com.revature.anthony.nguyen.project0.project0.model;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class AccountChecking {
-	private int bankAccountId;
-	private double balance;
+	private ArrayList<AccountInformation> accounts;
+	private double totalBalance;
 	
 	public AccountChecking() {
+		
 	}
 	
-	public AccountChecking(int bankAccountId, double balance) {
-		this.bankAccountId = bankAccountId;
-		this.balance = balance;
+	public AccountChecking(ArrayList<AccountInformation> accounts, double totalBalance) {
+		this.accounts = accounts;
+		this.totalBalance = totalBalance;
 	}
 	
-	public int getBankAccountId() {
-		return this.bankAccountId;
+	public ArrayList<AccountInformation> getAccounts() {
+		return this.accounts;
 	}
 	
-	public double getBalance() {
-		return this.balance;
+	public double getTotalBalance() {
+		return this.totalBalance;
 	}
 	
-	public void setBankAccountId(int id) {
-		this.bankAccountId = id;
+	public void setAccounts(ArrayList<AccountInformation> accounts) {
+		this.accounts = accounts;
 	}
 	
-	public void setBalance(double amt) {
-		this.balance = amt;
+	public void setTotalBalance(double amt) {
+		this.totalBalance = amt;
 	}
 }

@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.anthony.nguyen.project0.project0.model.AccountChecking;
+import com.revature.anthony.nguyen.project0.project0.model.AccountInformation;
 import com.revature.anthony.nguyen.project0.project0.model.User;
 import com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService;
 import com.revature.anthony.nguyen.project0.project0.service.UserService;
@@ -81,8 +82,7 @@ public class ConsoleDisplay {
 		if(password.equals("")) return;
 		
 		try {
-			user = UserService.get().addUser(username, password, firstName, lastName).get();
-			accountChecking = AccountCheckingService.get().retrieveAccount(user.getBankAccountId()).get();
+			user = UserService.get().addUser(username, password, 0).get();
 		} catch (NoSuchElementException e) {
 			System.out.println("Username is taken.");
 			return;
@@ -103,7 +103,6 @@ public class ConsoleDisplay {
 		
 		try {
 			user = UserService.get().loginUser(username, password).get();
-			accountChecking = AccountCheckingService.get().retrieveAccount(user.getBankAccountId()).get();
 		} catch (NoSuchElementException e) {
 			System.out.println("Wrong username or passowrd.");
 			return;
@@ -118,36 +117,38 @@ public class ConsoleDisplay {
 			if(user == null) {
 				loginRegister();
 			}
+			
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println("Welcome, " + user.getFirstName() + " " + user.getLastName() + "!");
 			System.out.println("How can we service you today?");
 			System.out.println("\nOptions: ");
 			System.out.println("1. View banking accounts");
-			System.out.println("2. Change address");
-			System.out.println("3. Change password");
+			System.out.println("2. Open banking accounts");
+			System.out.println("3. Change address");
+			System.out.println("4. Change password");
 			System.out.println("\n0. Log out");
 			
 			String choice = input.nextLine();
 			switch(choice) {
 			case "1":
-				try {
-					bankingAccounts();
-				} catch (NoSuchElementException e) {
-					System.out.println("Session timed out. Please log in again.");
-					breaker = true;
-				}
+				bankingAccounts();
+				break;
+			case "2":
+				openBankAccount();
 				break;
 			case "0":
 				breaker = true;
 				user = null;
 				accountChecking = null;
+				break;
 			default:
 				break;
 			}
 		}
 	}
 	
-	public void bankingAccounts() throws NoSuchElementException {
+	/*
+	public void bankingOptions() throws NoSuchElementException {
 		boolean breaker = false;
 		while(!breaker) {
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -192,9 +193,69 @@ public class ConsoleDisplay {
 				break;
 			}
 		}
+	}*/
+	
+	public void bankingAccounts() {
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		try {
+			accountChecking = AccountCheckingService.get().retrieveAccounts(user.getUserID()).get();
+			System.out.println("These are your available accounts: ");
+
+			for(AccountInformation acc_info: accountChecking.getAccounts()) {
+				System.out.println("Account number: " + acc_info.getBankAccountId() + " || Balance: " + acc_info.getBalance());
+			}
+		} catch(NoSuchElementException e) {
+			log.catching(e);
+			
+			System.out.println("We apologize for the inconvenience. It looks like you do not have any opened accounts with us.");
+			System.out.println("Please open an account with us at the main menu.");
+			System.out.println("Press any button to return back to the main menu...");
+			
+			input.nextLine();
+			return;
+		}
+	}
+	
+	public void bankAccountInvocation(int bankId) {
+		
+	}
+	
+	public void openBankAccount() {
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("You have the choice to open either a checking or savings account.");
+		System.out.println("Note: You can set up multiple accounts with us!");
+		System.out.println("\n1. Create a new checking account.");
+		System.out.println("\n2. Create a new savings account.");
+		
+		boolean breaker = false;
+		while(!breaker) {
+			String choice = input.nextLine();
+			switch(choice) {
+			case "1":
+				try {
+					AccountInformation account = AccountCheckingService.get().createAccount(user.getUserID()).get();
+					System.out.println("Your checking account has been made.\n Your checking account id is "+ account.getBankAccountId()+".");
+					System.out.println("\nPress any key to return to main menu...");
+					input.nextLine();
+					breaker = true;
+				} catch(NoSuchElementException e) {
+					log.catching(e);
+					System.out.println("You have lost connection.");
+					return;
+				}
+				break;
+			case "2":
+				break;
+			case "0":
+				breaker = true;
+				break;
+			default:
+				break;
+			}
+		}
 	}
 	
 	public void displayBalance() {
-		System.out.println("Your balance: $" + accountChecking.getBalance());
+		//System.out.println("Your balance: $" + accountChecking.getBalance());
 	}
 }

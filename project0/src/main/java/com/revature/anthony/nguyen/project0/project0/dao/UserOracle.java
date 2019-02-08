@@ -32,28 +32,24 @@ public class UserOracle implements UserDao{
 	}
 	
 	@Override
-	public Optional<User> addUser(String username, String password, String firstname, String lastname) {
-		String query = "call insertIntoUser(?, ?, ?, ?, ?, ?)";
-		System.out.println("SQL: Running query - "+query );
+	public Optional<User> addUser(String username, String password, int adminAccess) {
+		String query = "call createuser(?, ?, ?, ?)";
 		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
 			stmt.setString(1, username);
 			stmt.setString(2, password);
-			stmt.setString(3, firstname);
-			stmt.setString(4, lastname);	
-			stmt.registerOutParameter(5, Types.INTEGER);
-			stmt.registerOutParameter(6, Types.INTEGER);
+			stmt.setInt(3, adminAccess);	
+			stmt.registerOutParameter(4, Types.INTEGER);
 			stmt.execute();
 			
-			Integer userid = stmt.getInt(5);
-			Integer bankid = stmt.getInt(6);
+			Integer userid = stmt.getInt(4);
 			
 			log.debug("Added user to database with user id: " + userid);
 			
 			// Create user
-			User user = new User(username, password, firstname, lastname, userid, bankid);
+			User user = new User(username, password, adminAccess, userid);
 			return Optional.of(user);
 		} catch(SQLException e) {
-			System.out.println("SQL Exception");
+			log.catching(e);
 			return Optional.empty();
 		}
 	}
@@ -66,22 +62,20 @@ public class UserOracle implements UserDao{
 
 	@Override
 	public Optional<User> loginUser(String username, String password) {
-		String query = "select * from BANKUSERS where USERNAME = ? and PASSCODE = ?";
+		String query = "select * from p0_users where USERNAME = ? and PASSCODE = ?";
 		
 		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
-				String firstName = rs.getString("FIRSTNAME");
-				String lastName = rs.getString("LASTNAME");
+				int adminAccess = rs.getInt("adminaccess");
 				int userid = rs.getInt("USER_ID");
-				int bankid = rs.getInt("BANK_ACCOUNT_ID");
-				User user = new User(username, password, firstName, lastName, userid, bankid);
+				User user = new User(username, password, adminAccess, userid);
 				return Optional.of(user);
 			}
 		} catch(SQLException e) {
-			System.err.println("SQL Exception");
+			log.catching(e);
 			return Optional.empty();
 		}
 		return Optional.empty();
@@ -114,17 +108,17 @@ public class UserOracle implements UserDao{
 	
 	@Override
 	public boolean checkUsername(String username) {
-		String query = "select * from BANKUSERS where USERNAME = ?";
+		String query = "select * from p0_users where USERNAME = ?";
 		
 		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
 			stmt.setString(1, username);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
-				System.out.println(username + " exists");
+				log.debug(username + " exists");
 				return true;
 			}
 		} catch(SQLException e) {
-			System.err.println("SQL Exception");
+			log.catching(e);
 			return false;
 		}
 		return false;

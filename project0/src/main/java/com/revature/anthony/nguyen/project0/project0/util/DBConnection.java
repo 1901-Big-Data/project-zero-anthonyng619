@@ -45,7 +45,6 @@ public class DBConnection {
         	loadProperties();
         	
         	String dbUrl = "jdbc:oracle:thin:" + this.props.getProperty("dbuser") + "/" + this.props.getProperty("dbpassword") + "@" + this.props.getProperty("database") + ":1521:ORCL";
-        	System.out.println(dbUrl);
         	this.conn = DriverManager.getConnection(dbUrl);
         	if(conn != null) {
         		System.out.println("Connection successfully established.");

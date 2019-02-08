@@ -5,9 +5,9 @@ public class User {
 	private String username;
 	transient private String password;
 	private int userID;
-	private int bankAccountID;
 	private String firstName;
 	private String lastName;
+	private int adminAccess;
 	
 	public User() {
 		firstName = "";
@@ -19,13 +19,11 @@ public class User {
 		this.password = password;           
 	}
 	
-	public User(String username, String password, String firstName, String lastName, int userId, int bankId) {
+	public User(String username, String password, int adminAccess, int userId) {
 		this.username = username;
 		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.setAdminAccess(adminAccess);
 		this.userID = userId;
-		this.bankAccountID = bankId;
 	}
 	
 	//---- Getters
@@ -44,13 +42,13 @@ public class User {
 	public String getLastName() {
 		return this.lastName;
 	}
-
-	public int getBankAccountId() {
-		return this.bankAccountID;
-	}
 	
 	public int getUserID() {
 		return this.userID;
+	}
+	
+	public int getAdminAccess() {
+		return this.adminAccess;
 	}
 
 	//---- Setters
@@ -70,12 +68,12 @@ public class User {
 		this.lastName = lastName;
 	}
 	
-	public void setBankAccountId(int id) {
-		this.bankAccountID = id;
-	}
-
 	public void setUserID(int userID) {
 		this.userID = userID;
+	}
+
+	public void setAdminAccess(int adminAccess) {
+		this.adminAccess = adminAccess;
 	}
 	
 }

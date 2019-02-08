@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingDao;
 import com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingOracle;
 import com.revature.anthony.nguyen.project0.project0.model.AccountChecking;
+import com.revature.anthony.nguyen.project0.project0.model.AccountInformation;
 
 public class AccountCheckingService {
 	private static AccountCheckingService service;
@@ -32,8 +33,12 @@ public class AccountCheckingService {
 		return AccountCheckingOracle.get().deposit(amt, bankId);
 	}
 	
-	public Optional<AccountChecking> retrieveAccount(int bankId) {
-		return AccountCheckingOracle.get().retrieveAccount(bankId);
+	public Optional<AccountChecking> retrieveAccounts(int userId) throws NoSuchElementException {
+		return AccountCheckingOracle.get().retrieveAccounts(userId);
+	}
+	
+	public Optional<AccountInformation> createAccount(int userId) {
+		return AccountCheckingOracle.get().createAccount(userId);
 	}
 	
 }

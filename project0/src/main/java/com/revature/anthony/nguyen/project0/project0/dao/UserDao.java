@@ -5,7 +5,7 @@ import java.util.Optional;
 import com.revature.anthony.nguyen.project0.project0.model.User;
 
 public interface UserDao {
-	public Optional<User> addUser(String username, String password, String firstname, String lastname);
+	public Optional<User> addUser(String username, String password, int adminAccess);
 	
 	public Optional<User> removeUser(User user);
 	

@@ -205,3 +205,81 @@ ORA-06512: at "ROOT.WITHDRAWMONEY", line 4
 [DEBUG] 2019-02-08 12:23:01.802 [main] ConsoleDisplay - User finished registering for new account. Username: ryan1
 [DEBUG] 2019-02-08 12:26:04.493 [main] UserOracle - Added user to database with user id: 32
 [DEBUG] 2019-02-08 12:26:04.509 [main] ConsoleDisplay - User finished registering for new account. Username: lukeusername
+[DEBUG] 2019-02-08 14:51:53.633 [main] UserOracle - Added user to database with user id: 23
+[DEBUG] 2019-02-08 14:51:53.641 [main] ConsoleDisplay - User finished registering for new account. Username: a
+[ERROR] 2019-02-08 15:20:52.176 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:200) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:133) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:110) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:44) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:117) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:25) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-08 15:21:02.018 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:200) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:133) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:110) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:44) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:117) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:25) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-08 15:47:46.209 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:199) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:111) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-08 15:48:21.659 [main] AccountCheckingOracle - Catching
+java.sql.SQLException: Invalid operation for forward only resultset : beforeFirst
+	at oracle.jdbc.driver.InsensitiveScrollableResultSet.ensureOpenPlus(InsensitiveScrollableResultSet.java:128) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.InsensitiveScrollableResultSet.beforeFirst(InsensitiveScrollableResultSet.java:443) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingOracle.retrieveAccounts(AccountCheckingOracle.java:130) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService.retrieveAccounts(AccountCheckingService.java:37) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:199) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:111) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-08 15:48:21.666 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:199) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:111) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-08 15:49:39.073 [main] AccountCheckingOracle - Catching
+java.sql.SQLException: Invalid operation for forward only resultset : beforeFirst
+	at oracle.jdbc.driver.InsensitiveScrollableResultSet.ensureOpenPlus(InsensitiveScrollableResultSet.java:128) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.InsensitiveScrollableResultSet.beforeFirst(InsensitiveScrollableResultSet.java:443) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingOracle.retrieveAccounts(AccountCheckingOracle.java:130) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService.retrieveAccounts(AccountCheckingService.java:37) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:199) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:111) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-08 15:49:39.075 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:199) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:111) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
