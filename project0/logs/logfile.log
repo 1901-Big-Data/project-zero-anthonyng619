@@ -199,3 +199,9 @@ ORA-06512: at "ROOT.WITHDRAWMONEY", line 4
 [DEBUG] 2019-02-08 09:27:02.965 [main] ConsoleDisplay - User finished registering for new account. Username: 1
 [DEBUG] 2019-02-08 10:02:46.322 [main] UserOracle - Added user to database with user id: 29
 [DEBUG] 2019-02-08 10:02:46.327 [main] ConsoleDisplay - User finished registering for new account. Username: p
+[DEBUG] 2019-02-08 12:09:37.389 [main] UserOracle - Added user to database with user id: 30
+[DEBUG] 2019-02-08 12:09:37.404 [main] ConsoleDisplay - User finished registering for new account. Username: master
+[DEBUG] 2019-02-08 12:23:01.786 [main] UserOracle - Added user to database with user id: 31
+[DEBUG] 2019-02-08 12:23:01.802 [main] ConsoleDisplay - User finished registering for new account. Username: ryan1
+[DEBUG] 2019-02-08 12:26:04.493 [main] UserOracle - Added user to database with user id: 32
+[DEBUG] 2019-02-08 12:26:04.509 [main] ConsoleDisplay - User finished registering for new account. Username: lukeusername

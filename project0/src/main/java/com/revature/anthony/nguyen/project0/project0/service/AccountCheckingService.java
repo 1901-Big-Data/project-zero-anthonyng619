@@ -28,7 +28,12 @@ public class AccountCheckingService {
 		return AccountCheckingOracle.get().withdraw(amt, bankId);
 	}
 	
+	public Optional<AccountChecking> deposit(double amt, int bankId) throws NoSuchElementException {
+		return AccountCheckingOracle.get().deposit(amt, bankId);
+	}
+	
 	public Optional<AccountChecking> retrieveAccount(int bankId) {
 		return AccountCheckingOracle.get().retrieveAccount(bankId);
 	}
+	
 }

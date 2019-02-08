@@ -45,6 +45,7 @@ public class ConsoleDisplay {
 	    		break;
 	    	case "0":
 	    		breaker = true;
+	    		System.exit(0);
 	    		break;
 	    	default:
 	    		System.out.println("Please pick a valid option.");
@@ -138,6 +139,8 @@ public class ConsoleDisplay {
 				break;
 			case "0":
 				breaker = true;
+				user = null;
+				accountChecking = null;
 			default:
 				break;
 			}
@@ -163,6 +166,19 @@ public class ConsoleDisplay {
 				
 				try {
 					accountChecking = AccountCheckingService.get().withdraw(Double.parseDouble(amt), user.getBankAccountId()).get();
+				} catch (NoSuchElementException e) {
+					System.out.println("You don't have enough money to withdraw that much!");
+					accountChecking = AccountCheckingService.get().retrieveAccount(user.getBankAccountId()).get();
+				}
+				
+				displayBalance();
+				break;
+			case "2":
+				System.out.println("How much would you like to deposit?");
+				amt = input.nextLine();
+				
+				try {
+					accountChecking = AccountCheckingService.get().deposit(Double.parseDouble(amt), user.getBankAccountId()).get();
 				} catch (NoSuchElementException e) {
 					accountChecking = AccountCheckingService.get().retrieveAccount(user.getBankAccountId()).get();
 				}

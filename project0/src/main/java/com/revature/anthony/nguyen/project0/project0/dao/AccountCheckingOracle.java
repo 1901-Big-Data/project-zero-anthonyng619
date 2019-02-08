@@ -32,8 +32,21 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 	
 	@Override
 	public Optional<AccountChecking> deposit(double amt, int bankId) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		String query = "call depositmoney(?, ?, ?)";
+		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
+			stmt.setDouble(1, amt);
+			stmt.setInt(2, bankId);
+			stmt.registerOutParameter(3, Types.DOUBLE);
+			stmt.execute();
+			
+			Double newBalance = stmt.getDouble(3);
+			
+			AccountChecking account = new AccountChecking(bankId, newBalance);
+			return Optional.of(account);
+		} catch (SQLException e) {
+			log.catching(e);
+			return Optional.empty();
+		}
 	}
 
 	@Override
@@ -46,7 +59,10 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			stmt.execute();
 			
 			Double newBalance = stmt.getDouble(3);
-			
+			if(newBalance == -1) {
+				return Optional.empty();
+			}
+			System.out.println("New balance after withdraw: "+newBalance);
 			AccountChecking account = new AccountChecking(bankId, newBalance);
 			return Optional.of(account);
 		} catch (SQLException e) {
