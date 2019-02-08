@@ -3,7 +3,7 @@ package com.revature.anthony.nguyen.project0.project0.model;
 public class User {
 	
 	private String username;
-	private String password;
+	transient private String password;
 	private String userID;
 	private String bankAccountID;
 	private String firstName;

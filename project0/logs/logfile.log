@@ -1,0 +1,187 @@
+[DEBUG] 2019-02-07 18:29:50.890 [main] ConsoleDisplay - User finished registering for new account. Username: hello
+[DEBUG] 2019-02-07 20:31:47.003 [main] ConsoleDisplay - User finished registering for new account. Username: qwerty
+[ERROR] 2019-02-07 20:31:47.088 [main] AccountCheckingOracle - Catching
+java.sql.SQLSyntaxErrorException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:226) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:59) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:747) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:904) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1082) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeInternal(T4CPreparedStatement.java:1343) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3822) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1165) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingOracle.retrieveAccount(AccountCheckingOracle.java:92) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService.retrieveAccount(AccountCheckingService.java:31) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:75) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:38) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:108) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:25) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[DEBUG] 2019-02-07 20:31:47.093 [main] ConsoleDisplay - Cannot retrieve user from sql read.
+[DEBUG] 2019-02-07 20:32:32.497 [main] ConsoleDisplay - User finished registering for new account. Username: o
+[ERROR] 2019-02-07 20:32:32.559 [main] AccountCheckingOracle - Catching
+java.sql.SQLSyntaxErrorException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:226) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:59) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:747) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:904) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1082) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeInternal(T4CPreparedStatement.java:1343) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3822) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1165) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingOracle.retrieveAccount(AccountCheckingOracle.java:92) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService.retrieveAccount(AccountCheckingService.java:31) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:76) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:38) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:109) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:25) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[DEBUG] 2019-02-07 20:32:32.564 [main] ConsoleDisplay - Cannot retrieve user from sql read.
+[DEBUG] 2019-02-07 20:36:10.442 [main] ConsoleDisplay - User finished registering for new account. Username: ii
+[ERROR] 2019-02-07 20:36:10.532 [main] AccountCheckingOracle - Catching
+java.sql.SQLSyntaxErrorException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:226) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:59) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:747) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:904) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1082) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeInternal(T4CPreparedStatement.java:1343) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3822) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1165) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingOracle.retrieveAccount(AccountCheckingOracle.java:92) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService.retrieveAccount(AccountCheckingService.java:31) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:75) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:38) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:108) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:25) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[DEBUG] 2019-02-07 20:36:10.537 [main] ConsoleDisplay - Cannot retrieve user from sql read.
+[ERROR] 2019-02-07 20:37:27.573 [main] AccountCheckingOracle - Catching
+java.sql.SQLSyntaxErrorException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:226) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:59) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:747) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:904) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1082) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeInternal(T4CPreparedStatement.java:1343) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3822) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1165) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingOracle.retrieveAccount(AccountCheckingOracle.java:92) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService.retrieveAccount(AccountCheckingService.java:31) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:99) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:41) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:109) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:25) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[DEBUG] 2019-02-07 20:37:27.582 [main] ConsoleDisplay - Cannot retrieve user from sql read.
+[DEBUG] 2019-02-07 20:38:06.549 [main] ConsoleDisplay - User logged in. Username: qwerty
+[DEBUG] 2019-02-07 20:43:01.253 [main] ConsoleDisplay - User logged in. Username: qwerty
+[ERROR] 2019-02-07 20:43:06.734 [main] AccountCheckingOracle - Catching
+java.sql.SQLException: Missing IN or OUT parameter at index:: 2
+	at oracle.jdbc.driver.OraclePreparedStatement.processCompletedBindRow(OraclePreparedStatement.java:2086) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3772) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeInternal(T4CPreparedStatement.java:1343) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3822) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1165) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingOracle.withdraw(AccountCheckingOracle.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService.withdraw(AccountCheckingService.java:27) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:142) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:122) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:25) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[DEBUG] 2019-02-07 20:45:05.302 [main] ConsoleDisplay - User logged in. Username: qwerty
+[ERROR] 2019-02-07 20:45:10.184 [main] AccountCheckingOracle - Catching
+java.sql.SQLException: Missing IN or OUT parameter at index:: 2
+	at oracle.jdbc.driver.OraclePreparedStatement.processCompletedBindRow(OraclePreparedStatement.java:2086) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3772) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingOracle.withdraw(AccountCheckingOracle.java:43) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService.withdraw(AccountCheckingService.java:27) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:142) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:122) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:25) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[DEBUG] 2019-02-07 20:46:03.061 [main] ConsoleDisplay - User logged in. Username: qwerty
+[ERROR] 2019-02-07 20:46:07.402 [main] AccountCheckingOracle - Catching
+java.sql.SQLSyntaxErrorException: ORA-04091: table ROOT.ACCOUNTS_CHECKING is mutating, trigger/function may not see it
+ORA-06512: at "ROOT.SUBTRACTMONEY", line 7
+ORA-06512: at "ROOT.WITHDRAWMONEY", line 4
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingOracle.withdraw(AccountCheckingOracle.java:44) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService.withdraw(AccountCheckingService.java:27) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:142) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:122) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:25) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-04091: table ROOT.ACCOUNTS_CHECKING is mutating, trigger/function may not see it
+ORA-06512: at "ROOT.SUBTRACTMONEY", line 7
+ORA-06512: at "ROOT.WITHDRAWMONEY", line 4
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 20 more

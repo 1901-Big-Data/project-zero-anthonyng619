@@ -19,7 +19,7 @@ public class DBConnection {
 	
 	private DBConnection() {
 		this.props = new Properties();
-		logger = LogManager.getRootLogger();
+		logger = LogManager.getLogger(DBConnection.class);
 	}
 	
 	public static DBConnection get() {
@@ -61,7 +61,7 @@ public class DBConnection {
 	
 	private void loadProperties() {
 		try {
-			this.props.load(new FileInputStream("src/main/config.properties"));
+			this.props.load(new FileInputStream("src/main/resources/config.properties"));
 		} catch(NullPointerException e) {
 			logger.debug("Please provide a valid config file");
 		} catch(FileNotFoundException e) {
