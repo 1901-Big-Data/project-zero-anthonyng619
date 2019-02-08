@@ -185,3 +185,11 @@ ORA-06512: at "ROOT.WITHDRAWMONEY", line 4
 
 	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
 	... 20 more
+[DEBUG] 2019-02-08 08:31:48.671 [main] ConsoleDisplay - User logged in. Username: qwerty
+[DEBUG] 2019-02-08 08:32:30.683 [main] ConsoleDisplay - User logged in. Username: qwerty
+[DEBUG] 2019-02-08 08:33:02.244 [main] ConsoleDisplay - User logged in. Username: qwerty
+[DEBUG] 2019-02-08 08:40:21.167 [main] ConsoleDisplay - User logged in. Username: qwerty
+[DEBUG] 2019-02-08 08:41:45.765 [main] ConsoleDisplay - User logged in. Username: qwerty
+[DEBUG] 2019-02-08 08:50:38.834 [main] ConsoleDisplay - User logged in. Username: qwerty
+[DEBUG] 2019-02-08 08:51:43.420 [main] ConsoleDisplay - Cannot retrieve user from sql read.
+[DEBUG] 2019-02-08 09:02:18.009 [main] ConsoleDisplay - User finished registering for new account. Username: a

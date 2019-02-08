@@ -76,8 +76,8 @@ public class UserOracle implements UserDao{
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();
-			User user = new User();
 			if(rs.next()) {
+				User user = new User();
 				user.setUsername(rs.getString("USERNAME"));
 				user.setPassword(rs.getString("PASSCODE"));
 				user.setFirstName(rs.getString("FIRSTNAME"));

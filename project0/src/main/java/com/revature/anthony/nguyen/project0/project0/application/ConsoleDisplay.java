@@ -26,44 +26,58 @@ public class ConsoleDisplay {
 	}
 	
 	public void loginRegister() {
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    	System.out.println("Menu Options: ");
-    	System.out.println("    1. Register a new account");
-    	System.out.println("    2. Login to an existing account");
-    	System.out.print("\nPick an option: ");
-    	String choice = input.nextLine();
-    
-		switch(choice) {
-    	case "1":
-    		register();
-    		break;
-    	case "2":
-    		login();
-    		break;
-    	default:
-    		System.out.println("Please pick a valid option.");
-    		loginRegister();
-    		break;
-    	}
+		boolean breaker = false;
+		while(!breaker) {
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	    	System.out.println("Menu Options: ");
+	    	System.out.println("    1. Register a new account");
+	    	System.out.println("    2. Login to an existing account");
+	    	System.out.println("\n    0. Exit");
+	    	System.out.print("\nPick an option: ");
+	    	String choice = input.nextLine();
+	    
+			switch(choice) {
+	    	case "1":
+	    		register();
+	    		break;
+	    	case "2":
+	    		login();
+	    		break;
+	    	case "0":
+	    		breaker = true;
+	    		break;
+	    	default:
+	    		System.out.println("Please pick a valid option.");
+	    		break;
+	    	}
+		}
 	}
 	
 	public void register() {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("Registering new account with the bank.");
+		
 		System.out.print("Enter your first name: ");
 		String firstName = input.nextLine();
+		if(firstName.equals("")) return;
+		
 		System.out.print("Enter your last name: ");
 		String lastName = input.nextLine();
+		if(lastName.equals("")) return;
+		
 		System.out.print("Enter a username: ");
 		String username = input.nextLine();
+		if(username.equals("")) return;
 		
 		while(UserService.get().checkUser(username)) {
 			System.out.println("That username is unavailable. Please enter another one.");
 			System.out.print("Enter a username: ");
 			username = input.nextLine();
+			if(username.equals("")) return;
 		}
 		System.out.print("Enter a password: ");
 		String password = input.nextLine(); // TODO: Hash this in the future.
+		if(password.equals("")) return;
 		
 		user = new User(username, password, firstName, lastName);
 
@@ -77,6 +91,7 @@ public class ConsoleDisplay {
 			log.debug("Cannot retrieve user from sql read.");
 			return;
 		}
+		mainMenu();
 	}
 	
 	public void login() {
@@ -86,6 +101,7 @@ public class ConsoleDisplay {
 		String username = input.nextLine();
 		System.out.print("Password:");
 		String password = input.nextLine();
+		if(username.equals("") && password.equals("")) return;
 		while(!UserService.get().validateUser(username, password)) {
 			
 			System.out.println("Username or password is incorrect.");
@@ -93,6 +109,7 @@ public class ConsoleDisplay {
 			username = input.nextLine();
 			System.out.print("Password:");
 			password = input.nextLine();
+			if(username.equals("") && password.equals("")) return;
 		}
 		try {
 			user = UserService.get().retrieveUser(username, password).get();
@@ -102,47 +119,68 @@ public class ConsoleDisplay {
 			log.debug("Cannot retrieve user from sql read.");
 			return;
 		}
+		mainMenu();
 	}
 	
 	public void mainMenu() {
-		if(user == null) {
-			loginRegister();
-		}
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println("Welcome, " + user.getFirstName() + " " + user.getLastName() + "!");
-		System.out.println("How can we service you today?");
-		System.out.println("\nOptions: ");
-		System.out.println("1. View banking accounts");
-		System.out.println("2. Change address");
-		System.out.println("3. Change password");
-		
-		String choice = input.nextLine();
-		switch(choice) {
-		case "1":
-			bankingAccounts();
-			break;
-		default:
-			break;
+		boolean breaker = false;
+		while(!breaker) {
+			if(user == null) {
+				loginRegister();
+			}
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println("Welcome, " + user.getFirstName() + " " + user.getLastName() + "!");
+			System.out.println("How can we service you today?");
+			System.out.println("\nOptions: ");
+			System.out.println("1. View banking accounts");
+			System.out.println("2. Change address");
+			System.out.println("3. Change password");
+			System.out.println("\n0. Log out");
+			
+			String choice = input.nextLine();
+			switch(choice) {
+			case "1":
+				bankingAccounts();
+				break;
+			case "0":
+				breaker = true;
+			default:
+				break;
+			}
 		}
 	}
 	
 	public void bankingAccounts() {
-		System.out.println("You have " + "$" + accountChecking.getBalance() + "in your bank account");
-		System.out.println("How would you like to proceed?");
-		System.out.println("1. Withdraw funds");
-		System.out.println("2. Deposit funds");
-		System.out.println("3. Transfer funds");
-		
-		String choice = input.nextLine();
-		switch(choice) {
-		case "1":
-			System.out.println("How much would you like to withdraw?");
-			String amt = input.nextLine();
-			// Need to catch exceptions...
-			AccountCheckingService.get().withdraw(Double.parseDouble(amt), accountChecking.getBankAccountId());
-			break;
-		default:
-			break;
+		boolean breaker = false;
+		while(!breaker) {
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			displayBalance();
+			System.out.println("How would you like to proceed?");
+			System.out.println("1. Withdraw funds");
+			System.out.println("2. Deposit funds");
+			System.out.println("3. Transfer funds");
+			System.out.println("\n0. Go back");
+			
+			String choice = input.nextLine();
+			switch(choice) {
+			case "1":
+				System.out.println("How much would you like to withdraw?");
+				String amt = input.nextLine();
+				// Need to catch exceptions...
+				AccountCheckingService.get().withdraw(Double.parseDouble(amt), accountChecking.getBankAccountId());
+				accountChecking = AccountCheckingService.get().retrieveAccount(user.getBankAccountId()).get();
+				displayBalance();
+				break;
+			case "0":
+				breaker = true;
+				break;
+			default:
+				break;
+			}
 		}
+	}
+	
+	public void displayBalance() {
+		System.out.println("Your balance: $" + accountChecking.getBalance());
 	}
 }
