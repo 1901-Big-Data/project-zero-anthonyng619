@@ -25,12 +25,12 @@ public class AccountCheckingService {
 		}
 	}
 	
-	public Optional<AccountChecking> withdraw(double amt, int bankId) throws NoSuchElementException {
-		return AccountCheckingOracle.get().withdraw(amt, bankId);
+	public Optional<AccountChecking> withdraw(double amt, int bankId, int userId) throws NoSuchElementException {
+		return AccountCheckingOracle.get().withdraw(amt, bankId, userId);
 	}
 	
-	public Optional<AccountChecking> deposit(double amt, int bankId) throws NoSuchElementException {
-		return AccountCheckingOracle.get().deposit(amt, bankId);
+	public Optional<AccountChecking> deposit(double amt, int bankId, int userId) throws NoSuchElementException {
+		return AccountCheckingOracle.get().deposit(amt, bankId, userId);
 	}
 	
 	public Optional<AccountChecking> retrieveAccounts(int userId) throws NoSuchElementException {

@@ -198,15 +198,106 @@ public class ConsoleDisplay {
 	public void bankingAccounts() {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		try {
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			accountChecking = AccountCheckingService.get().retrieveAccounts(user.getUserID()).get();
 			System.out.println("These are your available accounts: ");
 
-			for(AccountInformation acc_info: accountChecking.getAccounts()) {
-				System.out.println("Account number: " + acc_info.getBankAccountId() + " || Balance: " + acc_info.getBalance());
+		
+			int page = 0;
+			int pageSize = 5;
+			boolean breaker = false;
+			
+			while(!breaker) {
+			int index = 0;
+			while(index < pageSize) {
+				AccountInformation acc_info = accountChecking.getAccounts().get(index + page*pageSize);
+				System.out.println((index+1 + page*pageSize)+".     |Account number: " + acc_info.getBankAccountId() + " || Balance: " + acc_info.getBalance());
+				if(index + 1 + page*pageSize >= accountChecking.getAccounts().size()) {
+					break;
+				}
+				index++;
+			}
+			if(page == 0) {
+				System.out.println("\n8. Main Menu"
+						+ "\n9. Next");
+			} else {
+				System.out.println("\n8. Previous\n9. Next");
+			}
+			System.out.println("Which account would you like to access?");
+			String choice = input.nextLine();
+			switch(choice) {
+			case "1":
+				int indexInList = page*pageSize;
+				if(1 + indexInList > accountChecking.getAccounts().size()) {
+					break;
+				}
+				breaker = true;
+				
+				bankAccountInvocation(indexInList);
+				break;
+				
+			case "2":
+				indexInList = 1 + page*pageSize;
+				if(1 + indexInList > accountChecking.getAccounts().size()) {
+					break;
+				}
+				breaker = true;
+				
+				bankAccountInvocation(indexInList);
+				break;
+				
+			case "3":
+				indexInList = 2 + page*pageSize;
+				if(1 + indexInList > accountChecking.getAccounts().size()) {
+					break;
+				}
+				breaker = true;
+				
+				bankAccountInvocation(indexInList);
+				break;
+				
+			case "4":
+				indexInList = 3 + page*pageSize;
+				if(1 + indexInList > accountChecking.getAccounts().size()) {
+					break;
+				}
+				breaker = true;
+				
+				bankAccountInvocation(indexInList);
+				break;
+				
+			case "5":
+				indexInList = 4 + page*pageSize;
+				if(1 + indexInList > accountChecking.getAccounts().size()) {
+					break;
+				}
+				breaker = true;
+			
+				bankAccountInvocation(indexInList);
+				break;
+				
+			case "8":
+				index = 0;
+				if(page > 0) {
+					page--;
+				} else {
+					return;
+				}
+				break;
+			case "9": 
+				index = 0;
+				if(!((page+1)*pageSize > accountChecking.getAccounts().size())) {
+					page++;
+				}
+				break;
+			
+			default:
+				break;
+			}
 			}
 		} catch(NoSuchElementException e) {
 			log.catching(e);
-			
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println("We apologize for the inconvenience. It looks like you do not have any opened accounts with us.");
 			System.out.println("Please open an account with us at the main menu.");
 			System.out.println("Press any button to return back to the main menu...");
@@ -217,6 +308,59 @@ public class ConsoleDisplay {
 	}
 	
 	public void bankAccountInvocation(int bankId) {
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		AccountInformation acc_info = accountChecking.getAccounts().get(bankId);
+		System.out.println("Currently viewing Bank Account Number: " + acc_info.getBankAccountId());
+		System.out.println("Remaining balance: "+ acc_info.getBalance());
+		
+	
+		boolean breaker = false;
+
+		while(!breaker) {
+			System.out.println("What would you like to do?\n");
+			System.out.println("1. Withdraw");
+			System.out.println("2. Deposit");
+			System.out.println("3. Transfer");
+			System.out.println("\nPick an option: ");
+			
+			String choice = input.nextLine();
+			
+			switch(choice) {
+			case "1":
+				System.out.println("How much would you like to withdraw?");
+				String amt = input.nextLine();
+				
+				try {
+					accountChecking = AccountCheckingService.get().withdraw(Double.parseDouble(amt), acc_info.getBankAccountId(), user.getUserID()).get();
+					System.out.println("You withdrew $" + amt);
+					System.out.println("Your remaining balance is $" + accountChecking.getAccounts().get(bankId).getBalance());
+					breaker = true;
+					System.out.println("Press enter to continue.");
+					amt = input.nextLine();
+				} catch (NoSuchElementException e) {
+					System.out.println("You don't have enough money to withdraw that much!");
+					accountChecking = AccountCheckingService.get().retrieveAccounts(user.getUserID()).get();
+				} 
+				break;
+			case "2":
+				System.out.println("How much would you like to deposit?");
+				amt = input.nextLine();
+				
+				try {
+					accountChecking = AccountCheckingService.get().deposit(Double.parseDouble(amt), acc_info.getBankAccountId(), user.getUserID()).get();
+					System.out.println("You deposited $" + amt);
+					System.out.println("Your remaining balance is $" + accountChecking.getAccounts().get(bankId).getBalance());
+					breaker = true;
+					System.out.println("Press enter to continue.");
+					amt = input.nextLine();
+				} catch (NoSuchElementException e) {
+					System.out.println("You can't deposit that much!");
+					accountChecking = AccountCheckingService.get().retrieveAccounts(user.getUserID()).get();
+				} 
+				break;
+			}
+			
+		}
 		
 	}
 	

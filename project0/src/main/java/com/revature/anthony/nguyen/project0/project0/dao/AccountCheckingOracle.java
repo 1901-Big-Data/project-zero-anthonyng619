@@ -35,50 +35,85 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 	}
 	
 	@Override
-	public Optional<AccountChecking> deposit(double amt, int bankId) {
-		/*String query = "call depositmoney(?, ?, ?)";
+	public Optional<AccountChecking> deposit(double amt, int bankId, int userId) {
+		String query = "call depositmoney(?, ?, ?, ?, ?)";
 		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
 			stmt.setDouble(1, amt);
 			stmt.setInt(2, bankId);
-			stmt.registerOutParameter(3, Types.DOUBLE);
+			stmt.setInt(3, userId);
+			stmt.registerOutParameter(4, Types.DOUBLE);
+			stmt.registerOutParameter(5, oracle.jdbc.OracleTypes.CURSOR);
 			stmt.execute();
 			
-			Double newBalance = stmt.getDouble(3);
+			Double newBalance = stmt.getDouble(4);
+			ResultSet rs = (ResultSet) stmt.getObject(5);
 			
-			AccountChecking account = new AccountChecking(bankId, newBalance);
-			return Optional.of(account);
-		} catch (SQLException e) {
-			log.catching(e);
-			return Optional.empty();
-		}*/
-		
-		return Optional.empty();
-	}
-
-	@Override
-	public Optional<AccountChecking> withdraw(double amt, int bankId) {
-		/*
-		String query = "call withdrawmoney(?, ?, ?)";
-		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
-			stmt.setDouble(1, amt);
-			stmt.setInt(2, bankId);
-			stmt.registerOutParameter(3, Types.DOUBLE);
-			stmt.execute();
+			double totalBalance = 0;
+			ArrayList<AccountInformation> accountlist = new ArrayList<AccountInformation>();
+			boolean rsempty = true; // Used to check if resultset is empty
 			
-			Double newBalance = stmt.getDouble(3);
-			if(newBalance == -1) {
+			while(rs.next()) {
+				rsempty = false;
+				int bankid = rs.getInt("BANK_ACCOUNT_ID");
+				double balance = rs.getDouble("BALANCE");
+				totalBalance += balance;
+				AccountInformation acc_info = new AccountInformation(bankid, balance);
+				accountlist.add(acc_info);
+			}
+			
+			if(rsempty) {
 				return Optional.empty();
 			}
-			System.out.println("New balance after withdraw: "+newBalance);
-			AccountChecking account = new AccountChecking(bankId, newBalance);
+			
+			AccountChecking account = new AccountChecking(accountlist, totalBalance);
 			return Optional.of(account);
 		} catch (SQLException e) {
 			log.catching(e);
 			return Optional.empty();
 		}
+	}
+
+	@Override
+	public Optional<AccountChecking> withdraw(double amt, int bankId, int userId) {
 		
-		*/
-		return Optional.empty();
+		String query = "call withdrawmoney(?, ?, ?, ?, ?)";
+		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
+			stmt.setDouble(1, amt);
+			stmt.setInt(2, bankId);
+			stmt.setInt(3, userId);
+			stmt.registerOutParameter(4, Types.DOUBLE);
+			stmt.registerOutParameter(5, oracle.jdbc.OracleTypes.CURSOR);
+			stmt.execute();
+			
+			Double newBalance = stmt.getDouble(4);
+			ResultSet rs = (ResultSet) stmt.getObject(5);
+			if(newBalance == -1) {
+				return Optional.empty();
+			}
+			
+			double totalBalance = 0;
+			ArrayList<AccountInformation> accountlist = new ArrayList<AccountInformation>();
+			boolean rsempty = true; // Used to check if resultset is empty
+			
+			while(rs.next()) {
+				rsempty = false;
+				int bankid = rs.getInt("BANK_ACCOUNT_ID");
+				double balance = rs.getDouble("BALANCE");
+				totalBalance += balance;
+				AccountInformation acc_info = new AccountInformation(bankid, balance);
+				accountlist.add(acc_info);
+			}
+			
+			if(rsempty) {
+				return Optional.empty();
+			}
+			
+			AccountChecking account = new AccountChecking(accountlist, totalBalance);
+			return Optional.of(account);
+		} catch (SQLException e) {
+			log.catching(e);
+			return Optional.empty();
+		}
 	}
 
 	@Override
