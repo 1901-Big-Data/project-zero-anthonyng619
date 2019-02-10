@@ -211,17 +211,24 @@ public class ConsoleDisplay {
 			int index = 0;
 			while(index < pageSize) {
 				AccountInformation acc_info = accountChecking.getAccounts().get(index + page*pageSize);
-				System.out.println((index+1 + page*pageSize)+".     |Account number: " + acc_info.getBankAccountId() + " || Balance: " + acc_info.getBalance());
+				System.out.println((index+1)+".     |Account number: " + acc_info.getBankAccountId() + " || Balance: " + acc_info.getBalance());
 				if(index + 1 + page*pageSize >= accountChecking.getAccounts().size()) {
 					break;
 				}
 				index++;
 			}
 			if(page == 0) {
-				System.out.println("\n8. Main Menu"
-						+ "\n9. Next");
+				if((page+1)*pageSize >= accountChecking.getAccounts().size()) {
+					System.out.println("\n8. Main Menu");
+				} else {
+					System.out.println("\n8. Main Menu\n9. Next");
+				}
 			} else {
-				System.out.println("\n8. Previous\n9. Next");
+				if((page+1)*pageSize >= accountChecking.getAccounts().size()) {
+					System.out.println("\n8. Previous");
+				} else {
+					System.out.println("\n8. Previous\n9. Next");
+				}
 			}
 			System.out.println("Which account would you like to access?");
 			String choice = input.nextLine();
@@ -286,7 +293,7 @@ public class ConsoleDisplay {
 				break;
 			case "9": 
 				index = 0;
-				if(!((page+1)*pageSize > accountChecking.getAccounts().size())) {
+				if((page+1)*pageSize < accountChecking.getAccounts().size()) {
 					page++;
 				}
 				break;
@@ -321,6 +328,7 @@ public class ConsoleDisplay {
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
 			System.out.println("3. Transfer");
+			System.out.println("\n4. Go back");
 			System.out.println("\nPick an option: ");
 			
 			String choice = input.nextLine();
@@ -358,8 +366,14 @@ public class ConsoleDisplay {
 					accountChecking = AccountCheckingService.get().retrieveAccounts(user.getUserID()).get();
 				} 
 				break;
+			case "3":
+				// TODO: Transfer
+				break;
+			case "4":
+				return;
+			default:
+				break;
 			}
-			
 		}
 		
 	}
