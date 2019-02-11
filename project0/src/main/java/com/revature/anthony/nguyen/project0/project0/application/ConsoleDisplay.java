@@ -34,7 +34,7 @@ public class ConsoleDisplay {
 	    	System.out.println("    1. Register a new account");
 	    	System.out.println("    2. Login to an existing account");
 	    	System.out.println("\n    0. Exit");
-	    	System.out.print("\nPick an option: ");
+	    	System.out.println("\nPick an option: ");
 	    	String choice = input.nextLine();
 	    
 			switch(choice) {
@@ -59,25 +59,25 @@ public class ConsoleDisplay {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("Registering new account with the bank.");
 		
-		System.out.print("Enter your first name: ");
+		System.out.println("Enter your first name: ");
 		String firstName = input.nextLine();
 		if(firstName.equals("")) return;
 		
-		System.out.print("Enter your last name: ");
+		System.out.println("Enter your last name: ");
 		String lastName = input.nextLine();
 		if(lastName.equals("")) return;
 		
-		System.out.print("Enter a username: ");
+		System.out.println("Enter a username: ");
 		String username = input.nextLine();
 		if(username.equals("")) return;
 		
 		while(UserService.get().checkUser(username)) {
 			System.out.println("That username is unavailable. Please enter another one.");
-			System.out.print("Enter a username: ");
+			System.out.println("Enter a username: ");
 			username = input.nextLine();
 			if(username.equals("")) return;
 		}
-		System.out.print("Enter a password: ");
+		System.out.println("Enter a password: ");
 		String password = input.nextLine(); // TODO: Hash this in the future.
 		if(password.equals("")) return;
 		
@@ -328,6 +328,7 @@ public class ConsoleDisplay {
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
 			System.out.println("3. Transfer");
+			System.out.println("9. Delete");
 			System.out.println("\n4. Go back");
 			System.out.println("\nPick an option: ");
 			
@@ -367,10 +368,48 @@ public class ConsoleDisplay {
 				} 
 				break;
 			case "3":
-				// TODO: Transfer
+				System.out.println("Who would you like to transfer money to?\nEnter the bank account id:");
+				String targetidstring = input.nextLine();
+				int targetid;
+				try {
+					targetid = Integer.parseInt(targetidstring);
+				} catch(NumberFormatException e) {
+					System.out.println("Please enter a valid bank account number.");
+					break;
+				}
+				System.out.println("How much would you like to send?");
+				amt = input.nextLine();
+				
+				try {
+					accountChecking = AccountCheckingService.get().transfer(Double.parseDouble(amt), acc_info.getBankAccountId(), targetid, user.getUserID()).get();
+					System.out.println("You transferred $" + amt + " to the bank account id " + targetid + ".");
+					System.out.println("Your remaining balance is $" + accountChecking.getAccounts().get(bankId).getBalance());
+				} catch(NoSuchElementException e) {
+					System.out.println("Your transfer has failed due to insufficient funds or invalid recipient.");
+				}
+				
 				break;
 			case "4":
 				return;
+			case "9":
+				boolean breaker2 = false;
+				while(!breaker2) {
+					System.out.println("Are you sure you want to delete this account?");
+					choice = input.nextLine();
+					switch(choice) {
+					case "y": 
+						// Delete account
+						try {
+							accountChecking = AccountCheckingService.get().deleteAccount(acc_info.getBankAccountId(), user.getUserID()).get();
+							breaker2 = true;
+							System.out.println("You have successfully deleted your account!");
+						} catch(NoSuchElementException e) {
+							System.out.println("You are unable to delete the account!\nPlease check if your balance is 0 or you are an admin.");
+						}
+						break;
+					}
+				}
+				break;
 			default:
 				break;
 			}
@@ -412,6 +451,7 @@ public class ConsoleDisplay {
 			}
 		}
 	}
+
 	
 	public void displayBalance() {
 		//System.out.println("Your balance: $" + accountChecking.getBalance());

@@ -33,12 +33,20 @@ public class AccountCheckingService {
 		return AccountCheckingOracle.get().deposit(amt, bankId, userId);
 	}
 	
+	public Optional<AccountChecking> transfer(double amt, int bankIdSource, int bankIdTarget, int userId) throws NoSuchElementException {
+		return AccountCheckingOracle.get().transfer(amt,  bankIdSource, bankIdTarget, userId);
+	}
+	
 	public Optional<AccountChecking> retrieveAccounts(int userId) throws NoSuchElementException {
 		return AccountCheckingOracle.get().retrieveAccounts(userId);
 	}
 	
 	public Optional<AccountInformation> createAccount(int userId) {
 		return AccountCheckingOracle.get().createAccount(userId);
+	}
+	
+	public Optional<AccountChecking> deleteAccount(int bankId, int invokerId) {
+		return AccountCheckingOracle.get().deleteAccount(bankId, invokerId);
 	}
 	
 }

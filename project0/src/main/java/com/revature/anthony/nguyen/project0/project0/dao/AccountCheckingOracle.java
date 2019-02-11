@@ -117,21 +117,46 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 	}
 
 	@Override
-	public Optional<AccountChecking> transfer(double amt, int sourceBankId, int targetBankId) {
-		/*String query = "select BALANCE from ACCOUNTSCHECKING where BANK_ACCOUNT_ID = ?";
-		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
-			stmt.setString(1, bankAccountId);
-			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
-				
+	public Optional<AccountChecking> transfer(double amt, int sourceBankId, int targetBankId, int userId) {
+		String query = "call transfermoney(?, ?, ?, ?, ?, ?)";
+		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
+			stmt.setDouble(1, amt);
+			stmt.setInt(2, sourceBankId);
+			stmt.setInt(3, targetBankId);
+			stmt.setInt(4, userId);
+			stmt.registerOutParameter(5, Types.DOUBLE);
+			stmt.registerOutParameter(6, oracle.jdbc.OracleTypes.CURSOR);
+			stmt.execute();
+			
+			Double newBalance = stmt.getDouble(5);
+			ResultSet rs = (ResultSet) stmt.getObject(6);
+			if(newBalance == -1) {
+				return Optional.empty();
 			}
+			
+			double totalBalance = 0;
+			ArrayList<AccountInformation> accountlist = new ArrayList<AccountInformation>();
+			boolean rsempty = true; // Used to check if resultset is empty
+			
+			while(rs.next()) {
+				rsempty = false;
+				int bankid = rs.getInt("BANK_ACCOUNT_ID");
+				double balance = rs.getDouble("BALANCE");
+				totalBalance += balance;
+				AccountInformation acc_info = new AccountInformation(bankid, balance);
+				accountlist.add(acc_info);
+			}
+			
+			if(rsempty) {
+				return Optional.empty();
+			}
+			
+			AccountChecking account = new AccountChecking(accountlist, totalBalance);
+			return Optional.of(account);
 		} catch (SQLException e) {
 			log.catching(e);
-			return false;
+			return Optional.empty();
 		}
-		return false;
-		*/
-		return Optional.empty();
 	}
 
 	/*
@@ -151,6 +176,8 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 		return Optional.empty();
 	}
 	 */
+	
+	
 	@Override
 	public Optional<AccountChecking> retrieveAccounts(int userId) {
 		String query = "select * from p0_checking where user_id = ?";
@@ -198,6 +225,50 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			
 			return Optional.of(account);
 		} catch (SQLException e) {
+			log.catching(e);
+			return Optional.empty();
+		}
+	}
+	
+	@Override
+	public Optional<AccountChecking> deleteAccount(int bankId, int invokerId) {
+		String query = "call deletecheckingaccount(?, ?, ?, ?)";
+		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
+			stmt.setInt(1, bankId);
+			stmt.setInt(2, invokerId);
+			stmt.registerOutParameter(3, Types.INTEGER);
+			stmt.registerOutParameter(4, oracle.jdbc.OracleTypes.CURSOR);
+			stmt.execute();
+			
+			Integer success = stmt.getInt(3);
+			ResultSet rs = (ResultSet) stmt.getObject(4);
+			
+			if(success == 0) {
+				log.debug("Unsuccessful deletion");
+				return Optional.empty();
+			}
+			
+			double totalBalance = 0;
+			ArrayList<AccountInformation> accountlist = new ArrayList<AccountInformation>();
+			boolean rsempty = true; // Used to check if resultset is empty
+			
+			while(rs.next()) {
+				System.out.println("Looped");
+				rsempty = false;
+				int bankid = rs.getInt("BANK_ACCOUNT_ID");
+				double balance = rs.getDouble("BALANCE");
+				totalBalance += balance;
+				AccountInformation acc_info = new AccountInformation(bankid, balance);
+				accountlist.add(acc_info);
+			}
+			
+			if(rsempty) {
+				//return Optional.empty();
+			}
+			
+			AccountChecking account = new AccountChecking(accountlist, totalBalance);
+			return Optional.of(account);
+		} catch(SQLException e) {
 			log.catching(e);
 			return Optional.empty();
 		}
