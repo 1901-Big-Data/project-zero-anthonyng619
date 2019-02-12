@@ -110,6 +110,7 @@ public class UserOracle implements UserDao{
 			}
 			
 			Users users = new Users(userslist);
+			rs.close();
 			return Optional.of(users);
 		} catch(SQLException e) {
 			log.catching(e);
@@ -172,6 +173,7 @@ public class UserOracle implements UserDao{
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
 				log.debug(username + " exists");
+				rs.close();
 				return true;
 			}
 		} catch(SQLException e) {
@@ -200,10 +202,12 @@ public class UserOracle implements UserDao{
 			}
 		
 			if(empty) {
+				rs.close();
 				return Optional.empty();
 			}
 		
 			Users users = new Users(list);
+			rs.close();
 			return Optional.of(users);
 		} catch(SQLException e) {
 			log.catching(e);
