@@ -4414,3 +4414,6 @@ java.util.NoSuchElementException: No line found
 	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:150) [classes/:?]
 	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:31) [classes/:?]
 	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[DEBUG] 2019-02-12 16:23:32.527 [main] AccountCheckingOracle - Unsuccessful deletion
+[DEBUG] 2019-02-12 16:25:44.335 [main] UserOracle - Added user to database with user id: 339
+[DEBUG] 2019-02-12 16:25:44.338 [main] ConsoleDisplay - User finished registering for new account. Username: q
