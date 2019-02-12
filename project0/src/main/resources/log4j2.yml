@@ -26,5 +26,5 @@ Configuration:
     Root:
       level: trace
       AppenderRef:
-        - ref: Console_Appender
+ 
         - ref: File_Appender

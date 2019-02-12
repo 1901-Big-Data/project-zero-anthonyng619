@@ -108,22 +108,39 @@ public class ConsoleDisplay {
 	}
 	
 	public void login() {
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println("Login Page");
-		System.out.print("Username:");
-		String username = input.nextLine();
-		System.out.print("Password:");
-		String password = input.nextLine();
-		if(username.equals("") && password.equals("")) return;
-		
-		try {
-			user = UserService.get().loginUser(username, password).get();
-		} catch (NoSuchElementException e) {
-			System.out.println("Wrong username or passowrd.");
-			return;
+		boolean breaker = false;
+		while(!breaker) {
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println("Login Page");
+			System.out.print("Username:");
+			String username = input.nextLine();
+			System.out.print("Password:");
+			String password = input.nextLine();
+			if(username.equals("") && password.equals("")) return;
+			
+			try {
+				user = UserService.get().loginUser(username, password).get();
+				mainMenu();
+			} catch (NoSuchElementException e) {
+				boolean breaker2 = false;
+				while(!breaker2) {
+					System.out.println("Wrong username or passowrd.");
+					System.out.println("Would you like to try again? (Y/N)" );
+					String choice = input.nextLine().toUpperCase();
+					switch(choice) {
+					case "Y":
+						breaker2 = true;
+						break;
+					case "N":
+						breaker = true;
+						breaker2 = true;
+						break;
+					default:
+						break;
+					}
+				}
+			}
 		}
-		
-		mainMenu();
 	}
 	
 	public void mainMenu() {
@@ -168,7 +185,6 @@ public class ConsoleDisplay {
 	
 	
 	public void bankingAccounts() {
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		try {
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			accountChecking = AccountCheckingService.get().retrieveAccounts(user.getUserID()).get();
@@ -183,7 +199,7 @@ public class ConsoleDisplay {
 			int index = 0;
 			while(index < pageSize) {
 				AccountInformation acc_info = accountChecking.getAccounts().get(index + page*pageSize);
-				System.out.println((index+1)+".     |Account number: " + acc_info.getBankAccountId() + " || Balance: " + acc_info.getBalance());
+				System.out.println("    " + (index+1)+".  |  Account number: " + acc_info.getBankAccountId() + " || Balance: " + acc_info.getBalance());
 				if(index + 1 + page*pageSize >= accountChecking.getAccounts().size()) {
 					break;
 				}
@@ -191,15 +207,15 @@ public class ConsoleDisplay {
 			}
 			if(page == 0) {
 				if((page+1)*pageSize >= accountChecking.getAccounts().size()) {
-					System.out.println("\n8. Main Menu");
+					System.out.println("\n9. Main Menu");
 				} else {
-					System.out.println("\n8. Main Menu\n9. Next");
+					System.out.println("\n9. Main Menu\n0. Next");
 				}
 			} else {
 				if((page+1)*pageSize >= accountChecking.getAccounts().size()) {
-					System.out.println("\n8. Previous");
+					System.out.println("\n9. Previous");
 				} else {
-					System.out.println("\n8. Previous\n9. Next");
+					System.out.println("\n9. Previous\n0. Next");
 				}
 			}
 			System.out.println("Which account would you like to access?");
@@ -255,7 +271,7 @@ public class ConsoleDisplay {
 				bankAccountInvocation(indexInList);
 				break;
 				
-			case "8":
+			case "9":
 				index = 0;
 				if(page > 0) {
 					page--;
@@ -263,7 +279,7 @@ public class ConsoleDisplay {
 					return;
 				}
 				break;
-			case "9": 
+			case "0": 
 				index = 0;
 				if((page+1)*pageSize < accountChecking.getAccounts().size()) {
 					page++;
@@ -275,7 +291,6 @@ public class ConsoleDisplay {
 			}
 			}
 		} catch(NoSuchElementException e) {
-			log.catching(e);
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println("We apologize for the inconvenience. It looks like you do not have any opened accounts with us.");
 			System.out.println("Please open an account with us at the main menu.");
@@ -300,8 +315,8 @@ public class ConsoleDisplay {
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
 			System.out.println("3. Transfer");
-			System.out.println("9. Delete");
-			System.out.println("\n4. Go back");
+			System.out.println("4. Delete This Checking Account");
+			System.out.println("\n0. Go back");
 			System.out.println("\nPick an option: ");
 			
 			String choice = input.nextLine();
@@ -361,9 +376,9 @@ public class ConsoleDisplay {
 				}
 				
 				break;
-			case "4":
+			case "0":
 				return;
-			case "9":
+			case "4":
 				boolean breaker2 = false;
 				while(!breaker2) {
 					System.out.println("Are you sure you want to delete this account?");
@@ -409,7 +424,6 @@ public class ConsoleDisplay {
 					input.nextLine();
 					breaker = true;
 				} catch(NoSuchElementException e) {
-					log.catching(e);
 					System.out.println("You have lost connection.");
 					return;
 				}
@@ -467,7 +481,7 @@ public class ConsoleDisplay {
 			int index = 0;
 			while(index < pageSize) {
 				AccountInformation acc_info = accountChecking.getAccounts().get(index + page*pageSize);
-				System.out.println((index+1)+".     |Account number: " + acc_info.getBankAccountId() + " || Balance: " + acc_info.getBalance());
+				System.out.println("    " + (index+1)+".  |  Account number: " + acc_info.getBankAccountId() + " || Balance: " + acc_info.getBalance());
 				if(index + 1 + page*pageSize >= accountChecking.getAccounts().size()) {
 					break;
 				}
@@ -589,7 +603,6 @@ public class ConsoleDisplay {
 			}
 			}
 		} catch(NoSuchElementException e) {
-			log.catching(e);
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println("Sorry, there are no checking accounts in the database.");
 			System.out.println("Press any button to return back to the main menu...");
@@ -704,7 +717,6 @@ public class ConsoleDisplay {
 	}
 	
 	public void adminUserAccounts() {
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		try {
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			users = UserService.get().retrieveUsersAsAdmin().get();
@@ -840,7 +852,6 @@ public class ConsoleDisplay {
 			}
 			}
 		} catch(NoSuchElementException e) {
-			log.catching(e);
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println("Sorry, there are no users in the database.");
 			System.out.println("Press any button to return back to the main menu...");
@@ -860,7 +871,7 @@ public class ConsoleDisplay {
 		while(!breaker) {
 			System.out.println("What would you like to do?\n");
 			System.out.println("1. Delete");
-			System.out.println("\n2. Go back");
+			System.out.println("\n0. Go back");
 			System.out.println("\nPick an option: ");
 			
 			String choice = input.nextLine();
@@ -869,10 +880,10 @@ public class ConsoleDisplay {
 			case "1":
 				boolean breaker2 = false;
 				while(!breaker2) {
-					System.out.println("Are you sure you want to delete this account?");
-					choice = input.nextLine();
+					System.out.println("Are you sure you want to delete this account? (Y/N)");
+					choice = input.nextLine().toUpperCase();
 					switch(choice) {
-					case "y": 
+					case "Y": 
 						// Delete account
 						try {
 							users = UserService.get().removeUserAsAdmin(user_info.getUserID()).get();
@@ -887,7 +898,7 @@ public class ConsoleDisplay {
 					}
 				}
 				break;
-			case "2":
+			case "0":
 				return;
 			default:
 				break;
@@ -908,6 +919,8 @@ public class ConsoleDisplay {
 					user = UserService.get().removeUser(user.getUserID()).get();
 					if(user.getUserID() == 0) {
 						System.out.println("Your account has been successfully closed.");
+						System.out.println("Press the enter key to continue...");
+						input.nextLine();
 					}
 					breaker = true;
 				} catch(NoSuchElementException e) {
