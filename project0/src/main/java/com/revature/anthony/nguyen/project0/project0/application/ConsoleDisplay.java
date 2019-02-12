@@ -339,12 +339,13 @@ public class ConsoleDisplay {
 					accountChecking = AccountCheckingService.get().withdraw(amount, acc_info.getBankAccountId(), user.getUserID()).get();
 					System.out.println("You withdrew $" + df.format(amount));
 					System.out.println("Your remaining balance is $" + df.format(accountChecking.getAccounts().get(bankId).getBalance()));
-					breaker = true;
 					System.out.println("Press enter to continue...");
 					amt = input.nextLine();
 				} catch (NoSuchElementException e) {
 					System.out.println("You don't have enough money to withdraw that much!");
 					accountChecking = AccountCheckingService.get().retrieveAccounts(user.getUserID()).get();
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 				} 
 				break;
 			case "2":
@@ -353,18 +354,21 @@ public class ConsoleDisplay {
 				double amount = Double.parseDouble(amt);
 				if(amount < 0.0) {
 					System.out.println("You can only deposit a positive amount!");
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 					break;
 				}
 				try {
 					accountChecking = AccountCheckingService.get().deposit(amount, acc_info.getBankAccountId(), user.getUserID()).get();
 					System.out.println("You deposited $" + df.format(amount));
 					System.out.println("Your remaining balance is $" + df.format(accountChecking.getAccounts().get(bankId).getBalance()));
-					breaker = true;
 					System.out.println("Press enter to continue...");
 					amt = input.nextLine();
 				} catch (NoSuchElementException e) {
 					System.out.println("You can't deposit that much!");
 					accountChecking = AccountCheckingService.get().retrieveAccounts(user.getUserID()).get();
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 				} 
 				break;
 			case "3":
@@ -375,6 +379,8 @@ public class ConsoleDisplay {
 					targetid = Integer.parseInt(targetidstring);
 				} catch(NumberFormatException e) {
 					System.out.println("Please enter a valid bank account number.");
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 					break;
 				}
 				System.out.println("How much would you like to send?");
@@ -388,8 +394,12 @@ public class ConsoleDisplay {
 					accountChecking = AccountCheckingService.get().transfer(amount, acc_info.getBankAccountId(), targetid, user.getUserID()).get();
 					System.out.println("You transferred $" + df.format(amount) + " to the bank account id " + targetid + ".");
 					System.out.println("Your remaining balance is $" + df.format(accountChecking.getAccounts().get(bankId).getBalance()));
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 				} catch(NoSuchElementException e) {
 					System.out.println("Your transfer has failed due to insufficient funds or invalid recipient.");
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 				}
 				
 				break;
@@ -408,8 +418,12 @@ public class ConsoleDisplay {
 							breaker2 = true;
 							breaker = true;
 							System.out.println("You have successfully deleted your account!");
+							System.out.println("Press the enter key to continue...");
+							input.nextLine();
 						} catch(NoSuchElementException e) { 
 							System.out.println("You are unable to delete the account!\nPlease check if your balance is 0 before deleting.");
+							System.out.println("Press the enter key to continue...");
+							input.nextLine();
 						}
 						breaker2 = true;
 					}
@@ -423,14 +437,13 @@ public class ConsoleDisplay {
 	}
 	
 	public void openBankAccount() {
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println("You have the choice to open either a checking or savings account.");
-		System.out.println("Note: You can set up multiple accounts with us!");
-		System.out.println("\n1. Create a new checking account.");
-		//System.out.println("\n2. Create a new savings account.");
-		
 		boolean breaker = false;
 		while(!breaker) {
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println("You have the choice to open either a checking or savings account.");
+			System.out.println("Note: You can set up multiple accounts with us!");
+			System.out.println("\n1. Create a new checking account.");
+			System.out.println("\n0. Return to main menu.");
 			String choice = input.nextLine();
 			switch(choice) {
 			case "1":
@@ -442,6 +455,8 @@ public class ConsoleDisplay {
 					breaker = true;
 				} catch(NoSuchElementException e) {
 					System.out.println("You have lost connection.");
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 					return;
 				}
 				break;
@@ -643,8 +658,8 @@ public class ConsoleDisplay {
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
 			System.out.println("3. Transfer");
-			System.out.println("9. Delete");
-			System.out.println("\n4. Go back");
+			System.out.println("4. Delete");
+			System.out.println("\n0. Go back");
 			System.out.println("\nPick an option: ");
 			
 			String choice = input.nextLine();
@@ -658,6 +673,8 @@ public class ConsoleDisplay {
 					double amount = Double.parseDouble(amt);
 					if(amount < 0.0) {
 						System.out.println("You can only withdraw a positive amount!");
+						System.out.println("Press the enter key to continue...");
+						input.nextLine();
 						break;
 					}
 					accountChecking = AccountCheckingService.get().withdraw(amount, acc_info.getBankAccountId(), -1).get();
@@ -669,6 +686,8 @@ public class ConsoleDisplay {
 				} catch (NoSuchElementException e) {
 					System.out.println("You don't have enough money to withdraw that much!");
 					accountChecking = AccountCheckingService.get().retrieveAccountsAsAdmin().get();
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 				} 
 				break;
 			case "2":
@@ -679,6 +698,8 @@ public class ConsoleDisplay {
 					double amount = Double.parseDouble(amt);
 					if(amount < 0.0) {
 						System.out.println("You can only deposit a positive amount!");
+						System.out.println("Press the enter key to continue...");
+						input.nextLine();
 						break;
 					}
 					accountChecking = AccountCheckingService.get().deposit(amount, acc_info.getBankAccountId(), -1).get();
@@ -690,6 +711,8 @@ public class ConsoleDisplay {
 				} catch (NoSuchElementException e) {
 					System.out.println("You can't deposit that much!");
 					accountChecking = AccountCheckingService.get().retrieveAccountsAsAdmin().get();
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 				} 
 				break;
 			case "3":
@@ -700,6 +723,8 @@ public class ConsoleDisplay {
 					targetid = Integer.parseInt(targetidstring);
 				} catch(NumberFormatException e) {
 					System.out.println("Please enter a valid bank account number.");
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 					break;
 				}
 				System.out.println("How much would you like to send?");
@@ -707,26 +732,32 @@ public class ConsoleDisplay {
 				double amount = Double.parseDouble(amt);
 				if(amount < 0.0) {
 					System.out.println("You can only transfer a positive amount!");
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 					break;
 				}
 				try {
 					accountChecking = AccountCheckingService.get().transfer(amount, acc_info.getBankAccountId(), targetid, -1).get();
 					System.out.println("You transferred $" + df.format(amount) + " to the bank account id " + targetid + ".");
 					System.out.println("Your remaining balance is $" + df.format(accountChecking.getAccounts().get(index).getBalance()));
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 				} catch(NoSuchElementException e) {
 					System.out.println("Your transfer has failed due to insufficient funds or invalid recipient.");
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
 				}
 				
 				break;
-			case "4":
+			case "0":
 				return;
-			case "9":
+			case "4":
 				boolean breaker2 = false;
 				while(!breaker2) {
-					System.out.println("Are you sure you want to delete this account?");
-					choice = input.nextLine();
+					System.out.println("Are you sure you want to delete this account? (Y/N)");
+					choice = input.nextLine().toUpperCase();
 					switch(choice) {
-					case "y": 
+					case "Y": 
 						// Delete account
 						try {
 							accountChecking = AccountCheckingService.get().deleteAccountAsAdmin(acc_info.getBankAccountId()).get();
@@ -734,9 +765,17 @@ public class ConsoleDisplay {
 							breaker = true;
 							System.out.println("You have successfully deleted your account!");
 							System.out.println("Press the enter key to return back to the main menu...");
+							input.nextLine();
 						} catch(NoSuchElementException e) { 
 							System.out.println("You are unable to delete the account!\nPlease check if you are an admin.");
+							System.out.println("Press the enter key to continue...");
+							input.nextLine();
 						}
+						break;
+					case "N":
+						breaker2 = true;
+						break;
+					default:
 						break;
 					}
 				}
@@ -921,7 +960,8 @@ public class ConsoleDisplay {
 							breaker2 = true;
 							breaker = true;
 							System.out.println("You have successfully deleted that user!");
-							System.out.println("Press the enter key to return back to the main menu");
+							System.out.println("Press the enter key to continue...");
+							input.nextLine();
 						} catch(NoSuchElementException e) { 
 							System.out.println("You are unable to delete the account!\nPlease check if you are an admin.");
 						}
@@ -943,9 +983,9 @@ public class ConsoleDisplay {
 		boolean breaker = false;
 		while(!breaker) {
 			System.out.println("Are you sure you want to delete your account? (Y/N)"); 
-			String choice = input.nextLine();
+			String choice = input.nextLine().toUpperCase();
 			switch(choice) {
-			case "y":
+			case "Y":
 				try {
 					user = UserService.get().removeUser(user.getUserID()).get();
 					if(user.getUserID() == 0) {
@@ -956,9 +996,12 @@ public class ConsoleDisplay {
 					breaker = true;
 				} catch(NoSuchElementException e) {
 					System.out.println("Sorry. You can only close your user account that have no balance in any checking accounts.");
+					System.out.println("Press the enter key to continue...");
+					input.nextLine();
+					breaker = true;
 				}
 				break;
-			case "n":
+			case "N":
 				breaker = true;
 				break;
 			default:
