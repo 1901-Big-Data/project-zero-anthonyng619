@@ -62,10 +62,12 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			}
 			
 			if(rsempty) {
+				rs.close();
 				return Optional.empty();
 			}
 			
 			AccountChecking account = new AccountChecking(accountlist, totalBalance);
+			rs.close();
 			return Optional.of(account);
 		} catch (SQLException e) {
 			log.catching(e);
@@ -88,6 +90,7 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			Double newBalance = stmt.getDouble(4);
 			ResultSet rs = (ResultSet) stmt.getObject(5);
 			if(newBalance == -1) {
+				rs.close();
 				return Optional.empty();
 			}
 			
@@ -105,10 +108,12 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			}
 			
 			if(rsempty) {
+				rs.close();
 				return Optional.empty();
 			}
 			
 			AccountChecking account = new AccountChecking(accountlist, totalBalance);
+			rs.close();
 			return Optional.of(account);
 		} catch (SQLException e) {
 			log.catching(e);
@@ -131,6 +136,7 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			Double newBalance = stmt.getDouble(5);
 			ResultSet rs = (ResultSet) stmt.getObject(6);
 			if(newBalance == -1) {
+				rs.close();
 				return Optional.empty();
 			}
 			
@@ -151,10 +157,12 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			}
 			
 			if(rsempty) {
+				rs.close();
 				return Optional.empty();
 			}
 			
 			AccountChecking account = new AccountChecking(accountlist, totalBalance);
+			rs.close();
 			return Optional.of(account);
 		} catch (SQLException e) {
 			log.catching(e);
@@ -202,10 +210,12 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			}
 			
 			if(rsempty) {
+				rs.close();
 				return Optional.empty();
 			}
 			
 			AccountChecking account = new AccountChecking(accountlist, totalBalance);
+			rs.close();
 			return Optional.of(account);
 		} catch(SQLException e) {
 			log.catching(e);
@@ -248,6 +258,7 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			
 			if(success == 0) {
 				log.debug("Unsuccessful deletion");
+				rs.close();
 				return Optional.empty();
 			}
 			
@@ -270,6 +281,7 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			}
 			
 			AccountChecking account = new AccountChecking(accountlist, totalBalance);
+			rs.close();
 			return Optional.of(account);
 		} catch(SQLException e) {
 			log.catching(e);
@@ -295,10 +307,12 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			}
 			
 			if(rsempty) {
+				rs.close();
 				return Optional.empty();
 			}
 			
 			AccountChecking account = new AccountChecking(accountlist, 0.0);
+			rs.close();
 			return Optional.of(account);
 		} catch(SQLException e) {
 			log.catching(e);
@@ -320,6 +334,7 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			
 			if(success == 0) {
 				log.debug("Unsuccessful deletion");
+				rs.close();
 				return Optional.empty();
 			}
 			
@@ -340,6 +355,7 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			}
 			
 			AccountChecking account = new AccountChecking(accountlist, 0.0);
+			rs.close();
 			return Optional.of(account);
 		} catch(SQLException e) {
 			log.catching(e);

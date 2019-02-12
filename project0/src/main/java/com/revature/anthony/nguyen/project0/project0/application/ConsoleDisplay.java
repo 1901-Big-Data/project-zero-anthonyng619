@@ -74,7 +74,9 @@ public class ConsoleDisplay {
 	public void register() {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("Registering new account with the bank.");
-		
+		/*
+		 * Removed until table for names is added. 
+		 *
 		System.out.println("Enter your first name: ");
 		String firstName = input.nextLine();
 		if(firstName.equals("")) return;
@@ -82,7 +84,7 @@ public class ConsoleDisplay {
 		System.out.println("Enter your last name: ");
 		String lastName = input.nextLine();
 		if(lastName.equals("")) return;
-		
+		*/
 		System.out.println("Enter a username: ");
 		String username = input.nextLine();
 		if(username.equals("")) return;
@@ -122,6 +124,7 @@ public class ConsoleDisplay {
 			try {
 				user = UserService.get().loginUser(username, password).get();
 				mainMenu();
+				breaker = true;
 			} catch (NoSuchElementException e) {
 				boolean breaker2 = false;
 				while(!breaker2) {
@@ -152,7 +155,7 @@ public class ConsoleDisplay {
 			}
 			
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			System.out.println("Welcome, " + user.getFirstName() + " " + user.getLastName() + "!");
+			System.out.println("Welcome, " + user.getUsername() + "!");
 			System.out.println("How can we service you today?");
 			System.out.println("\nOptions: ");
 			System.out.println("1. View banking accounts");

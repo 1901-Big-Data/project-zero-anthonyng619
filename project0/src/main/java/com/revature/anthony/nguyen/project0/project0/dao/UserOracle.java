@@ -123,7 +123,7 @@ public class UserOracle implements UserDao{
 		String query = "select * from p0_users where USERNAME = ? and PASSCODE = ?";
 		
 		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
-			stmt.setString(1, username);
+			stmt.setString(1, username.toLowerCase());
 			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
@@ -169,7 +169,7 @@ public class UserOracle implements UserDao{
 		String query = "select * from p0_users where USERNAME = ?";
 		
 		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
-			stmt.setString(1, username);
+			stmt.setString(1, username.toLowerCase());
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
 				log.debug(username + " exists");

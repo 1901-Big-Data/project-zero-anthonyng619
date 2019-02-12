@@ -420,7 +420,7 @@ public class MyTest extends TestCase {
 			DBConnection.get().getConnection().setAutoCommit(false);
 	
 			accountService.createAccount(100000).get();
-
+			
 		} catch (SQLException e) {
 			fail(e.toString());
 		} catch (NoSuchElementException e) {
@@ -494,16 +494,29 @@ public class MyTest extends TestCase {
 		}
 	}
 	
-	@Test
+	@Test(expected=NoSuchElementException.class)
 	public void testWithdrawExtra() {
 		DBConnection.get().connect();
 		try {
 			DBConnection.get().getConnection().setAutoCommit(false);
 			
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
+			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql2 = "insert into p0_checking values(100000, 100000, 10.0)"; 
+				
+				try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+					stmt2.execute();
+					
+					accountService.withdraw(100.0, 100000, 100000).get();
+				}
+			}
 		} catch (SQLException e) {
 			fail(e.toString());
 		} catch (NoSuchElementException e) {
-			
+			// Negative test
 		}
 		finally {
 			try {
@@ -515,16 +528,28 @@ public class MyTest extends TestCase {
 		}
 	}
 	
-	@Test
+	@Test(expected=NoSuchElementException.class)
 	public void testWithdrawNegative() {
 		DBConnection.get().connect();
 		try {
 			DBConnection.get().getConnection().setAutoCommit(false);
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
 			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql2 = "insert into p0_checking values(100000, 100000, 10.0)"; 
+				
+				try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+					stmt2.execute();
+					
+					accountService.withdraw(-100.0, 100000, 100000).get();
+				}
+			}
 		} catch (SQLException e) {
 			fail(e.toString());
 		} catch (NoSuchElementException e) {
-			
+			// Negative test
 		}
 		finally {
 			try {
@@ -537,15 +562,428 @@ public class MyTest extends TestCase {
 	}
 	
 	@Test
-	public void testWithdrawPositive() {
+	public void testWithdrawNormal() {
+		DBConnection.get().connect();
+		try {
+			DBConnection.get().getConnection().setAutoCommit(false);
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
+			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql2 = "insert into p0_checking values(100000, 100000, 1000.0)"; 
+				
+				try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+					stmt2.execute();
+					
+					AccountChecking accountChecking = accountService.withdraw(100.0, 100000, 100000).get();
+					assertEquals(accountChecking.getAccounts().get(0).getBalance(), 900.0);
+				}
+			}
+		} catch (SQLException e) {
+			fail(e.toString());
+		} catch (NoSuchElementException e) {
+			fail(e.toString());
+		}
+		finally {
+			try {
+				DBConnection.get().getConnection().rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	@Test(expected=NoSuchElementException.class)
+	public void testDepositNegative() {
+		DBConnection.get().connect();
+		try {
+			DBConnection.get().getConnection().setAutoCommit(false);
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
+			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql2 = "insert into p0_checking values(100000, 100000, 10.0)"; 
+				
+				try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+					stmt2.execute();
+					
+					accountService.deposit(-100.0, 100000, 100000).get();
+				}
+			}
+		} catch (SQLException e) {
+			fail(e.toString());
+		} catch (NoSuchElementException e) {
+			// Negative test
+		}
+		finally {
+			try {
+				DBConnection.get().getConnection().rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test
+	public void testDepositNormal() {
+		DBConnection.get().connect();
+		try {
+			DBConnection.get().getConnection().setAutoCommit(false);
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
+			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql2 = "insert into p0_checking values(100000, 100000, 1000.0)"; 
+				
+				try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+					stmt2.execute();
+					
+					AccountChecking accountChecking = accountService.deposit(100.0, 100000, 100000).get();
+					assertEquals(accountChecking.getAccounts().get(0).getBalance(), 1100.0);
+				}
+			}
+		} catch (SQLException e) {
+			fail(e.toString());
+		} catch (NoSuchElementException e) {
+			fail(e.toString());
+		}
+		finally {
+			try {
+				DBConnection.get().getConnection().rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test(expected=NoSuchElementException.class)
+	public void testTransferExtra() {
 		DBConnection.get().connect();
 		try {
 			DBConnection.get().getConnection().setAutoCommit(false);
 			
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
+			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql1 = "insert into p0_users values (100001, 'test1', 'test1', 0)";
+				
+				try(PreparedStatement stmt1 = DBConnection.get().getConnection().prepareStatement(sql1)) {
+					stmt1.execute();
+					
+					String sql2 = "insert into p0_checking values (100000, 100000, 100.0)";
+					
+					try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+						stmt2.execute();
+						
+						String sql3 = "insert into p0_checking values(100001, 100001, 0.0)"; 
+					
+						try(PreparedStatement stmt3 = DBConnection.get().getConnection().prepareStatement(sql3)) {
+							stmt3.execute();
+							
+							accountService.transfer(1000.0, 100000, 100001, 100000).get();
+						
+						}
+					}
+				}
+			}
 		} catch (SQLException e) {
 			fail(e.toString());
 		} catch (NoSuchElementException e) {
+			// Negative test
+		}
+		finally {
+			try {
+				DBConnection.get().getConnection().rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test(expected=NoSuchElementException.class)
+	public void testTransferNegative() {
+		DBConnection.get().connect();
+		try {
+			DBConnection.get().getConnection().setAutoCommit(false);
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
 			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql1 = "insert into p0_users values (100001, 'test1', 'test1', 0)";
+				
+				try(PreparedStatement stmt1 = DBConnection.get().getConnection().prepareStatement(sql1)) {
+					stmt1.execute();
+					
+					String sql2 = "insert into p0_checking values (100000, 100000, 100.0)";
+					
+					try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+						stmt2.execute();
+						
+						String sql3 = "insert into p0_checking values(100001, 100001, 0.0)"; 
+					
+						try(PreparedStatement stmt3 = DBConnection.get().getConnection().prepareStatement(sql3)) {
+							stmt3.execute();
+							
+							accountService.transfer(-100.0, 100000, 100001, 100000).get();
+							
+						}
+					}
+				}
+			}
+		} catch (SQLException e) {
+			fail(e.toString());
+		} catch (NoSuchElementException e) {
+			// Negative test
+		}
+		finally {
+			try {
+				DBConnection.get().getConnection().rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test
+	public void testTransferNormal() {
+		DBConnection.get().connect();
+		try {
+			DBConnection.get().getConnection().setAutoCommit(false);
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
+			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql1 = "insert into p0_users values (100001, 'test1', 'test1', 0)";
+				
+				try(PreparedStatement stmt1 = DBConnection.get().getConnection().prepareStatement(sql1)) {
+					stmt1.execute();
+					
+					String sql2 = "insert into p0_checking values (100000, 100000, 100.0)";
+					
+					try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+						stmt2.execute();
+						
+						String sql3 = "insert into p0_checking values(100001, 100001, 0.0)"; 
+					
+						try(PreparedStatement stmt3 = DBConnection.get().getConnection().prepareStatement(sql3)) {
+							stmt3.execute();
+							
+							AccountChecking account = accountService.transfer(100.0, 100000, 100001, 100000).get();
+							assertEquals(account.getAccounts().get(0).getBalance(), 0.0);
+						}
+					}
+				}
+			}
+		} catch (SQLException e) {
+			fail(e.toString());
+		} catch (NoSuchElementException e) {
+			fail(e.toString());
+		}
+		finally {
+			try {
+				DBConnection.get().getConnection().rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test(expected=NoSuchElementException.class)
+	public void testTransferVoidAccount() {
+		DBConnection.get().connect();
+		try {
+			DBConnection.get().getConnection().setAutoCommit(false);
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
+			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql2 = "insert into p0_checking values(100000, 100000, 1000.0)"; 
+				
+				try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+					stmt2.execute();
+					
+					accountService.transfer(100.0, 100000, 100001, 100000).get();
+				}
+			}
+		} catch (SQLException e) {
+			fail(e.toString());
+		} catch (NoSuchElementException e) {
+			// Negative test
+		}
+		finally {
+			try {
+				DBConnection.get().getConnection().rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test
+	public void testRetrieveAccountsAsAdmin() {
+		DBConnection.get().connect();
+		try {
+			DBConnection.get().getConnection().setAutoCommit(false);
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
+			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql2 = "insert into p0_checking values(100000, 100000, 1000.0)"; 
+				
+				try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+					stmt2.execute();
+					
+					AccountChecking account = accountService.retrieveAccountsAsAdmin().get();
+					assertSame(account.getClass(), AccountChecking.class);
+				}
+			}
+			
+		} catch (SQLException e) {
+			fail(e.toString());
+		} catch (NoSuchElementException e) {
+			// Negative test
+		}
+		finally {
+			try {
+				DBConnection.get().getConnection().rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test(expected=NoSuchElementException.class)
+	public void testDeleteAccountWithBalance() {
+		DBConnection.get().connect();
+		try {
+			DBConnection.get().getConnection().setAutoCommit(false);
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
+			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql2 = "insert into p0_checking values(100000, 100000, 1000.0)"; 
+				
+				try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+					stmt2.execute();
+					
+					accountService.deleteAccount(100000, 100000).get();
+				}
+			}
+
+		} catch (SQLException e) {
+			fail(e.toString());
+		} catch (NoSuchElementException e) {
+			// Negative test
+		}
+		finally {
+			try {
+				DBConnection.get().getConnection().rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test
+	public void testDeleteAccountWithNoBalance() {
+		DBConnection.get().connect();
+		try {
+			DBConnection.get().getConnection().setAutoCommit(false);
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
+			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql2 = "insert into p0_checking values(100000, 100000, 0.0)"; 
+				
+				try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+					stmt2.execute();
+					
+					AccountChecking account = accountService.deleteAccount(100000, 100000).get();
+					assertEquals(account.getAccounts().size(), 0);
+				}
+			}
+
+		} catch (SQLException e) {
+			fail(e.toString());
+		} catch (NoSuchElementException e) {
+			fail(e.toString());
+		}
+		finally {
+			try {
+				DBConnection.get().getConnection().rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test
+	public void testDeleteAccountAsAdmin() {
+		DBConnection.get().connect();
+		try {
+			DBConnection.get().getConnection().setAutoCommit(false);
+			String sql = "insert into p0_users values (100000, 'test', 'test', 0)";
+			
+			try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(sql)) {
+				stmt.execute();
+				
+				String sql2 = "insert into p0_checking values(100000, 100000, 0.0)"; 
+				
+				try(PreparedStatement stmt2 = DBConnection.get().getConnection().prepareStatement(sql2)) {
+					stmt2.execute();
+					
+					AccountChecking account = accountService.deleteAccountAsAdmin(100000).get();
+					assertSame(account.getClass(), AccountChecking.class);
+				}
+			}
+
+		} catch (SQLException e) {
+			fail(e.toString());
+		} catch (NoSuchElementException e) {
+			fail(e.toString());
+		}
+		finally {
+			try {
+				DBConnection.get().getConnection().rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test(expected=NoSuchElementException.class)
+	public void testDeleteFalseAccountAsAdmin() {
+		DBConnection.get().connect();
+		try {
+			DBConnection.get().getConnection().setAutoCommit(false);
+				accountService.deleteAccountAsAdmin(10001).get();
+		} catch (SQLException e) {
+			fail(e.toString());
+		} catch (NoSuchElementException e) {
+			// Negative check
 		}
 		finally {
 			try {
