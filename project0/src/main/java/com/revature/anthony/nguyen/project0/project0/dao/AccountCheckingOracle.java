@@ -137,6 +137,9 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			double totalBalance = 0;
 			ArrayList<AccountInformation> accountlist = new ArrayList<AccountInformation>();
 			boolean rsempty = true; // Used to check if resultset is empty
+			if(rs == null) {
+				return Optional.empty();
+			}
 			
 			while(rs.next()) {
 				rsempty = false;

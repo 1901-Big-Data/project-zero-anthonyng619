@@ -1,5 +1,6 @@
 package com.revature.anthony.nguyen.project0.project0.application;
 
+import java.text.DecimalFormat;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -20,7 +21,7 @@ public class ConsoleDisplay {
 	private AccountChecking accountChecking;
 	private Logger log = LogManager.getLogger(ConsoleDisplay.class);
 	private boolean isAdmin;
-	
+	private DecimalFormat df = new DecimalFormat("0.00");
 	
 	public ConsoleDisplay() {
 		input = new Scanner(System.in);
@@ -327,7 +328,12 @@ public class ConsoleDisplay {
 				String amt = input.nextLine();
 				
 				try {
-					accountChecking = AccountCheckingService.get().withdraw(Double.parseDouble(amt), acc_info.getBankAccountId(), user.getUserID()).get();
+					double amount = Double.parseDouble(amt);
+					if(amount < 0.0) {
+						System.out.println("You can only withdraw a positive amount!");
+						break;
+					}
+					accountChecking = AccountCheckingService.get().withdraw(amount, acc_info.getBankAccountId(), user.getUserID()).get();
 					System.out.println("You withdrew $" + amt);
 					System.out.println("Your remaining balance is $" + accountChecking.getAccounts().get(bankId).getBalance());
 					breaker = true;
@@ -341,9 +347,13 @@ public class ConsoleDisplay {
 			case "2":
 				System.out.println("How much would you like to deposit?");
 				amt = input.nextLine();
-				
+				double amount = Double.parseDouble(amt);
+				if(amount < 0.0) {
+					System.out.println("You can only deposit a positive amount!");
+					break;
+				}
 				try {
-					accountChecking = AccountCheckingService.get().deposit(Double.parseDouble(amt), acc_info.getBankAccountId(), user.getUserID()).get();
+					accountChecking = AccountCheckingService.get().deposit(amount, acc_info.getBankAccountId(), user.getUserID()).get();
 					System.out.println("You deposited $" + amt);
 					System.out.println("Your remaining balance is $" + accountChecking.getAccounts().get(bankId).getBalance());
 					breaker = true;
@@ -366,9 +376,13 @@ public class ConsoleDisplay {
 				}
 				System.out.println("How much would you like to send?");
 				amt = input.nextLine();
-				
+				amount = Double.parseDouble(amt);
+				if(amount < 0.0) {
+					System.out.println("You can only transfer a positive amount!");
+					break;
+				}
 				try {
-					accountChecking = AccountCheckingService.get().transfer(Double.parseDouble(amt), acc_info.getBankAccountId(), targetid, user.getUserID()).get();
+					accountChecking = AccountCheckingService.get().transfer(amount, acc_info.getBankAccountId(), targetid, user.getUserID()).get();
 					System.out.println("You transferred $" + amt + " to the bank account id " + targetid + ".");
 					System.out.println("Your remaining balance is $" + accountChecking.getAccounts().get(bankId).getBalance());
 				} catch(NoSuchElementException e) {
@@ -638,7 +652,12 @@ public class ConsoleDisplay {
 				String amt = input.nextLine();
 				
 				try {
-					accountChecking = AccountCheckingService.get().withdraw(Double.parseDouble(amt), acc_info.getBankAccountId(), -1).get();
+					double amount = Double.parseDouble(amt);
+					if(amount < 0.0) {
+						System.out.println("You can only withdraw a positive amount!");
+						break;
+					}
+					accountChecking = AccountCheckingService.get().withdraw(amount, acc_info.getBankAccountId(), -1).get();
 					System.out.println("You withdrew $" + amt);
 					System.out.println("Your remaining balance is $" + accountChecking.getAccounts().get(index).getBalance());
 					breaker = true;
@@ -654,7 +673,12 @@ public class ConsoleDisplay {
 				amt = input.nextLine();
 				
 				try {
-					accountChecking = AccountCheckingService.get().deposit(Double.parseDouble(amt), acc_info.getBankAccountId(), -1).get();
+					double amount = Double.parseDouble(amt);
+					if(amount < 0.0) {
+						System.out.println("You can only deposit a positive amount!");
+						break;
+					}
+					accountChecking = AccountCheckingService.get().deposit(amount, acc_info.getBankAccountId(), -1).get();
 					System.out.println("You deposited $" + amt);
 					System.out.println("Your remaining balance is $" + accountChecking.getAccounts().get(index).getBalance());
 					breaker = true;
@@ -677,9 +701,13 @@ public class ConsoleDisplay {
 				}
 				System.out.println("How much would you like to send?");
 				amt = input.nextLine();
-				
+				double amount = Double.parseDouble(amt);
+				if(amount < 0.0) {
+					System.out.println("You can only transfer a positive amount!");
+					break;
+				}
 				try {
-					accountChecking = AccountCheckingService.get().transfer(Double.parseDouble(amt), acc_info.getBankAccountId(), targetid, -1).get();
+					accountChecking = AccountCheckingService.get().transfer(amount, acc_info.getBankAccountId(), targetid, -1).get();
 					System.out.println("You transferred $" + amt + " to the bank account id " + targetid + ".");
 					System.out.println("Your remaining balance is $" + accountChecking.getAccounts().get(index).getBalance());
 				} catch(NoSuchElementException e) {
