@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import com.revature.anthony.nguyen.project0.project0.dao.UserDao;
 import com.revature.anthony.nguyen.project0.project0.dao.UserOracle;
 import com.revature.anthony.nguyen.project0.project0.model.User;
+import com.revature.anthony.nguyen.project0.project0.model.Users;
 
 public class UserService {
 	private static UserService service;
@@ -49,9 +50,17 @@ public class UserService {
 		return userDao.loginUser(username, password);
 	}
 	
-	/*public Optional<User> retrieveUser(String username, String password) {
-		return userDao.retrieveUser(username, password);
-	}*/
+	public Optional<User> removeUser(int userid) {
+		return userDao.removeUser(userid);
+	}
+	
+	public Optional<Users> removeUserAsAdmin(int userid) {
+		return userDao.removeUserAsAdmin(userid);
+	}
+	
+	public Optional<Users> retrieveUsersAsAdmin() {
+		return userDao.retrieveUsersAsAdmin();
+	}
 	
 	public boolean checkUser(String username) {
 		return userDao.checkUsername(username);

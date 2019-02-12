@@ -10,6 +10,8 @@ public interface AccountCheckingDao {
 	public Optional<AccountChecking> withdraw(double amt, int bankId, int userId);
 	public Optional<AccountChecking> transfer(double amt, int sourceBankId, int targetBankId, int userId);
 	public Optional<AccountChecking> retrieveAccounts(int userId);
+	public Optional<AccountChecking> retrieveAccountsAsAdmin();
 	public Optional<AccountInformation> createAccount(int userId);
 	public Optional<AccountChecking> deleteAccount(int bankId, int invokerId);
+	public Optional<AccountChecking> deleteAccountAsAdmin(int bankId);
 }

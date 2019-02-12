@@ -253,7 +253,7 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			boolean rsempty = true; // Used to check if resultset is empty
 			
 			while(rs.next()) {
-				System.out.println("Looped");
+				//System.out.println("Looped");
 				rsempty = false;
 				int bankid = rs.getInt("BANK_ACCOUNT_ID");
 				double balance = rs.getDouble("BALANCE");
@@ -267,6 +267,76 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			}
 			
 			AccountChecking account = new AccountChecking(accountlist, totalBalance);
+			return Optional.of(account);
+		} catch(SQLException e) {
+			log.catching(e);
+			return Optional.empty();
+		}
+	}
+
+	@Override
+	public Optional<AccountChecking> retrieveAccountsAsAdmin() {
+		String query = "select * from p0_checking";
+		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
+			ResultSet rs = stmt.executeQuery();
+			ArrayList<AccountInformation> accountlist = new ArrayList<AccountInformation>();
+			
+			boolean rsempty = true; // Used to check if resultset is empty
+			
+			while(rs.next()) {
+				rsempty = false;
+				int bankid = rs.getInt("BANK_ACCOUNT_ID");
+				double balance = rs.getDouble("BALANCE");
+				AccountInformation acc_info = new AccountInformation(bankid, balance);
+				accountlist.add(acc_info);
+			}
+			
+			if(rsempty) {
+				return Optional.empty();
+			}
+			
+			AccountChecking account = new AccountChecking(accountlist, 0.0);
+			return Optional.of(account);
+		} catch(SQLException e) {
+			log.catching(e);
+			return Optional.empty();
+		}
+	}
+
+	@Override
+	public Optional<AccountChecking> deleteAccountAsAdmin(int bankId) {
+		String query = "call deletecheckingaccountasadmin(?, ?, ?)";
+		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
+			stmt.setInt(1, bankId);
+			stmt.registerOutParameter(2, Types.INTEGER);
+			stmt.registerOutParameter(3, oracle.jdbc.OracleTypes.CURSOR);
+			stmt.execute();
+			
+			Integer success = stmt.getInt(2);
+			ResultSet rs = (ResultSet) stmt.getObject(3);
+			
+			if(success == 0) {
+				log.debug("Unsuccessful deletion");
+				return Optional.empty();
+			}
+			
+			ArrayList<AccountInformation> accountlist = new ArrayList<AccountInformation>();
+			boolean rsempty = true; // Used to check if resultset is empty
+			
+			while(rs.next()) {
+				//System.out.println("Looped");
+				rsempty = false;
+				int bankid = rs.getInt("BANK_ACCOUNT_ID");
+				double balance = rs.getDouble("BALANCE");
+				AccountInformation acc_info = new AccountInformation(bankid, balance);
+				accountlist.add(acc_info);
+			}
+			
+			if(rsempty) {
+				//return Optional.empty();
+			}
+			
+			AccountChecking account = new AccountChecking(accountlist, 0.0);
 			return Optional.of(account);
 		} catch(SQLException e) {
 			log.catching(e);

@@ -6,12 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.revature.anthony.nguyen.project0.project0.model.AccountChecking;
+import com.revature.anthony.nguyen.project0.project0.model.AccountInformation;
 import com.revature.anthony.nguyen.project0.project0.model.User;
+import com.revature.anthony.nguyen.project0.project0.model.Users;
 import com.revature.anthony.nguyen.project0.project0.service.UserService;
 import com.revature.anthony.nguyen.project0.project0.util.DBConnection;
 
@@ -55,9 +59,62 @@ public class UserOracle implements UserDao{
 	}
 
 	@Override
-	public Optional<User> removeUser(User user) {
-		// TODO: Remove user
-		return Optional.empty();
+	public Optional<User> removeUser(int userid) {
+		String query = "call deleteuser(?, ?)";
+		
+		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
+			stmt.setInt(1, userid);
+			stmt.registerOutParameter(2, Types.INTEGER);
+			stmt.execute();
+			
+			Integer result = stmt.getInt(2);
+			if(result == 0) {
+				return Optional.empty();
+			}
+			
+			User blankuser = new User();
+			return Optional.of(blankuser);
+			
+		} catch(SQLException e) {
+			log.catching(e);
+			return Optional.empty();
+		}
+	}
+	
+	@
+	Override
+	public Optional<Users> removeUserAsAdmin(int userid) {
+		String query = "call deleteuserasadmin(?, ?)";
+		
+		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
+			stmt.setInt(1, userid);
+			stmt.registerOutParameter(2, oracle.jdbc.OracleTypes.CURSOR);
+			stmt.execute();
+		
+			ResultSet rs = (ResultSet) stmt.getObject(2);
+			
+			ArrayList<User> userslist = new ArrayList<User>();
+			boolean rsempty = true; // Used to check if resultset is empty
+			
+			while(rs.next()) {
+				//System.out.println("Looped");
+				rsempty = false;
+				int userid_ = rs.getInt("user_id");
+				String username = rs.getString("username");
+				User user_info = new User(username, "", 0, userid_);
+				userslist.add(user_info);
+			}
+			
+			if(rsempty) {
+				//return Optional.empty();
+			}
+			
+			Users users = new Users(userslist);
+			return Optional.of(users);
+		} catch(SQLException e) {
+			log.catching(e);
+			return Optional.empty();
+		}
 	}
 
 	@Override
@@ -122,6 +179,36 @@ public class UserOracle implements UserDao{
 			return false;
 		}
 		return false;
+	}
+
+	@Override
+	public Optional<Users> retrieveUsersAsAdmin() {
+		String query = "select *  from p0_users";
+		
+		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
+			ResultSet rs = stmt.executeQuery();
+			
+			ArrayList<User> list = new ArrayList<User>();
+			
+			boolean empty = true;
+			while(rs.next()) {
+				empty = false;
+				int userid = rs.getInt("user_id");
+				String username = rs.getString("username");
+				User tempuser = new User(username, "", 0, userid);
+				list.add(tempuser);
+			}
+		
+			if(empty) {
+				return Optional.empty();
+			}
+		
+			Users users = new Users(list);
+			return Optional.of(users);
+		} catch(SQLException e) {
+			log.catching(e);
+			return Optional.empty();
+		}
 	}
 
 }

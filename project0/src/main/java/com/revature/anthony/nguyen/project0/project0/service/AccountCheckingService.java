@@ -41,6 +41,10 @@ public class AccountCheckingService {
 		return AccountCheckingOracle.get().retrieveAccounts(userId);
 	}
 	
+	public Optional<AccountChecking> retrieveAccountsAsAdmin() throws NoSuchElementException {
+		return AccountCheckingOracle.get().retrieveAccountsAsAdmin();
+	}
+	
 	public Optional<AccountInformation> createAccount(int userId) {
 		return AccountCheckingOracle.get().createAccount(userId);
 	}
@@ -48,5 +52,10 @@ public class AccountCheckingService {
 	public Optional<AccountChecking> deleteAccount(int bankId, int invokerId) {
 		return AccountCheckingOracle.get().deleteAccount(bankId, invokerId);
 	}
+	
+	public Optional<AccountChecking> deleteAccountAsAdmin(int bankId) {
+		return AccountCheckingOracle.get().deleteAccountAsAdmin(bankId);
+	}
+	
 	
 }

@@ -17,7 +17,7 @@ public class App
     {
         System.out.println("Initializing the Bank of Revature.");
         System.out.println("Establishing connection... Please wait.");
-       
+        
         if(!DBConnection.get().connect()) {
         	System.out.println("Connection to the bank's database failed.");
         	return;
@@ -28,6 +28,6 @@ public class App
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         ConsoleDisplay disp = new ConsoleDisplay();
         
-        disp.start();
+        disp.start(DBConnection.get().isAdmin());
     }
 }

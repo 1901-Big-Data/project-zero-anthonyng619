@@ -959,3 +959,664 @@ java.sql.SQLException: Invalid column index
 	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
 	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
 	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-10 23:45:06.374 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No line found
+	at java.util.Scanner.nextLine(Scanner.java:1540) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankAccountInvocation(ConsoleDisplay.java:398) ~[classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:243) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:111) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-10 23:45:06.878 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No line found
+	at java.util.Scanner.nextLine(Scanner.java:1540) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankAccountInvocation(ConsoleDisplay.java:398) ~[classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:243) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:111) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-10 23:45:07.381 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No line found
+	at java.util.Scanner.nextLine(Scanner.java:1540) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankAccountInvocation(ConsoleDisplay.java:398) ~[classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:243) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:111) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-10 23:45:07.886 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No line found
+	at java.util.Scanner.nextLine(Scanner.java:1540) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:234) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:111) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[DEBUG] 2019-02-11 13:05:06.774 [main] DBConnection - Database access error or url is null
+[DEBUG] 2019-02-11 13:05:32.425 [main] DBConnection - Database access error or url is null
+[DEBUG] 2019-02-11 13:06:02.428 [main] DBConnection - Database access error or url is null
+[ERROR] 2019-02-11 13:08:11.878 [main] UserOracle - Catching
+java.sql.SQLSyntaxErrorException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:226) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:59) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:747) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:904) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1082) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeInternal(T4CPreparedStatement.java:1343) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3822) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1165) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.loginUser(UserOracle.java:70) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.loginUser(UserService.java:49) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:105) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[ERROR] 2019-02-11 13:12:44.425 [main] UserOracle - Catching
+java.sql.SQLSyntaxErrorException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:226) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:59) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:747) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:904) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1082) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeInternal(T4CPreparedStatement.java:1343) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3822) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1165) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.loginUser(UserOracle.java:70) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.loginUser(UserService.java:49) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:105) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[ERROR] 2019-02-11 13:13:33.925 [main] UserOracle - Catching
+java.sql.SQLSyntaxErrorException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:226) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:59) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:747) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:904) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1082) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeInternal(T4CPreparedStatement.java:1343) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3822) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1165) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.loginUser(UserOracle.java:70) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.loginUser(UserService.java:49) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:105) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[ERROR] 2019-02-11 13:13:37.279 [main] UserOracle - Catching
+java.sql.SQLSyntaxErrorException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:226) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:59) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:747) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:904) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1082) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeInternal(T4CPreparedStatement.java:1343) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3822) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1165) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.checkUsername(UserOracle.java:115) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.checkUser(UserService.java:57) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:74) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[ERROR] 2019-02-11 13:16:44.518 [main] UserOracle - Catching
+java.sql.SQLSyntaxErrorException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:226) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:59) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:747) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:904) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1082) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeInternal(T4CPreparedStatement.java:1343) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3822) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1165) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.loginUser(UserOracle.java:70) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.loginUser(UserService.java:49) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:105) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[ERROR] 2019-02-11 13:27:17.850 [main] UserOracle - Catching
+java.sql.SQLSyntaxErrorException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:226) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:59) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:747) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:904) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1082) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeInternal(T4CPreparedStatement.java:1343) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3822) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1165) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.loginUser(UserOracle.java:70) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.loginUser(UserService.java:49) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:105) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[ERROR] 2019-02-11 13:36:19.097 [main] UserOracle - Catching
+java.sql.SQLSyntaxErrorException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:226) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:59) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:747) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:904) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1082) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeInternal(T4CPreparedStatement.java:1343) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3822) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1165) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.loginUser(UserOracle.java:70) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.loginUser(UserService.java:49) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:105) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-00942: table or view does not exist
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[ERROR] 2019-02-11 13:41:37.444 [main] UserOracle - Catching
+java.sql.SQLException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.addUser(UserOracle.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.addUser(UserService.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:85) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[ERROR] 2019-02-11 13:43:52.805 [main] UserOracle - Catching
+java.sql.SQLException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.addUser(UserOracle.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.addUser(UserService.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:85) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[DEBUG] 2019-02-11 13:45:34.453 [main] UserOracle - a exists
+[ERROR] 2019-02-11 13:45:37.051 [main] UserOracle - Catching
+java.sql.SQLException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.addUser(UserOracle.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.addUser(UserService.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:85) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[ERROR] 2019-02-11 13:47:43.715 [main] UserOracle - Catching
+java.sql.SQLException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.addUser(UserOracle.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.addUser(UserService.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:85) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[ERROR] 2019-02-11 13:49:57.754 [main] UserOracle - Catching
+java.sql.SQLException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.addUser(UserOracle.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.addUser(UserService.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:85) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[ERROR] 2019-02-11 13:54:01.256 [main] UserOracle - Catching
+java.sql.SQLException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.addUser(UserOracle.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.addUser(UserService.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:85) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[DEBUG] 2019-02-11 13:57:18.227 [main] UserOracle - Added user to database with user id: 61
+[DEBUG] 2019-02-11 13:57:18.234 [main] ConsoleDisplay - User finished registering for new account. Username: 1
+[ERROR] 2019-02-11 13:57:39.946 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:155) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:92) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-11 13:57:56.488 [main] AccountCheckingOracle - Catching
+java.sql.SQLException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingOracle.deleteAccount(AccountCheckingOracle.java:241) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService.deleteAccount(AccountCheckingService.java:49) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankAccountInvocation(ConsoleDisplay.java:356) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:206) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:92) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 24 more
+[DEBUG] 2019-02-11 14:27:12.253 [main] DBConnection - Failed to authenticate as a super user. Accessing as a normal user.
+[ERROR] 2019-02-11 14:40:53.720 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No line found
+	at java.util.Scanner.nextLine(Scanner.java:1540) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankAccountInvocation(ConsoleDisplay.java:351) ~[classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:206) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:92) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:42) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-11 14:40:54.229 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No line found
+	at java.util.Scanner.nextLine(Scanner.java:1540) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:187) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:134) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:111) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:45) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:118) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:26) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[DEBUG] 2019-02-11 14:53:41.224 [main] DBConnection - Failed to authenticate as a super user. Accessing as a normal user.
+[DEBUG] 2019-02-11 14:53:54.949 [main] DBConnection - Failed to authenticate as a super user. Accessing as a normal user.
+[DEBUG] 2019-02-11 15:10:54.862 [main] DBConnection - Failed to authenticate as a super user. Accessing as a normal user.
+[DEBUG] 2019-02-11 15:13:13.018 [main] DBConnection - Failed to authenticate as a super user. Accessing as a normal user.
+[DEBUG] 2019-02-11 15:13:56.204 [main] DBConnection - Failed to authenticate as a super user. Accessing as a normal user.
+[DEBUG] 2019-02-11 15:14:35.129 [main] DBConnection - Failed to authenticate as a super user. Accessing as a normal user.
+[DEBUG] 2019-02-11 16:22:52.620 [main] UserOracle - Added user to database with user id: 62
+[DEBUG] 2019-02-11 16:22:52.625 [main] ConsoleDisplay - User finished registering for new account. Username: ryanh
+[ERROR] 2019-02-11 16:23:02.671 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:168) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:147) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:105) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:48) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:131) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:29) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-11 17:21:01.996 [main] AccountCheckingOracle - Catching
+java.sql.SQLException: ORA-06553: PLS-306: wrong number or types of arguments in call to 'DELETECHECKINGACCOUNT'
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.AccountCheckingOracle.deleteAccountAsAdmin(AccountCheckingOracle.java:313) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService.deleteAccountAsAdmin(AccountCheckingService.java:57) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankInvocationAsAdmin(ConsoleDisplay.java:670) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminBankingAccounts(ConsoleDisplay.java:551) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminMenu(ConsoleDisplay.java:431) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:55) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:131) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:29) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-06553: PLS-306: wrong number or types of arguments in call to 'DELETECHECKINGACCOUNT'
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 23 more
+[ERROR] 2019-02-11 22:45:18.215 [main] UserOracle - Catching
+java.sql.SQLException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.removeUser(UserOracle.java:64) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.removeUser(UserService.java:53) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.closeAccount(ConsoleDisplay.java:699) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:154) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:124) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:51) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:131) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:29) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-06576: not a valid function or procedure name
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 23 more
+[ERROR] 2019-02-11 22:48:04.536 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.bankingAccounts(ConsoleDisplay.java:172) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:148) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:124) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:51) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:131) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:29) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-11 23:25:06.634 [main] UserOracle - Catching
+java.sql.SQLException: ORA-06553: PLS-306: wrong number or types of arguments in call to 'DELETEUSER'
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.removeUserAsAdmin(UserOracle.java:92) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.removeUserAsAdmin(UserService.java:58) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.userInvocationAsAdmin(ConsoleDisplay.java:878) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminUserAccounts(ConsoleDisplay.java:750) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminMenu(ConsoleDisplay.java:442) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:57) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:133) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:31) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-06553: PLS-306: wrong number or types of arguments in call to 'DELETEUSER'
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 23 more
+[ERROR] 2019-02-11 23:25:55.113 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminUserAccounts(ConsoleDisplay.java:710) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminMenu(ConsoleDisplay.java:442) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:57) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:133) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:31) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-11 23:27:04.354 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminBankingAccounts(ConsoleDisplay.java:458) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminMenu(ConsoleDisplay.java:439) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:57) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:133) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:31) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-11 23:27:06.750 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminBankingAccounts(ConsoleDisplay.java:458) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminMenu(ConsoleDisplay.java:439) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:57) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:133) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:31) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[DEBUG] 2019-02-11 23:27:14.355 [main] UserOracle - Added user to database with user id: 81
+[DEBUG] 2019-02-11 23:27:14.355 [main] ConsoleDisplay - User finished registering for new account. Username: a
+[ERROR] 2019-02-11 23:27:20.232 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminBankingAccounts(ConsoleDisplay.java:458) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminMenu(ConsoleDisplay.java:439) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:57) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:133) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:31) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+[ERROR] 2019-02-11 23:27:36.083 [main] ConsoleDisplay - Catching
+java.util.NoSuchElementException: No value present
+	at java.util.Optional.get(Optional.java:135) ~[?:1.8.0_201]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminUserAccounts(ConsoleDisplay.java:710) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.adminMenu(ConsoleDisplay.java:442) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:57) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:133) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.login(ConsoleDisplay.java:126) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:53) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:133) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:31) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
