@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountCheckingOracle.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">project0</a> &gt; <a href="index.source.html" class="el_package">com.revature.anthony.nguyen.project0.project0.dao</a> &gt; <span class="el_source">AccountCheckingOracle.java</span></div><h1>AccountCheckingOracle.java</h1><pre class="source lang-java linenums">package com.revature.anthony.nguyen.project0.project0.dao;
+
+import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.revature.anthony.nguyen.project0.project0.model.AccountChecking;
+import com.revature.anthony.nguyen.project0.project0.model.AccountInformation;
+import com.revature.anthony.nguyen.project0.project0.model.User;
+import com.revature.anthony.nguyen.project0.project0.util.DBConnection;
+
+public class AccountCheckingOracle implements AccountCheckingDao {
+	private static AccountCheckingOracle accountCheckingOracle;
+<span class="fc" id="L23">	private Logger log = LogManager.getLogger(AccountCheckingOracle.class);</span>
+	
+<span class="fc" id="L25">	private AccountCheckingOracle() {</span>
+<span class="fc" id="L26">	}</span>
+	
+	public static AccountCheckingOracle get() {
+<span class="fc bfc" id="L29" title="All 2 branches covered.">		if(accountCheckingOracle == null) {</span>
+<span class="fc" id="L30">			accountCheckingOracle = new AccountCheckingOracle();</span>
+<span class="fc" id="L31">			return accountCheckingOracle;</span>
+		} else {
+<span class="fc" id="L33">			return accountCheckingOracle;</span>
+		}
+	}
+	
+	/**
+	 * deposit
+	 * Deposit an amount into the database. All negatives are handled through exceptions. Grabs
+	 * all user accounts after the deposit and returns it in an AccountChecking model
+	 * @param double amt
+	 * @param int bankId
+	 * @param int userId
+	 * @return Optional
+	 */
+	@Override
+	public Optional&lt;AccountChecking&gt; deposit(double amt, int bankId, int userId) {
+<span class="fc" id="L48">		String query = &quot;call depositmoney(?, ?, ?, ?, ?)&quot;;</span>
+<span class="fc" id="L49">		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {</span>
+<span class="fc" id="L50">			stmt.setDouble(1, amt);</span>
+<span class="fc" id="L51">			stmt.setInt(2, bankId);</span>
+<span class="fc" id="L52">			stmt.setInt(3, userId);</span>
+<span class="fc" id="L53">			stmt.registerOutParameter(4, Types.DOUBLE);</span>
+<span class="fc" id="L54">			stmt.registerOutParameter(5, oracle.jdbc.OracleTypes.CURSOR);</span>
+<span class="fc" id="L55">			stmt.execute();</span>
+			
+<span class="fc" id="L57">			Double newBalance = stmt.getDouble(4);</span>
+<span class="fc" id="L58">			ResultSet rs = (ResultSet) stmt.getObject(5);</span>
+			
+<span class="fc" id="L60">			double totalBalance = 0;</span>
+<span class="fc" id="L61">			ArrayList&lt;AccountInformation&gt; accountlist = new ArrayList&lt;AccountInformation&gt;();</span>
+<span class="fc" id="L62">			boolean rsempty = true; // Used to check if resultset is empty</span>
+			
+<span class="fc bfc" id="L64" title="All 2 branches covered.">			while(rs.next()) {</span>
+<span class="fc" id="L65">				rsempty = false;</span>
+<span class="fc" id="L66">				int bankid = rs.getInt(&quot;BANK_ACCOUNT_ID&quot;);</span>
+<span class="fc" id="L67">				double balance = rs.getDouble(&quot;BALANCE&quot;);</span>
+<span class="fc" id="L68">				totalBalance += balance;</span>
+<span class="fc" id="L69">				AccountInformation acc_info = new AccountInformation(bankid, balance);</span>
+<span class="fc" id="L70">				accountlist.add(acc_info);</span>
+			}
+			
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">			if(rsempty) {</span>
+<span class="nc" id="L74">				rs.close();</span>
+<span class="nc" id="L75">				return Optional.empty();</span>
+			}
+			
+<span class="fc" id="L78">			AccountChecking account = new AccountChecking(accountlist, totalBalance);</span>
+<span class="fc" id="L79">			rs.close();</span>
+<span class="pc" id="L80">			return Optional.of(account);</span>
+<span class="pc bpc" id="L81" title="9 of 10 branches missed.">		} catch (SQLException e) {</span>
+<span class="nc" id="L82">			log.catching(e);</span>
+<span class="nc" id="L83">			return Optional.empty();</span>
+		}
+	}
+
+	/**
+	 * withdraw
+	 * Withdraw an amount into the database. All negatives are handled through exceptions. Grabs
+	 * all user accounts after the withdraw and returns it in an AccountChecking model
+	 * @param double amt
+	 * @param int bankId
+	 * @param int userId
+	 * @return Optional
+	 */
+	@Override
+	public Optional&lt;AccountChecking&gt; withdraw(double amt, int bankId, int userId) {
+		
+<span class="fc" id="L99">		String query = &quot;call withdrawmoney(?, ?, ?, ?, ?)&quot;;</span>
+<span class="fc" id="L100">		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {</span>
+<span class="fc" id="L101">			stmt.setDouble(1, amt);</span>
+<span class="fc" id="L102">			stmt.setInt(2, bankId);</span>
+<span class="fc" id="L103">			stmt.setInt(3, userId);</span>
+<span class="fc" id="L104">			stmt.registerOutParameter(4, Types.DOUBLE);</span>
+<span class="fc" id="L105">			stmt.registerOutParameter(5, oracle.jdbc.OracleTypes.CURSOR);</span>
+<span class="fc" id="L106">			stmt.execute();</span>
+			
+<span class="fc" id="L108">			Double newBalance = stmt.getDouble(4);</span>
+<span class="fc" id="L109">			ResultSet rs = (ResultSet) stmt.getObject(5);</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">			if(newBalance == -1) {</span>
+<span class="fc" id="L111">				rs.close();</span>
+<span class="fc" id="L112">				return Optional.empty();</span>
+			}
+			
+<span class="fc" id="L115">			double totalBalance = 0;</span>
+<span class="fc" id="L116">			ArrayList&lt;AccountInformation&gt; accountlist = new ArrayList&lt;AccountInformation&gt;();</span>
+<span class="fc" id="L117">			boolean rsempty = true; // Used to check if resultset is empty</span>
+			
+<span class="fc bfc" id="L119" title="All 2 branches covered.">			while(rs.next()) {</span>
+<span class="fc" id="L120">				rsempty = false;</span>
+<span class="fc" id="L121">				int bankid = rs.getInt(&quot;BANK_ACCOUNT_ID&quot;);</span>
+<span class="fc" id="L122">				double balance = rs.getDouble(&quot;BALANCE&quot;);</span>
+<span class="fc" id="L123">				totalBalance += balance;</span>
+<span class="fc" id="L124">				AccountInformation acc_info = new AccountInformation(bankid, balance);</span>
+<span class="fc" id="L125">				accountlist.add(acc_info);</span>
+			}
+			
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">			if(rsempty) {</span>
+<span class="nc" id="L129">				rs.close();</span>
+<span class="nc" id="L130">				return Optional.empty();</span>
+			}
+			
+<span class="fc" id="L133">			AccountChecking account = new AccountChecking(accountlist, totalBalance);</span>
+<span class="fc" id="L134">			rs.close();</span>
+<span class="pc" id="L135">			return Optional.of(account);</span>
+<span class="pc bpc" id="L136" title="10 of 12 branches missed.">		} catch (SQLException e) {</span>
+<span class="nc" id="L137">			log.catching(e);</span>
+<span class="nc" id="L138">			return Optional.empty();</span>
+		}
+	}
+
+	/**
+	 * transfer
+	 * Transfer an amount from one account into another in the database. All negatives 
+	 * are handled through exceptions. Grabs all user accounts after the transfer and 
+	 * returns it in an AccountChecking model
+	 * @param double amt
+	 * @param int bankId
+	 * @param int userId
+	 * @return Optional
+	 */
+	@Override
+	public Optional&lt;AccountChecking&gt; transfer(double amt, int sourceBankId, int targetBankId, int userId) {
+<span class="fc" id="L154">		String query = &quot;call transfermoney(?, ?, ?, ?, ?, ?)&quot;;</span>
+<span class="fc" id="L155">		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {</span>
+<span class="fc" id="L156">			stmt.setDouble(1, amt);</span>
+<span class="fc" id="L157">			stmt.setInt(2, sourceBankId);</span>
+<span class="fc" id="L158">			stmt.setInt(3, targetBankId);</span>
+<span class="fc" id="L159">			stmt.setInt(4, userId);</span>
+<span class="fc" id="L160">			stmt.registerOutParameter(5, Types.DOUBLE);</span>
+<span class="fc" id="L161">			stmt.registerOutParameter(6, oracle.jdbc.OracleTypes.CURSOR);</span>
+<span class="fc" id="L162">			stmt.execute();</span>
+			
+<span class="fc" id="L164">			Double newBalance = stmt.getDouble(5);</span>
+<span class="fc" id="L165">			ResultSet rs = (ResultSet) stmt.getObject(6);</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">			if(newBalance == -1) {</span>
+<span class="fc" id="L167">				rs.close();</span>
+<span class="fc" id="L168">				return Optional.empty();</span>
+			}
+			
+<span class="fc" id="L171">			double totalBalance = 0;</span>
+<span class="fc" id="L172">			ArrayList&lt;AccountInformation&gt; accountlist = new ArrayList&lt;AccountInformation&gt;();</span>
+<span class="fc" id="L173">			boolean rsempty = true; // Used to check if resultset is empty</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">			if(rs == null) {</span>
+<span class="fc" id="L175">				return Optional.empty();</span>
+			}
+			
+<span class="fc bfc" id="L178" title="All 2 branches covered.">			while(rs.next()) {</span>
+<span class="fc" id="L179">				rsempty = false;</span>
+<span class="fc" id="L180">				int bankid = rs.getInt(&quot;BANK_ACCOUNT_ID&quot;);</span>
+<span class="fc" id="L181">				double balance = rs.getDouble(&quot;BALANCE&quot;);</span>
+<span class="fc" id="L182">				totalBalance += balance;</span>
+<span class="fc" id="L183">				AccountInformation acc_info = new AccountInformation(bankid, balance);</span>
+<span class="fc" id="L184">				accountlist.add(acc_info);</span>
+			}
+			
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">			if(rsempty) {</span>
+<span class="nc" id="L188">				rs.close();</span>
+<span class="nc" id="L189">				return Optional.empty();</span>
+			}
+			
+<span class="fc" id="L192">			AccountChecking account = new AccountChecking(accountlist, totalBalance);</span>
+<span class="fc" id="L193">			rs.close();</span>
+<span class="pc" id="L194">			return Optional.of(account);</span>
+<span class="pc bpc" id="L195" title="11 of 14 branches missed.">		} catch (SQLException e) {</span>
+<span class="nc" id="L196">			log.catching(e);</span>
+<span class="nc" id="L197">			return Optional.empty();</span>
+		}
+	}
+	
+	/** 
+	 * retrieveAccounts
+	 * Retrieves the list of accounts held under the user in an AccountChecking model wrapped under
+	 * an Optional.
+	 * @param int userId
+	 * @return Optional
+	 */
+	@Override
+	public Optional&lt;AccountChecking&gt; retrieveAccounts(int userId) {
+<span class="fc" id="L210">		String query = &quot;select * from p0_checking where user_id = ?&quot;;</span>
+<span class="fc" id="L211">		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {</span>
+<span class="fc" id="L212">			stmt.setInt(1, userId);</span>
+<span class="fc" id="L213">			ResultSet rs = stmt.executeQuery();</span>
+<span class="fc" id="L214">			ArrayList&lt;AccountInformation&gt; accountlist = new ArrayList&lt;AccountInformation&gt;();</span>
+<span class="fc" id="L215">			double totalBalance = 0;</span>
+			
+<span class="fc" id="L217">			boolean rsempty = true; // Used to check if resultset is empty</span>
+			
+<span class="fc bfc" id="L219" title="All 2 branches covered.">			while(rs.next()) {</span>
+<span class="fc" id="L220">				rsempty = false;</span>
+<span class="fc" id="L221">				int bankid = rs.getInt(&quot;BANK_ACCOUNT_ID&quot;);</span>
+<span class="fc" id="L222">				double balance = rs.getDouble(&quot;BALANCE&quot;);</span>
+<span class="fc" id="L223">				totalBalance += balance;</span>
+<span class="fc" id="L224">				AccountInformation acc_info = new AccountInformation(bankid, balance);</span>
+<span class="fc" id="L225">				accountlist.add(acc_info);</span>
+			}
+			
+<span class="fc bfc" id="L228" title="All 2 branches covered.">			if(rsempty) {</span>
+<span class="fc" id="L229">				rs.close();</span>
+<span class="fc" id="L230">				return Optional.empty();</span>
+			}
+			
+<span class="fc" id="L233">			AccountChecking account = new AccountChecking(accountlist, totalBalance);</span>
+<span class="fc" id="L234">			rs.close();</span>
+<span class="pc" id="L235">			return Optional.of(account);</span>
+<span class="pc bpc" id="L236" title="8 of 10 branches missed.">		} catch(SQLException e) {</span>
+<span class="nc" id="L237">			log.catching(e);</span>
+<span class="nc" id="L238">			return Optional.empty();</span>
+		}
+	}
+	
+	/**
+	 * createAccount
+	 * Creates an account under the userid provided into the database with an initial balance of 0.
+	 * @param int userId
+	 * @return Optional
+	 */
+	@Override
+	public Optional&lt;AccountInformation&gt; createAccount(int userId) {
+<span class="fc" id="L250">		String query = &quot;call createcheckingaccount(?, ?)&quot;;</span>
+<span class="fc" id="L251">		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {</span>
+<span class="fc" id="L252">			stmt.setInt(1, userId);</span>
+<span class="fc" id="L253">			stmt.registerOutParameter(2, Types.INTEGER);</span>
+			
+<span class="fc" id="L255">			stmt.execute();</span>
+			
+<span class="fc" id="L257">			Integer bankid = stmt.getInt(2);</span>
+
+<span class="fc" id="L259">			AccountInformation account = new AccountInformation(bankid, 0.0);</span>
+			
+<span class="fc" id="L261">			return Optional.of(account);</span>
+<span class="pc bpc" id="L262" title="4 of 8 branches missed.">		} catch (SQLException e) {</span>
+<span class="fc" id="L263">			log.catching(e);</span>
+<span class="fc" id="L264">			return Optional.empty();</span>
+		}
+	}
+	
+	/**
+	 * deleteAccount
+	 * Deletes an account on the user's request, but will fail if the user has balance in the account.
+	 * @param int bankId
+	 * @param int invokerId
+	 * @return Optional
+	 */
+	@Override
+	public Optional&lt;AccountChecking&gt; deleteAccount(int bankId, int invokerId) {
+<span class="fc" id="L277">		String query = &quot;call deletecheckingaccount(?, ?, ?, ?)&quot;;</span>
+<span class="fc" id="L278">		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {</span>
+<span class="fc" id="L279">			stmt.setInt(1, bankId);</span>
+<span class="fc" id="L280">			stmt.setInt(2, invokerId);</span>
+<span class="fc" id="L281">			stmt.registerOutParameter(3, Types.INTEGER);</span>
+<span class="fc" id="L282">			stmt.registerOutParameter(4, oracle.jdbc.OracleTypes.CURSOR);</span>
+<span class="fc" id="L283">			stmt.execute();</span>
+			
+<span class="fc" id="L285">			Integer success = stmt.getInt(3);</span>
+<span class="fc" id="L286">			ResultSet rs = (ResultSet) stmt.getObject(4);</span>
+			
+<span class="fc bfc" id="L288" title="All 2 branches covered.">			if(success == 0) {</span>
+<span class="fc" id="L289">				log.debug(&quot;Unsuccessful deletion&quot;);</span>
+<span class="fc" id="L290">				rs.close();</span>
+<span class="fc" id="L291">				return Optional.empty();</span>
+			}
+			
+<span class="fc" id="L294">			double totalBalance = 0;</span>
+<span class="fc" id="L295">			ArrayList&lt;AccountInformation&gt; accountlist = new ArrayList&lt;AccountInformation&gt;();</span>
+<span class="fc" id="L296">			boolean rsempty = true; // Used to check if resultset is empty</span>
+			
+<span class="pc bpc" id="L298" title="1 of 2 branches missed.">			while(rs.next()) {</span>
+				//System.out.println(&quot;Looped&quot;);
+<span class="nc" id="L300">				rsempty = false;</span>
+<span class="nc" id="L301">				int bankid = rs.getInt(&quot;BANK_ACCOUNT_ID&quot;);</span>
+<span class="nc" id="L302">				double balance = rs.getDouble(&quot;BALANCE&quot;);</span>
+<span class="nc" id="L303">				totalBalance += balance;</span>
+<span class="nc" id="L304">				AccountInformation acc_info = new AccountInformation(bankid, balance);</span>
+<span class="nc" id="L305">				accountlist.add(acc_info);</span>
+			}
+			
+			if(rsempty) {
+				//return Optional.empty();
+			}
+			
+<span class="fc" id="L312">			AccountChecking account = new AccountChecking(accountlist, totalBalance);</span>
+<span class="fc" id="L313">			rs.close();</span>
+<span class="pc" id="L314">			return Optional.of(account);</span>
+<span class="pc bpc" id="L315" title="8 of 10 branches missed.">		} catch(SQLException e) {</span>
+<span class="nc" id="L316">			log.catching(e);</span>
+<span class="nc" id="L317">			return Optional.empty();</span>
+		}
+	}
+
+	/**
+	 * retrieveAccountsAsAdmin
+	 * Retrieves all accounts in the database which is only accessible by the admin. Stores
+	 * all accounts into an AccountChecking model
+	 * @return Optional
+	 */
+	@Override
+	public Optional&lt;AccountChecking&gt; retrieveAccountsAsAdmin() {
+<span class="fc" id="L329">		String query = &quot;select * from p0_checking&quot;;</span>
+<span class="fc" id="L330">		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {</span>
+<span class="fc" id="L331">			ResultSet rs = stmt.executeQuery();</span>
+<span class="fc" id="L332">			ArrayList&lt;AccountInformation&gt; accountlist = new ArrayList&lt;AccountInformation&gt;();</span>
+			
+<span class="fc" id="L334">			boolean rsempty = true; // Used to check if resultset is empty</span>
+			
+<span class="fc bfc" id="L336" title="All 2 branches covered.">			while(rs.next()) {</span>
+<span class="fc" id="L337">				rsempty = false;</span>
+<span class="fc" id="L338">				int bankid = rs.getInt(&quot;BANK_ACCOUNT_ID&quot;);</span>
+<span class="fc" id="L339">				double balance = rs.getDouble(&quot;BALANCE&quot;);</span>
+<span class="fc" id="L340">				AccountInformation acc_info = new AccountInformation(bankid, balance);</span>
+<span class="fc" id="L341">				accountlist.add(acc_info);</span>
+			}
+			
+<span class="pc bpc" id="L344" title="1 of 2 branches missed.">			if(rsempty) {</span>
+<span class="nc" id="L345">				rs.close();</span>
+<span class="nc" id="L346">				return Optional.empty();</span>
+			}
+			
+<span class="fc" id="L349">			AccountChecking account = new AccountChecking(accountlist, 0.0);</span>
+<span class="fc" id="L350">			rs.close();</span>
+<span class="pc" id="L351">			return Optional.of(account);</span>
+<span class="pc bpc" id="L352" title="9 of 10 branches missed.">		} catch(SQLException e) {</span>
+<span class="nc" id="L353">			log.catching(e);</span>
+<span class="nc" id="L354">			return Optional.empty();</span>
+		}
+	}
+
+	/**
+	 * deleteAccountAsAdmin
+	 * Force delete an account from database regardless of balance.
+	 * @param int bankId
+	 * @return Optional
+	 */
+	@Override
+	public Optional&lt;AccountChecking&gt; deleteAccountAsAdmin(int bankId) {
+<span class="fc" id="L366">		String query = &quot;call deletecheckingaccountasadmin(?, ?, ?)&quot;;</span>
+<span class="fc" id="L367">		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {</span>
+<span class="fc" id="L368">			stmt.setInt(1, bankId);</span>
+<span class="fc" id="L369">			stmt.registerOutParameter(2, Types.INTEGER);</span>
+<span class="fc" id="L370">			stmt.registerOutParameter(3, oracle.jdbc.OracleTypes.CURSOR);</span>
+<span class="fc" id="L371">			stmt.execute();</span>
+			
+<span class="fc" id="L373">			Integer success = stmt.getInt(2);</span>
+<span class="fc" id="L374">			ResultSet rs = (ResultSet) stmt.getObject(3);</span>
+			
+<span class="pc bpc" id="L376" title="1 of 2 branches missed.">			if(success == 0) {</span>
+<span class="nc" id="L377">				log.debug(&quot;Unsuccessful deletion&quot;);</span>
+<span class="nc" id="L378">				rs.close();</span>
+<span class="nc" id="L379">				return Optional.empty();</span>
+			}
+			
+<span class="fc" id="L382">			ArrayList&lt;AccountInformation&gt; accountlist = new ArrayList&lt;AccountInformation&gt;();</span>
+<span class="fc" id="L383">			boolean rsempty = true; // Used to check if resultset is empty</span>
+			
+<span class="fc bfc" id="L385" title="All 2 branches covered.">			while(rs.next()) {</span>
+				//System.out.println(&quot;Looped&quot;);
+<span class="fc" id="L387">				rsempty = false;</span>
+<span class="fc" id="L388">				int bankid = rs.getInt(&quot;BANK_ACCOUNT_ID&quot;);</span>
+<span class="fc" id="L389">				double balance = rs.getDouble(&quot;BALANCE&quot;);</span>
+<span class="fc" id="L390">				AccountInformation acc_info = new AccountInformation(bankid, balance);</span>
+<span class="fc" id="L391">				accountlist.add(acc_info);</span>
+			}
+			
+			if(rsempty) {
+				//return Optional.empty();
+			}
+			
+<span class="fc" id="L398">			AccountChecking account = new AccountChecking(accountlist, 0.0);</span>
+<span class="fc" id="L399">			rs.close();</span>
+<span class="pc" id="L400">			return Optional.of(account);</span>
+<span class="pc bpc" id="L401" title="9 of 10 branches missed.">		} catch(SQLException e) {</span>
+<span class="nc" id="L402">			log.catching(e);</span>
+<span class="nc" id="L403">			return Optional.empty();</span>
+		}
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

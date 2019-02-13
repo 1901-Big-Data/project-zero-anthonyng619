@@ -1,0 +1,1017 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConsoleDisplay.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">project0</a> &gt; <a href="index.source.html" class="el_package">com.revature.anthony.nguyen.project0.project0.application</a> &gt; <span class="el_source">ConsoleDisplay.java</span></div><h1>ConsoleDisplay.java</h1><pre class="source lang-java linenums">package com.revature.anthony.nguyen.project0.project0.application;
+
+import java.text.DecimalFormat;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.revature.anthony.nguyen.project0.project0.model.AccountChecking;
+import com.revature.anthony.nguyen.project0.project0.model.AccountInformation;
+import com.revature.anthony.nguyen.project0.project0.model.User;
+import com.revature.anthony.nguyen.project0.project0.model.Users;
+import com.revature.anthony.nguyen.project0.project0.service.AccountCheckingService;
+import com.revature.anthony.nguyen.project0.project0.service.UserService;
+
+public class ConsoleDisplay {
+	private Scanner input;
+	private User user;
+	private Users users;
+	private AccountChecking accountChecking;
+<span class="nc" id="L22">	private Logger log = LogManager.getLogger(ConsoleDisplay.class);</span>
+	private boolean isAdmin;
+<span class="nc" id="L24">	private DecimalFormat df = new DecimalFormat(&quot;0.00&quot;);</span>
+	
+<span class="nc" id="L26">	public ConsoleDisplay() {</span>
+<span class="nc" id="L27">		input = new Scanner(System.in);</span>
+<span class="nc" id="L28">	}</span>
+	
+	public void start(boolean isAdmin) {
+<span class="nc" id="L31">		this.isAdmin = isAdmin;</span>
+<span class="nc" id="L32">		mainMenu();</span>
+<span class="nc" id="L33">	}</span>
+	
+	public void loginRegister() {
+<span class="nc" id="L36">		boolean breaker = false;</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">		while(!breaker) {</span>
+<span class="nc" id="L38">			System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L39">	    	System.out.println(&quot;Menu Options: &quot;);</span>
+<span class="nc" id="L40">	    	System.out.println(&quot;    1. Register a new account&quot;);</span>
+<span class="nc" id="L41">	    	System.out.println(&quot;    2. Login to an existing account&quot;);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">	    	if(isAdmin) {</span>
+<span class="nc" id="L43">	    		System.out.println(&quot;    3. Admin Menu&quot;);</span>
+	    	}
+<span class="nc" id="L45">	    	System.out.println(&quot;\n    0. Exit&quot;);</span>
+<span class="nc" id="L46">	    	System.out.println(&quot;\nPick an option: &quot;);</span>
+<span class="nc" id="L47">	    	String choice = input.nextLine();</span>
+	    
+<span class="nc bnc" id="L49" title="All 13 branches missed.">			switch(choice) {</span>
+	    	case &quot;1&quot;:
+<span class="nc" id="L51">	    		register();</span>
+<span class="nc" id="L52">	    		break;</span>
+	    	case &quot;2&quot;:
+<span class="nc" id="L54">	    		login();</span>
+<span class="nc" id="L55">	    		break;</span>
+	    	case &quot;3&quot;:
+<span class="nc bnc" id="L57" title="All 2 branches missed.">	    		if(isAdmin) {</span>
+<span class="nc" id="L58">	    			adminMenu();</span>
+<span class="nc" id="L59">	    		} else {</span>
+<span class="nc" id="L60">	    			System.out.println(&quot;Please pick a valid option.&quot;);</span>
+	    		}
+<span class="nc" id="L62">	    		break;</span>
+	    	case &quot;0&quot;:
+<span class="nc" id="L64">	    		breaker = true;</span>
+<span class="nc" id="L65">	    		System.exit(0);</span>
+<span class="nc" id="L66">	    		break;</span>
+	    	default:
+<span class="nc" id="L68">	    		System.out.println(&quot;Please pick a valid option.&quot;);</span>
+	    		break;
+	    	}
+		}
+<span class="nc" id="L72">	}</span>
+	
+	public void register() {
+<span class="nc" id="L75">		System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L76">		System.out.println(&quot;Registering new account with the bank.&quot;);</span>
+		/*
+		 * Removed until table for names is added. 
+		 *
+		System.out.println(&quot;Enter your first name: &quot;);
+		String firstName = input.nextLine();
+		if(firstName.equals(&quot;&quot;)) return;
+		
+		System.out.println(&quot;Enter your last name: &quot;);
+		String lastName = input.nextLine();
+		if(lastName.equals(&quot;&quot;)) return;
+		*/
+<span class="nc" id="L88">		System.out.println(&quot;Enter a username: &quot;);</span>
+<span class="nc" id="L89">		String username = input.nextLine();</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">		if(username.equals(&quot;&quot;)) return;</span>
+		
+<span class="nc bnc" id="L92" title="All 2 branches missed.">		while(UserService.get().checkUser(username)) {</span>
+<span class="nc" id="L93">			System.out.println(&quot;That username is unavailable. Please enter another one.&quot;);</span>
+<span class="nc" id="L94">			System.out.println(&quot;Enter a username: &quot;);</span>
+<span class="nc" id="L95">			username = input.nextLine();</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">			if(username.equals(&quot;&quot;)) return;</span>
+		}
+<span class="nc" id="L98">		System.out.println(&quot;Enter a password: &quot;);</span>
+<span class="nc" id="L99">		String password = input.nextLine(); // TODO: Hash this in the future.</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">		if(password.equals(&quot;&quot;)) return;</span>
+		
+		try {
+<span class="nc" id="L103">			user = UserService.get().addUser(username, password, 0).get();</span>
+<span class="nc" id="L104">		} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L105">			System.out.println(&quot;Username and password must be under 20 characters.&quot;);</span>
+<span class="nc" id="L106">			return;</span>
+		}
+<span class="nc" id="L108">		log.debug(&quot;User finished registering for new account. Username: &quot;+username);</span>
+		
+<span class="nc" id="L110">		mainMenu();</span>
+<span class="nc" id="L111">	}</span>
+	
+	public void login() {
+<span class="nc" id="L114">		boolean breaker = false;</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">		while(!breaker) {</span>
+<span class="nc" id="L116">			System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L117">			System.out.println(&quot;Login Page&quot;);</span>
+<span class="nc" id="L118">			System.out.print(&quot;Username:&quot;);</span>
+<span class="nc" id="L119">			String username = input.nextLine();</span>
+<span class="nc" id="L120">			System.out.print(&quot;Password:&quot;);</span>
+<span class="nc" id="L121">			String password = input.nextLine();</span>
+<span class="nc bnc" id="L122" title="All 4 branches missed.">			if(username.equals(&quot;&quot;) &amp;&amp; password.equals(&quot;&quot;)) return;</span>
+			
+			try {
+<span class="nc" id="L125">				user = UserService.get().loginUser(username, password).get();</span>
+<span class="nc" id="L126">				mainMenu();</span>
+<span class="nc" id="L127">				breaker = true;</span>
+<span class="nc" id="L128">			} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L129">				boolean breaker2 = false;</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">				while(!breaker2) {</span>
+<span class="nc" id="L131">					System.out.println(&quot;Wrong username or passowrd.&quot;);</span>
+<span class="nc" id="L132">					System.out.println(&quot;Would you like to try again? (Y/N)&quot; );</span>
+<span class="nc" id="L133">					String choice = input.nextLine().toUpperCase();</span>
+<span class="nc bnc" id="L134" title="All 7 branches missed.">					switch(choice) {</span>
+					case &quot;Y&quot;:
+<span class="nc" id="L136">						breaker2 = true;</span>
+<span class="nc" id="L137">						break;</span>
+					case &quot;N&quot;:
+<span class="nc" id="L139">						breaker = true;</span>
+<span class="nc" id="L140">						breaker2 = true;</span>
+<span class="nc" id="L141">						break;</span>
+					default:
+						break;
+					}
+				}
+			}
+		}
+<span class="nc" id="L148">	}</span>
+	
+	public void mainMenu() {
+<span class="nc" id="L151">		boolean breaker = false;</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">		while(!breaker) {</span>
+<span class="nc bnc" id="L153" title="All 4 branches missed.">			if(user == null || user.getUserID() == 0) {</span>
+<span class="nc" id="L154">				loginRegister();</span>
+			}
+			
+<span class="nc" id="L157">			System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L158">			System.out.println(&quot;Welcome, &quot; + user.getUsername() + &quot;!&quot;);</span>
+<span class="nc" id="L159">			System.out.println(&quot;How can we service you today?&quot;);</span>
+<span class="nc" id="L160">			System.out.println(&quot;\nOptions: &quot;);</span>
+<span class="nc" id="L161">			System.out.println(&quot;1. View banking accounts&quot;);</span>
+<span class="nc" id="L162">			System.out.println(&quot;2. Open banking accounts&quot;);</span>
+<span class="nc" id="L163">			System.out.println(&quot;3. Close user account&quot;);</span>
+			//System.out.println(&quot;3. Change address&quot;);
+			//System.out.println(&quot;4. Change password&quot;);
+<span class="nc" id="L166">			System.out.println(&quot;\n0. Log out&quot;);</span>
+			
+<span class="nc" id="L168">			String choice = input.nextLine();</span>
+<span class="nc bnc" id="L169" title="All 13 branches missed.">			switch(choice) {</span>
+			case &quot;1&quot;:
+<span class="nc" id="L171">				bankingAccounts();</span>
+<span class="nc" id="L172">				break;</span>
+			case &quot;2&quot;:
+<span class="nc" id="L174">				openBankAccount();</span>
+<span class="nc" id="L175">				break;</span>
+			case &quot;3&quot;:
+<span class="nc" id="L177">				closeAccount();</span>
+<span class="nc" id="L178">				break;</span>
+			case &quot;0&quot;:
+<span class="nc" id="L180">				breaker = true;</span>
+<span class="nc" id="L181">				user = null;</span>
+<span class="nc" id="L182">				accountChecking = null;</span>
+<span class="nc" id="L183">				break;</span>
+			default:
+				break;
+			}
+		}
+<span class="nc" id="L188">	}</span>
+	
+	
+	public void bankingAccounts() {
+		try {
+<span class="nc" id="L193">			System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L194">			accountChecking = AccountCheckingService.get().retrieveAccounts(user.getUserID()).get();</span>
+<span class="nc" id="L195">			System.out.println(&quot;These are your available accounts: &quot;);</span>
+
+		
+<span class="nc" id="L198">			int page = 0;</span>
+<span class="nc" id="L199">			int pageSize = 5;</span>
+<span class="nc" id="L200">			boolean breaker = false;</span>
+			
+<span class="nc bnc" id="L202" title="All 2 branches missed.">			while(!breaker) {</span>
+<span class="nc" id="L203">			int index = 0;</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">			while(index &lt; pageSize) {</span>
+<span class="nc" id="L205">				AccountInformation acc_info = accountChecking.getAccounts().get(index + page*pageSize);</span>
+<span class="nc" id="L206">				System.out.println(&quot;&gt;    &quot; + (index+1)+&quot;.  |  Account number: &quot; + acc_info.getBankAccountId() + &quot; || Balance: $&quot; + df.format(acc_info.getBalance()));</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">				if(index + 1 + page*pageSize &gt;= accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L208">					break;</span>
+				}
+<span class="nc" id="L210">				index++;</span>
+			}
+<span class="nc bnc" id="L212" title="All 2 branches missed.">			if(page == 0) {</span>
+<span class="nc bnc" id="L213" title="All 2 branches missed.">				if((page+1)*pageSize &gt;= accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L214">					System.out.println(&quot;\n9. Main Menu&quot;);</span>
+<span class="nc" id="L215">				} else {</span>
+<span class="nc" id="L216">					System.out.println(&quot;\n9. Main Menu\n0. Next&quot;);</span>
+				}
+<span class="nc" id="L218">			} else {</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">				if((page+1)*pageSize &gt;= accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L220">					System.out.println(&quot;\n9. Previous&quot;);</span>
+<span class="nc" id="L221">				} else {</span>
+<span class="nc" id="L222">					System.out.println(&quot;\n9. Previous\n0. Next&quot;);</span>
+				}
+			}
+<span class="nc" id="L225">			System.out.println(&quot;Which account would you like to access?&quot;);</span>
+<span class="nc" id="L226">			String choice = input.nextLine();</span>
+<span class="nc bnc" id="L227" title="All 22 branches missed.">			switch(choice) {</span>
+			case &quot;1&quot;:
+<span class="nc" id="L229">				int indexInList = page*pageSize;</span>
+<span class="nc bnc" id="L230" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L231">					break;</span>
+				}
+<span class="nc" id="L233">				breaker = true;</span>
+				
+<span class="nc" id="L235">				bankAccountInvocation(indexInList);</span>
+<span class="nc" id="L236">				break;</span>
+				
+			case &quot;2&quot;:
+<span class="nc" id="L239">				indexInList = 1 + page*pageSize;</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L241">					break;</span>
+				}
+<span class="nc" id="L243">				breaker = true;</span>
+				
+<span class="nc" id="L245">				bankAccountInvocation(indexInList);</span>
+<span class="nc" id="L246">				break;</span>
+				
+			case &quot;3&quot;:
+<span class="nc" id="L249">				indexInList = 2 + page*pageSize;</span>
+<span class="nc bnc" id="L250" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L251">					break;</span>
+				}
+<span class="nc" id="L253">				breaker = true;</span>
+				
+<span class="nc" id="L255">				bankAccountInvocation(indexInList);</span>
+<span class="nc" id="L256">				break;</span>
+				
+			case &quot;4&quot;:
+<span class="nc" id="L259">				indexInList = 3 + page*pageSize;</span>
+<span class="nc bnc" id="L260" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L261">					break;</span>
+				}
+<span class="nc" id="L263">				breaker = true;</span>
+				
+<span class="nc" id="L265">				bankAccountInvocation(indexInList);</span>
+<span class="nc" id="L266">				break;</span>
+				
+			case &quot;5&quot;:
+<span class="nc" id="L269">				indexInList = 4 + page*pageSize;</span>
+<span class="nc bnc" id="L270" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L271">					break;</span>
+				}
+<span class="nc" id="L273">				breaker = true;</span>
+			
+<span class="nc" id="L275">				bankAccountInvocation(indexInList);</span>
+<span class="nc" id="L276">				break;</span>
+				
+			case &quot;9&quot;:
+<span class="nc" id="L279">				index = 0;</span>
+<span class="nc bnc" id="L280" title="All 2 branches missed.">				if(page &gt; 0) {</span>
+<span class="nc" id="L281">					page--;</span>
+<span class="nc" id="L282">				} else {</span>
+<span class="nc" id="L283">					return;</span>
+				}
+				break;
+			case &quot;0&quot;: 
+<span class="nc" id="L287">				index = 0;</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">				if((page+1)*pageSize &lt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L289">					page++;</span>
+				}
+<span class="nc" id="L291">				break;</span>
+			
+			default:
+				break;
+			}
+			}
+<span class="nc" id="L297">		} catch(NoSuchElementException e) {</span>
+<span class="nc" id="L298">			System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L299">			System.out.println(&quot;We apologize for the inconvenience. It looks like you do not have any opened accounts with us.&quot;);</span>
+<span class="nc" id="L300">			System.out.println(&quot;Please open an account with us at the main menu.&quot;);</span>
+<span class="nc" id="L301">			System.out.println(&quot;Press the enter key to return back to the main menu...&quot;);</span>
+			
+<span class="nc" id="L303">			input.nextLine();</span>
+<span class="nc" id="L304">			return;</span>
+		}
+<span class="nc" id="L306">	}</span>
+	
+	public void bankAccountInvocation(int bankId) {
+<span class="nc" id="L309">		System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L310">		AccountInformation acc_info = accountChecking.getAccounts().get(bankId);</span>
+		
+	
+<span class="nc" id="L313">		boolean breaker = false;</span>
+
+<span class="nc bnc" id="L315" title="All 2 branches missed.">		while(!breaker) {</span>
+<span class="nc" id="L316">			System.out.println(&quot;Currently viewing Bank Account Number: &quot; + acc_info.getBankAccountId());</span>
+<span class="nc" id="L317">			System.out.println(&quot;Remaining balance: $&quot;+ df.format(acc_info.getBalance()));</span>
+<span class="nc" id="L318">			System.out.println(&quot;What would you like to do?\n&quot;);</span>
+<span class="nc" id="L319">			System.out.println(&quot;1. Withdraw&quot;);</span>
+<span class="nc" id="L320">			System.out.println(&quot;2. Deposit&quot;);</span>
+<span class="nc" id="L321">			System.out.println(&quot;3. Transfer&quot;);</span>
+<span class="nc" id="L322">			System.out.println(&quot;4. Delete This Checking Account&quot;);</span>
+<span class="nc" id="L323">			System.out.println(&quot;\n0. Go back&quot;);</span>
+<span class="nc" id="L324">			System.out.println(&quot;\nPick an option: &quot;);</span>
+			
+<span class="nc" id="L326">			String choice = input.nextLine();</span>
+			
+<span class="nc bnc" id="L328" title="All 16 branches missed.">			switch(choice) {</span>
+			case &quot;1&quot;:
+<span class="nc" id="L330">				System.out.println(&quot;How much would you like to withdraw?&quot;);</span>
+<span class="nc" id="L331">				String amt = input.nextLine();</span>
+				
+				try {
+<span class="nc" id="L334">					double amount = Double.parseDouble(amt);</span>
+<span class="nc bnc" id="L335" title="All 2 branches missed.">					if(amount &lt; 0.0) {</span>
+<span class="nc" id="L336">						System.out.println(&quot;You can only withdraw a positive amount!&quot;);</span>
+<span class="nc" id="L337">						break;</span>
+					}
+<span class="nc" id="L339">					accountChecking = AccountCheckingService.get().withdraw(amount, acc_info.getBankAccountId(), user.getUserID()).get();</span>
+<span class="nc" id="L340">					System.out.println(&quot;You withdrew $&quot; + df.format(amount));</span>
+<span class="nc" id="L341">					System.out.println(&quot;Your remaining balance is $&quot; + df.format(accountChecking.getAccounts().get(bankId).getBalance()));</span>
+<span class="nc" id="L342">					System.out.println(&quot;Press enter to continue...&quot;);</span>
+<span class="nc" id="L343">					amt = input.nextLine();</span>
+<span class="nc" id="L344">				} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L345">					System.out.println(&quot;You don't have enough money to withdraw that much!&quot;);</span>
+<span class="nc" id="L346">					accountChecking = AccountCheckingService.get().retrieveAccounts(user.getUserID()).get();</span>
+<span class="nc" id="L347">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L348">					input.nextLine();</span>
+				} 
+<span class="nc" id="L350">				break;</span>
+			case &quot;2&quot;:
+<span class="nc" id="L352">				System.out.println(&quot;How much would you like to deposit?&quot;);</span>
+<span class="nc" id="L353">				amt = input.nextLine();</span>
+<span class="nc" id="L354">				double amount = Double.parseDouble(amt);</span>
+<span class="nc bnc" id="L355" title="All 2 branches missed.">				if(amount &lt; 0.0) {</span>
+<span class="nc" id="L356">					System.out.println(&quot;You can only deposit a positive amount!&quot;);</span>
+<span class="nc" id="L357">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L358">					input.nextLine();</span>
+<span class="nc" id="L359">					break;</span>
+				}
+				try {
+<span class="nc" id="L362">					accountChecking = AccountCheckingService.get().deposit(amount, acc_info.getBankAccountId(), user.getUserID()).get();</span>
+<span class="nc" id="L363">					System.out.println(&quot;You deposited $&quot; + df.format(amount));</span>
+<span class="nc" id="L364">					System.out.println(&quot;Your remaining balance is $&quot; + df.format(accountChecking.getAccounts().get(bankId).getBalance()));</span>
+<span class="nc" id="L365">					System.out.println(&quot;Press enter to continue...&quot;);</span>
+<span class="nc" id="L366">					amt = input.nextLine();</span>
+<span class="nc" id="L367">				} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L368">					System.out.println(&quot;You can't deposit that much!&quot;);</span>
+<span class="nc" id="L369">					accountChecking = AccountCheckingService.get().retrieveAccounts(user.getUserID()).get();</span>
+<span class="nc" id="L370">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L371">					input.nextLine();</span>
+				} 
+<span class="nc" id="L373">				break;</span>
+			case &quot;3&quot;:
+<span class="nc" id="L375">				System.out.println(&quot;Who would you like to transfer money to?\nEnter the bank account id:&quot;);</span>
+<span class="nc" id="L376">				String targetidstring = input.nextLine();</span>
+				int targetid;
+				try {
+<span class="nc" id="L379">					targetid = Integer.parseInt(targetidstring);</span>
+<span class="nc" id="L380">				} catch(NumberFormatException e) {</span>
+<span class="nc" id="L381">					System.out.println(&quot;Please enter a valid bank account number.&quot;);</span>
+<span class="nc" id="L382">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L383">					input.nextLine();</span>
+<span class="nc" id="L384">					break;</span>
+				}
+<span class="nc" id="L386">				System.out.println(&quot;How much would you like to send?&quot;);</span>
+<span class="nc" id="L387">				amt = input.nextLine();</span>
+<span class="nc" id="L388">				amount = Double.parseDouble(amt);</span>
+<span class="nc bnc" id="L389" title="All 2 branches missed.">				if(amount &lt; 0.0) {</span>
+<span class="nc" id="L390">					System.out.println(&quot;You can only transfer a positive amount!&quot;);</span>
+<span class="nc" id="L391">					break;</span>
+				}
+				try {
+<span class="nc" id="L394">					accountChecking = AccountCheckingService.get().transfer(amount, acc_info.getBankAccountId(), targetid, user.getUserID()).get();</span>
+<span class="nc" id="L395">					System.out.println(&quot;You transferred $&quot; + df.format(amount) + &quot; to the bank account id &quot; + targetid + &quot;.&quot;);</span>
+<span class="nc" id="L396">					System.out.println(&quot;Your remaining balance is $&quot; + df.format(accountChecking.getAccounts().get(bankId).getBalance()));</span>
+<span class="nc" id="L397">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L398">					input.nextLine();</span>
+<span class="nc" id="L399">				} catch(NoSuchElementException e) {</span>
+<span class="nc" id="L400">					System.out.println(&quot;Your transfer has failed due to insufficient funds or invalid recipient.&quot;);</span>
+<span class="nc" id="L401">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L402">					input.nextLine();</span>
+				}
+				
+<span class="nc" id="L405">				break;</span>
+			case &quot;0&quot;:
+<span class="nc" id="L407">				return;</span>
+			case &quot;4&quot;:
+<span class="nc" id="L409">				boolean breaker2 = false;</span>
+<span class="nc bnc" id="L410" title="All 2 branches missed.">				while(!breaker2) {</span>
+<span class="nc" id="L411">					System.out.println(&quot;Are you sure you want to delete this account? (Y/N)&quot;);</span>
+<span class="nc" id="L412">					choice = input.nextLine().toUpperCase();</span>
+<span class="nc bnc" id="L413" title="All 4 branches missed.">					switch(choice) {</span>
+					case &quot;Y&quot;: 
+						// Delete account
+						try {
+<span class="nc" id="L417">							accountChecking = AccountCheckingService.get().deleteAccount(acc_info.getBankAccountId(), user.getUserID()).get();</span>
+<span class="nc" id="L418">							breaker2 = true;</span>
+<span class="nc" id="L419">							breaker = true;</span>
+<span class="nc" id="L420">							System.out.println(&quot;You have successfully deleted your account!&quot;);</span>
+<span class="nc" id="L421">							System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L422">							input.nextLine();</span>
+<span class="nc" id="L423">						} catch(NoSuchElementException e) { </span>
+<span class="nc" id="L424">							System.out.println(&quot;You are unable to delete the account!\nPlease check if your balance is 0 before deleting.&quot;);</span>
+<span class="nc" id="L425">							System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L426">							input.nextLine();</span>
+						}
+<span class="nc" id="L428">						breaker2 = true;</span>
+					}
+				}
+<span class="nc" id="L431">				return;</span>
+			default:
+				break;
+			}
+		}
+		
+<span class="nc" id="L437">	}</span>
+	
+	public void openBankAccount() {
+<span class="nc" id="L440">		boolean breaker = false;</span>
+<span class="nc bnc" id="L441" title="All 2 branches missed.">		while(!breaker) {</span>
+<span class="nc" id="L442">			System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L443">			System.out.println(&quot;You can open a checking account with us!&quot;);</span>
+<span class="nc" id="L444">			System.out.println(&quot;Note: You can set up multiple accounts if you wish!&quot;);</span>
+<span class="nc" id="L445">			System.out.println(&quot;\n1. Create a new checking account.&quot;);</span>
+<span class="nc" id="L446">			System.out.println(&quot;\n0. Return to main menu.&quot;);</span>
+<span class="nc" id="L447">			String choice = input.nextLine();</span>
+<span class="nc bnc" id="L448" title="All 7 branches missed.">			switch(choice) {</span>
+			case &quot;1&quot;:
+				try {
+<span class="nc" id="L451">					AccountInformation account = AccountCheckingService.get().createAccount(user.getUserID()).get();</span>
+<span class="nc" id="L452">					System.out.println(&quot;Your checking account has been made.\n Your checking account id is &quot;+ account.getBankAccountId()+&quot;.&quot;);</span>
+<span class="nc" id="L453">					System.out.println(&quot;\nPress the enter key to return to main menu...&quot;);</span>
+<span class="nc" id="L454">					input.nextLine();</span>
+<span class="nc" id="L455">					breaker = true;</span>
+<span class="nc" id="L456">				} catch(NoSuchElementException e) {</span>
+<span class="nc" id="L457">					System.out.println(&quot;You have lost connection.&quot;);</span>
+<span class="nc" id="L458">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L459">					input.nextLine();</span>
+<span class="nc" id="L460">					return;</span>
+				}
+				break;
+			case &quot;0&quot;:
+<span class="nc" id="L464">				breaker = true;</span>
+<span class="nc" id="L465">				break;</span>
+			default:
+				break;
+			}
+		}
+<span class="nc" id="L470">	}</span>
+
+	
+	public void adminMenu() {
+<span class="nc" id="L474">		boolean breaker = false;</span>
+<span class="nc bnc" id="L475" title="All 2 branches missed.">		while(!breaker) {</span>
+<span class="nc" id="L476">			System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L477">			System.out.println(&quot;This is the admin menu.&quot;);</span>
+<span class="nc" id="L478">			System.out.println(&quot;Available Options:\n&quot;); </span>
+<span class="nc" id="L479">			System.out.println(&quot;    1. Manage checking accounts&quot;);</span>
+<span class="nc" id="L480">			System.out.println(&quot;    2. Manage user accounts&quot;);</span>
+<span class="nc" id="L481">			System.out.println(&quot;    0. Return to login page&quot;);</span>
+<span class="nc" id="L482">			String choice = input.nextLine();</span>
+<span class="nc bnc" id="L483" title="All 10 branches missed.">			switch(choice) {</span>
+			case &quot;1&quot;:
+<span class="nc" id="L485">				adminBankingAccounts();</span>
+<span class="nc" id="L486">				break;</span>
+			case &quot;2&quot;:
+<span class="nc" id="L488">				adminUserAccounts();</span>
+<span class="nc" id="L489">				break;</span>
+			case &quot;0&quot;:
+<span class="nc" id="L491">				users = null;</span>
+<span class="nc" id="L492">				accountChecking = null;</span>
+<span class="nc" id="L493">				user = null;</span>
+<span class="nc" id="L494">				breaker = true;</span>
+				break;
+			}
+		}
+<span class="nc" id="L498">	}</span>
+	
+	public void adminBankingAccounts() {
+<span class="nc" id="L501">		System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+		try {
+<span class="nc" id="L503">			System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L504">			accountChecking = AccountCheckingService.get().retrieveAccountsAsAdmin().get();</span>
+<span class="nc" id="L505">			System.out.println(&quot;This is the list of all checking accounts: &quot;);</span>
+
+		
+<span class="nc" id="L508">			int page = 0;</span>
+<span class="nc" id="L509">			int pageSize = 8;</span>
+<span class="nc" id="L510">			boolean breaker = false;</span>
+			
+<span class="nc bnc" id="L512" title="All 2 branches missed.">			while(!breaker) {</span>
+<span class="nc" id="L513">			int index = 0;</span>
+<span class="nc bnc" id="L514" title="All 2 branches missed.">			while(index &lt; pageSize) {</span>
+<span class="nc" id="L515">				AccountInformation acc_info = accountChecking.getAccounts().get(index + page*pageSize);</span>
+<span class="nc" id="L516">				System.out.println(&quot;&gt;    &quot; + (index+1)+&quot;.  |  Account number: &quot; + acc_info.getBankAccountId() + &quot; || Balance: $&quot; + df.format(acc_info.getBalance()));</span>
+<span class="nc bnc" id="L517" title="All 2 branches missed.">				if(index + 1 + page*pageSize &gt;= accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L518">					break;</span>
+				}
+<span class="nc" id="L520">				index++;</span>
+			}
+<span class="nc bnc" id="L522" title="All 2 branches missed.">			if(page == 0) {</span>
+<span class="nc bnc" id="L523" title="All 2 branches missed.">				if((page+1)*pageSize &gt;= accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L524">					System.out.println(&quot;\n9. Main Menu&quot;);</span>
+<span class="nc" id="L525">				} else {</span>
+<span class="nc" id="L526">					System.out.println(&quot;\n9. Main Menu\n0. Next&quot;);</span>
+				}
+<span class="nc" id="L528">			} else {</span>
+<span class="nc bnc" id="L529" title="All 2 branches missed.">				if((page+1)*pageSize &gt;= accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L530">					System.out.println(&quot;\n9. Previous&quot;);</span>
+<span class="nc" id="L531">				} else {</span>
+<span class="nc" id="L532">					System.out.println(&quot;\n9. Previous\n0. Next&quot;);</span>
+				}
+			}
+<span class="nc" id="L535">			System.out.println(&quot;Which account would you like to access?&quot;);</span>
+<span class="nc" id="L536">			String choice = input.nextLine();</span>
+<span class="nc bnc" id="L537" title="All 31 branches missed.">			switch(choice) {</span>
+			case &quot;1&quot;:
+<span class="nc" id="L539">				int indexInList = page*pageSize;</span>
+<span class="nc bnc" id="L540" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L541">					break;</span>
+				}
+<span class="nc" id="L543">				breaker = true;</span>
+				
+<span class="nc" id="L545">				bankInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L546">				break;</span>
+				
+			case &quot;2&quot;:
+<span class="nc" id="L549">				indexInList = 1 + page*pageSize;</span>
+<span class="nc bnc" id="L550" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L551">					break;</span>
+				}
+<span class="nc" id="L553">				breaker = true;</span>
+				
+<span class="nc" id="L555">				bankInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L556">				break;</span>
+				
+			case &quot;3&quot;:
+<span class="nc" id="L559">				indexInList = 2 + page*pageSize;</span>
+<span class="nc bnc" id="L560" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L561">					break;</span>
+				}
+<span class="nc" id="L563">				breaker = true;</span>
+				
+<span class="nc" id="L565">				bankInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L566">				break;</span>
+				
+			case &quot;4&quot;:
+<span class="nc" id="L569">				indexInList = 3 + page*pageSize;</span>
+<span class="nc bnc" id="L570" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L571">					break;</span>
+				}
+<span class="nc" id="L573">				breaker = true;</span>
+				
+<span class="nc" id="L575">				bankInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L576">				break;</span>
+				
+			case &quot;5&quot;:
+<span class="nc" id="L579">				indexInList = 4 + page*pageSize;</span>
+<span class="nc bnc" id="L580" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L581">					break;</span>
+				}
+<span class="nc" id="L583">				breaker = true;</span>
+			
+<span class="nc" id="L585">				bankInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L586">				break;</span>
+				
+			case &quot;6&quot;:
+<span class="nc" id="L589">				indexInList = 5 + page*pageSize;</span>
+<span class="nc bnc" id="L590" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L591">					break;</span>
+				}
+<span class="nc" id="L593">				breaker = true;</span>
+			
+<span class="nc" id="L595">				bankInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L596">				break;</span>
+				
+			case &quot;7&quot;:
+<span class="nc" id="L599">				indexInList = 6 + page*pageSize;</span>
+<span class="nc bnc" id="L600" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L601">					break;</span>
+				}
+<span class="nc" id="L603">				breaker = true;</span>
+			
+<span class="nc" id="L605">				bankInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L606">				break;</span>
+				
+			case &quot;8&quot;:
+<span class="nc" id="L609">				indexInList = 7 + page*pageSize;</span>
+<span class="nc bnc" id="L610" title="All 2 branches missed.">				if(1 + indexInList &gt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L611">					break;</span>
+				}
+<span class="nc" id="L613">				breaker = true;</span>
+			
+<span class="nc" id="L615">				bankInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L616">				break;</span>
+				
+			case &quot;9&quot;:
+<span class="nc" id="L619">				index = 0;</span>
+<span class="nc bnc" id="L620" title="All 2 branches missed.">				if(page &gt; 0) {</span>
+<span class="nc" id="L621">					page--;</span>
+<span class="nc" id="L622">				} else {</span>
+<span class="nc" id="L623">					return;</span>
+				}
+				break;
+			case &quot;0&quot;: 
+<span class="nc" id="L627">				index = 0;</span>
+<span class="nc bnc" id="L628" title="All 2 branches missed.">				if((page+1)*pageSize &lt; accountChecking.getAccounts().size()) {</span>
+<span class="nc" id="L629">					page++;</span>
+				}
+<span class="nc" id="L631">				break;</span>
+			
+			default:
+				break;
+			}
+			}
+<span class="nc" id="L637">		} catch(NoSuchElementException e) {</span>
+<span class="nc" id="L638">			System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L639">			System.out.println(&quot;Sorry, there are no checking accounts in the database.&quot;);</span>
+<span class="nc" id="L640">			System.out.println(&quot;Press the enter key to return back to the main menu...&quot;);</span>
+			
+<span class="nc" id="L642">			input.nextLine();</span>
+<span class="nc" id="L643">			return;</span>
+		}
+<span class="nc" id="L645">	}</span>
+	
+	public void bankInvocationAsAdmin(int index) {
+<span class="nc" id="L648">		System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L649">		AccountInformation acc_info = accountChecking.getAccounts().get(index);</span>
+		
+	
+<span class="nc" id="L652">		boolean breaker = false;</span>
+
+<span class="nc bnc" id="L654" title="All 2 branches missed.">		while(!breaker) {</span>
+<span class="nc" id="L655">			System.out.println(&quot;Currently viewing Bank Account Number: &quot; + acc_info.getBankAccountId());</span>
+<span class="nc" id="L656">			System.out.println(&quot;Remaining balance: $&quot;+ df.format(acc_info.getBalance()));</span>
+<span class="nc" id="L657">			System.out.println(&quot;What would you like to do?\n&quot;);</span>
+<span class="nc" id="L658">			System.out.println(&quot;1. Withdraw&quot;);</span>
+<span class="nc" id="L659">			System.out.println(&quot;2. Deposit&quot;);</span>
+<span class="nc" id="L660">			System.out.println(&quot;3. Transfer&quot;);</span>
+<span class="nc" id="L661">			System.out.println(&quot;4. Delete&quot;);</span>
+<span class="nc" id="L662">			System.out.println(&quot;\n0. Go back&quot;);</span>
+<span class="nc" id="L663">			System.out.println(&quot;\nPick an option: &quot;);</span>
+			
+<span class="nc" id="L665">			String choice = input.nextLine();</span>
+			
+<span class="nc bnc" id="L667" title="All 16 branches missed.">			switch(choice) {</span>
+			case &quot;1&quot;:
+<span class="nc" id="L669">				System.out.println(&quot;How much would you like to withdraw?&quot;);</span>
+<span class="nc" id="L670">				String amt = input.nextLine();</span>
+				
+				try {
+<span class="nc" id="L673">					double amount = Double.parseDouble(amt);</span>
+<span class="nc bnc" id="L674" title="All 2 branches missed.">					if(amount &lt; 0.0) {</span>
+<span class="nc" id="L675">						System.out.println(&quot;You can only withdraw a positive amount!&quot;);</span>
+<span class="nc" id="L676">						System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L677">						input.nextLine();</span>
+<span class="nc" id="L678">						break;</span>
+					}
+<span class="nc" id="L680">					accountChecking = AccountCheckingService.get().withdraw(amount, acc_info.getBankAccountId(), -1).get();</span>
+<span class="nc" id="L681">					System.out.println(&quot;You withdrew $&quot; + df.format(amount));</span>
+<span class="nc" id="L682">					System.out.println(&quot;Your remaining balance is $&quot; + df.format(accountChecking.getAccounts().get(index).getBalance()));</span>
+<span class="nc" id="L683">					breaker = true;</span>
+<span class="nc" id="L684">					System.out.println(&quot;Press enter to continue...&quot;);</span>
+<span class="nc" id="L685">					amt = input.nextLine();</span>
+<span class="nc" id="L686">				} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L687">					System.out.println(&quot;You don't have enough money to withdraw that much!&quot;);</span>
+<span class="nc" id="L688">					accountChecking = AccountCheckingService.get().retrieveAccountsAsAdmin().get();</span>
+<span class="nc" id="L689">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L690">					input.nextLine();</span>
+				} 
+<span class="nc" id="L692">				break;</span>
+			case &quot;2&quot;:
+<span class="nc" id="L694">				System.out.println(&quot;How much would you like to deposit?&quot;);</span>
+<span class="nc" id="L695">				amt = input.nextLine();</span>
+				
+				try {
+<span class="nc" id="L698">					double amount = Double.parseDouble(amt);</span>
+<span class="nc bnc" id="L699" title="All 2 branches missed.">					if(amount &lt; 0.0) {</span>
+<span class="nc" id="L700">						System.out.println(&quot;You can only deposit a positive amount!&quot;);</span>
+<span class="nc" id="L701">						System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L702">						input.nextLine();</span>
+<span class="nc" id="L703">						break;</span>
+					}
+<span class="nc" id="L705">					accountChecking = AccountCheckingService.get().deposit(amount, acc_info.getBankAccountId(), -1).get();</span>
+<span class="nc" id="L706">					System.out.println(&quot;You deposited $&quot; + df.format(amount));</span>
+<span class="nc" id="L707">					System.out.println(&quot;Your remaining balance is $&quot; + df.format(accountChecking.getAccounts().get(index).getBalance()));</span>
+<span class="nc" id="L708">					breaker = true;</span>
+<span class="nc" id="L709">					System.out.println(&quot;Press enter to continue...&quot;);</span>
+<span class="nc" id="L710">					amt = input.nextLine();</span>
+<span class="nc" id="L711">				} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L712">					System.out.println(&quot;You can't deposit that much!&quot;);</span>
+<span class="nc" id="L713">					accountChecking = AccountCheckingService.get().retrieveAccountsAsAdmin().get();</span>
+<span class="nc" id="L714">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L715">					input.nextLine();</span>
+				} 
+<span class="nc" id="L717">				break;</span>
+			case &quot;3&quot;:
+<span class="nc" id="L719">				System.out.println(&quot;Who would you like to transfer money to?\nEnter the bank account id:&quot;);</span>
+<span class="nc" id="L720">				String targetidstring = input.nextLine();</span>
+				int targetid;
+				try {
+<span class="nc" id="L723">					targetid = Integer.parseInt(targetidstring);</span>
+<span class="nc" id="L724">				} catch(NumberFormatException e) {</span>
+<span class="nc" id="L725">					System.out.println(&quot;Please enter a valid bank account number.&quot;);</span>
+<span class="nc" id="L726">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L727">					input.nextLine();</span>
+<span class="nc" id="L728">					break;</span>
+				}
+<span class="nc" id="L730">				System.out.println(&quot;How much would you like to send?&quot;);</span>
+<span class="nc" id="L731">				amt = input.nextLine();</span>
+<span class="nc" id="L732">				double amount = Double.parseDouble(amt);</span>
+<span class="nc bnc" id="L733" title="All 2 branches missed.">				if(amount &lt; 0.0) {</span>
+<span class="nc" id="L734">					System.out.println(&quot;You can only transfer a positive amount!&quot;);</span>
+<span class="nc" id="L735">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L736">					input.nextLine();</span>
+<span class="nc" id="L737">					break;</span>
+				}
+				try {
+<span class="nc bnc" id="L740" title="All 2 branches missed.">					if(acc_info.getBankAccountId() == targetid) {</span>
+<span class="nc" id="L741">						System.out.println(&quot;Sorry, you can't transfer money to the same account like that.&quot;);</span>
+<span class="nc" id="L742">						break;</span>
+					}
+<span class="nc" id="L744">					accountChecking = AccountCheckingService.get().transfer(amount, acc_info.getBankAccountId(), targetid, -1).get();</span>
+<span class="nc" id="L745">					System.out.println(&quot;You transferred $&quot; + df.format(amount) + &quot; to the bank account id &quot; + targetid + &quot;.&quot;);</span>
+<span class="nc" id="L746">					System.out.println(&quot;Your remaining balance is $&quot; + df.format(accountChecking.getAccounts().get(index).getBalance()));</span>
+<span class="nc" id="L747">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L748">					input.nextLine();</span>
+<span class="nc" id="L749">				} catch(NoSuchElementException e) {</span>
+<span class="nc" id="L750">					System.out.println(&quot;Your transfer has failed due to insufficient funds or invalid recipient.&quot;);</span>
+<span class="nc" id="L751">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L752">					input.nextLine();</span>
+				}
+				
+<span class="nc" id="L755">				break;</span>
+			case &quot;0&quot;:
+<span class="nc" id="L757">				return;</span>
+			case &quot;4&quot;:
+<span class="nc" id="L759">				boolean breaker2 = false;</span>
+<span class="nc bnc" id="L760" title="All 2 branches missed.">				while(!breaker2) {</span>
+<span class="nc" id="L761">					System.out.println(&quot;Are you sure you want to delete this account? (Y/N)&quot;);</span>
+<span class="nc" id="L762">					choice = input.nextLine().toUpperCase();</span>
+<span class="nc bnc" id="L763" title="All 7 branches missed.">					switch(choice) {</span>
+					case &quot;Y&quot;: 
+						// Delete account
+						try {
+<span class="nc" id="L767">							accountChecking = AccountCheckingService.get().deleteAccountAsAdmin(acc_info.getBankAccountId()).get();</span>
+<span class="nc" id="L768">							breaker2 = true;</span>
+<span class="nc" id="L769">							breaker = true;</span>
+<span class="nc" id="L770">							System.out.println(&quot;You have successfully deleted your account!&quot;);</span>
+<span class="nc" id="L771">							System.out.println(&quot;Press the enter key to return back to the main menu...&quot;);</span>
+<span class="nc" id="L772">							input.nextLine();</span>
+<span class="nc" id="L773">						} catch(NoSuchElementException e) { </span>
+<span class="nc" id="L774">							System.out.println(&quot;You are unable to delete the account!\nPlease check if you are an admin.&quot;);</span>
+<span class="nc" id="L775">							System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L776">							input.nextLine();</span>
+						}
+<span class="nc" id="L778">						break;</span>
+					case &quot;N&quot;:
+<span class="nc" id="L780">						breaker2 = true;</span>
+<span class="nc" id="L781">						break;</span>
+					default:
+						break;
+					}
+				}
+<span class="nc" id="L786">				break;</span>
+			default:
+				break;
+			}
+		}
+<span class="nc" id="L791">	}</span>
+	
+	public void adminUserAccounts() {
+		try {
+<span class="nc" id="L795">			System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L796">			users = UserService.get().retrieveUsersAsAdmin().get();</span>
+<span class="nc" id="L797">			System.out.println(&quot;This is the list of all user accounts: &quot;);</span>
+		
+<span class="nc" id="L799">			int page = 0;</span>
+<span class="nc" id="L800">			int pageSize = 8;</span>
+<span class="nc" id="L801">			boolean breaker = false;</span>
+			
+<span class="nc bnc" id="L803" title="All 2 branches missed.">			while(!breaker) {</span>
+<span class="nc" id="L804">			int index = 0;</span>
+<span class="nc bnc" id="L805" title="All 2 branches missed.">			while(index &lt; pageSize) {</span>
+<span class="nc" id="L806">				User user_info = users.getUsers().get(index + page*pageSize);</span>
+<span class="nc" id="L807">				System.out.println(&quot;&gt;    &quot; + (index+1)+&quot;.     | Username: &quot; + user_info.getUsername());</span>
+<span class="nc bnc" id="L808" title="All 2 branches missed.">				if(index + 1 + page*pageSize &gt;= users.getUsers().size()) {</span>
+<span class="nc" id="L809">					break;</span>
+				}
+<span class="nc" id="L811">				index++;</span>
+			}
+<span class="nc bnc" id="L813" title="All 2 branches missed.">			if(page == 0) {</span>
+<span class="nc bnc" id="L814" title="All 2 branches missed.">				if((page+1)*pageSize &gt;= users.getUsers().size()) {</span>
+<span class="nc" id="L815">					System.out.println(&quot;\n9. Main Menu&quot;);</span>
+<span class="nc" id="L816">				} else {</span>
+<span class="nc" id="L817">					System.out.println(&quot;\n9. Main Menu\n0. Next&quot;);</span>
+				}
+<span class="nc" id="L819">			} else {</span>
+<span class="nc bnc" id="L820" title="All 2 branches missed.">				if((page+1)*pageSize &gt;= users.getUsers().size()) {</span>
+<span class="nc" id="L821">					System.out.println(&quot;\n9. Previous&quot;);</span>
+<span class="nc" id="L822">				} else {</span>
+<span class="nc" id="L823">					System.out.println(&quot;\n9. Previous\n0. Next&quot;);</span>
+				}
+			}
+<span class="nc" id="L826">			System.out.println(&quot;Which account would you like to access?&quot;);</span>
+<span class="nc" id="L827">			String choice = input.nextLine();</span>
+<span class="nc bnc" id="L828" title="All 31 branches missed.">			switch(choice) {</span>
+			case &quot;1&quot;:
+<span class="nc" id="L830">				int indexInList = page*pageSize;</span>
+<span class="nc bnc" id="L831" title="All 2 branches missed.">				if(1 + indexInList &gt; users.getUsers().size()) {</span>
+<span class="nc" id="L832">					break;</span>
+				}
+<span class="nc" id="L834">				breaker = true;</span>
+				
+<span class="nc" id="L836">				userInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L837">				break;</span>
+				
+			case &quot;2&quot;:
+<span class="nc" id="L840">				indexInList = 1 + page*pageSize;</span>
+<span class="nc bnc" id="L841" title="All 2 branches missed.">				if(1 + indexInList &gt; users.getUsers().size()) {</span>
+<span class="nc" id="L842">					break;</span>
+				}
+<span class="nc" id="L844">				breaker = true;</span>
+				
+<span class="nc" id="L846">				userInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L847">				break;</span>
+				
+			case &quot;3&quot;:
+<span class="nc" id="L850">				indexInList = 2 + page*pageSize;</span>
+<span class="nc bnc" id="L851" title="All 2 branches missed.">				if(1 + indexInList &gt; users.getUsers().size()) {</span>
+<span class="nc" id="L852">					break;</span>
+				}
+<span class="nc" id="L854">				breaker = true;</span>
+				
+<span class="nc" id="L856">				userInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L857">				break;</span>
+				
+			case &quot;4&quot;:
+<span class="nc" id="L860">				indexInList = 3 + page*pageSize;</span>
+<span class="nc bnc" id="L861" title="All 2 branches missed.">				if(1 + indexInList &gt; users.getUsers().size()) {</span>
+<span class="nc" id="L862">					break;</span>
+				}
+<span class="nc" id="L864">				breaker = true;</span>
+				
+<span class="nc" id="L866">				userInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L867">				break;</span>
+				
+			case &quot;5&quot;:
+<span class="nc" id="L870">				indexInList = 4 + page*pageSize;</span>
+<span class="nc bnc" id="L871" title="All 2 branches missed.">				if(1 + indexInList &gt; users.getUsers().size()) {</span>
+<span class="nc" id="L872">					break;</span>
+				}
+<span class="nc" id="L874">				breaker = true;</span>
+			
+<span class="nc" id="L876">				userInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L877">				break;</span>
+				
+			case &quot;6&quot;:
+<span class="nc" id="L880">				indexInList = 5 + page*pageSize;</span>
+<span class="nc bnc" id="L881" title="All 2 branches missed.">				if(1 + indexInList &gt; users.getUsers().size()) {</span>
+<span class="nc" id="L882">					break;</span>
+				}
+<span class="nc" id="L884">				breaker = true;</span>
+			
+<span class="nc" id="L886">				userInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L887">				break;</span>
+				
+			case &quot;7&quot;:
+<span class="nc" id="L890">				indexInList = 6 + page*pageSize;</span>
+<span class="nc bnc" id="L891" title="All 2 branches missed.">				if(1 + indexInList &gt; users.getUsers().size()) {</span>
+<span class="nc" id="L892">					break;</span>
+				}
+<span class="nc" id="L894">				breaker = true;</span>
+			
+<span class="nc" id="L896">				userInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L897">				break;</span>
+				
+			case &quot;8&quot;:
+<span class="nc" id="L900">				indexInList = 7 + page*pageSize;</span>
+<span class="nc bnc" id="L901" title="All 2 branches missed.">				if(1 + indexInList &gt; users.getUsers().size()) {</span>
+<span class="nc" id="L902">					break;</span>
+				}
+<span class="nc" id="L904">				breaker = true;</span>
+			
+<span class="nc" id="L906">				userInvocationAsAdmin(indexInList);</span>
+<span class="nc" id="L907">				break;</span>
+				
+			case &quot;9&quot;:
+<span class="nc" id="L910">				index = 0;</span>
+<span class="nc bnc" id="L911" title="All 2 branches missed.">				if(page &gt; 0) {</span>
+<span class="nc" id="L912">					page--;</span>
+<span class="nc" id="L913">				} else {</span>
+<span class="nc" id="L914">					return;</span>
+				}
+				break;
+			case &quot;0&quot;: 
+<span class="nc" id="L918">				index = 0;</span>
+<span class="nc bnc" id="L919" title="All 2 branches missed.">				if((page+1)*pageSize &lt; users.getUsers().size()) {</span>
+<span class="nc" id="L920">					page++;</span>
+				}
+<span class="nc" id="L922">				break;</span>
+			
+			default:
+				break;
+			}
+			}
+<span class="nc" id="L928">		} catch(NoSuchElementException e) {</span>
+<span class="nc" id="L929">			System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L930">			System.out.println(&quot;Sorry, there are no users in the database.&quot;);</span>
+<span class="nc" id="L931">			System.out.println(&quot;Press the enter key to return back to the main menu...&quot;);</span>
+			
+<span class="nc" id="L933">			input.nextLine();</span>
+<span class="nc" id="L934">			return;</span>
+		}
+<span class="nc" id="L936">	};</span>
+	
+	public void userInvocationAsAdmin(int index) {
+<span class="nc" id="L939">		System.out.println(&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;);</span>
+<span class="nc" id="L940">		User user_info = users.getUsers().get(index);</span>
+<span class="nc" id="L941">		System.out.println(&quot;Currently viewing user: &quot; + user_info.getUsername());		</span>
+	
+<span class="nc" id="L943">		boolean breaker = false;</span>
+
+<span class="nc bnc" id="L945" title="All 2 branches missed.">		while(!breaker) {</span>
+<span class="nc" id="L946">			System.out.println(&quot;What would you like to do?\n&quot;);</span>
+<span class="nc" id="L947">			System.out.println(&quot;1. Delete&quot;);</span>
+<span class="nc" id="L948">			System.out.println(&quot;\n0. Go back&quot;);</span>
+<span class="nc" id="L949">			System.out.println(&quot;\nPick an option: &quot;);</span>
+			
+<span class="nc" id="L951">			String choice = input.nextLine();</span>
+			
+<span class="nc bnc" id="L953" title="All 7 branches missed.">			switch(choice) {</span>
+			case &quot;1&quot;:
+<span class="nc" id="L955">				boolean breaker2 = false;</span>
+<span class="nc bnc" id="L956" title="All 2 branches missed.">				while(!breaker2) {</span>
+<span class="nc" id="L957">					System.out.println(&quot;Are you sure you want to delete this account? (Y/N)&quot;);</span>
+<span class="nc" id="L958">					choice = input.nextLine().toUpperCase();</span>
+<span class="nc bnc" id="L959" title="All 4 branches missed.">					switch(choice) {</span>
+					case &quot;Y&quot;: 
+						// Delete account
+						try {
+<span class="nc" id="L963">							users = UserService.get().removeUserAsAdmin(user_info.getUserID()).get();</span>
+<span class="nc" id="L964">							breaker2 = true;</span>
+<span class="nc" id="L965">							breaker = true;</span>
+<span class="nc" id="L966">							System.out.println(&quot;You have successfully deleted that user!&quot;);</span>
+<span class="nc" id="L967">							System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L968">							input.nextLine();</span>
+<span class="nc" id="L969">						} catch(NoSuchElementException e) { </span>
+<span class="nc" id="L970">							System.out.println(&quot;You are unable to delete the account!\nPlease check if you are an admin.&quot;);</span>
+						}
+						break;
+					}
+				}
+<span class="nc" id="L975">				break;</span>
+			case &quot;0&quot;:
+<span class="nc" id="L977">				return;</span>
+			default:
+				break;
+			}
+		}
+<span class="nc" id="L982">	}</span>
+	
+	
+	public void closeAccount() {
+<span class="nc" id="L986">		System.out.println(&quot;To delete your account, please make sure that you withdrew all your money from each account&quot;);</span>
+<span class="nc" id="L987">		boolean breaker = false;</span>
+<span class="nc bnc" id="L988" title="All 2 branches missed.">		while(!breaker) {</span>
+<span class="nc" id="L989">			System.out.println(&quot;Are you sure you want to delete your account? (Y/N)&quot;); </span>
+<span class="nc" id="L990">			String choice = input.nextLine().toUpperCase();</span>
+<span class="nc bnc" id="L991" title="All 7 branches missed.">			switch(choice) {</span>
+			case &quot;Y&quot;:
+				try {
+<span class="nc" id="L994">					user = UserService.get().removeUser(user.getUserID()).get();</span>
+<span class="nc bnc" id="L995" title="All 2 branches missed.">					if(user.getUserID() == 0) {</span>
+<span class="nc" id="L996">						System.out.println(&quot;Your account has been successfully closed.&quot;);</span>
+<span class="nc" id="L997">						System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L998">						input.nextLine();</span>
+					}
+<span class="nc" id="L1000">					breaker = true;</span>
+<span class="nc" id="L1001">				} catch(NoSuchElementException e) {</span>
+<span class="nc" id="L1002">					System.out.println(&quot;Sorry. You can only close your user account that have no balance in any checking accounts.&quot;);</span>
+<span class="nc" id="L1003">					System.out.println(&quot;Press the enter key to continue...&quot;);</span>
+<span class="nc" id="L1004">					input.nextLine();</span>
+<span class="nc" id="L1005">					breaker = true;</span>
+				}
+<span class="nc" id="L1007">				break;</span>
+			case &quot;N&quot;:
+<span class="nc" id="L1009">				breaker = true;</span>
+<span class="nc" id="L1010">				break;</span>
+			default:
+				break;
+			}
+		}
+<span class="nc" id="L1015">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
