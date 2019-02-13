@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,6 +38,13 @@ public class UserOracle implements UserDao{
 	
 	@Override
 	public Optional<User> addUser(String username, String password, int adminAccess) {
+		// Check username valid
+		Pattern p = Pattern.compile("[^a-zA-Z0-9]");
+		boolean hasSpecialChar = p.matcher(username).find();
+		if(hasSpecialChar) {
+			return Optional.empty();
+		}
+		
 		String query = "call createuser(?, ?, ?, ?)";
 		try(CallableStatement stmt = DBConnection.get().getConnection().prepareCall(query)) {
 			stmt.setString(1, username);
@@ -166,6 +174,11 @@ public class UserOracle implements UserDao{
 	
 	@Override
 	public boolean checkUsername(String username) {
+		Pattern p = Pattern.compile("[^a-zA-Z0-9]");
+		boolean hasSpecialChar = p.matcher(username).find();
+		if(hasSpecialChar) {
+			return true;
+		}
 		String query = "select * from p0_users where USERNAME = ?";
 		
 		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {

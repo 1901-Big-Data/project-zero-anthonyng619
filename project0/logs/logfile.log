@@ -4423,3 +4423,14 @@ java.util.NoSuchElementException: No line found
 [DEBUG] 2019-02-12 17:54:39.618 [main] ConsoleDisplay - User finished registering for new account. Username: 111q
 [DEBUG] 2019-02-12 17:55:20.884 [main] AccountCheckingOracle - Unsuccessful deletion
 [DEBUG] 2019-02-12 18:04:48.037 [main] AccountCheckingOracle - Unsuccessful deletion
+[DEBUG] 2019-02-12 22:09:55.783 [main] UserOracle - Added user to database with user id: 361
+[DEBUG] 2019-02-12 22:09:55.788 [main] ConsoleDisplay - User finished registering for new account. Username:  
+[DEBUG] 2019-02-12 22:24:39.190 [main] UserOracle - Added user to database with user id: 362
+[DEBUG] 2019-02-12 22:24:39.194 [main] ConsoleDisplay - User finished registering for new account. Username:  
+[DEBUG] 2019-02-12 22:24:45.841 [main] UserOracle - Added user to database with user id: 363
+[DEBUG] 2019-02-12 22:24:45.841 [main] ConsoleDisplay - User finished registering for new account. Username:  
+[DEBUG] 2019-02-12 22:24:58.029 [main] UserOracle -   exists
+[DEBUG] 2019-02-12 22:28:34.442 [main] UserOracle - Added user to database with user id: 364
+[DEBUG] 2019-02-12 22:28:34.445 [main] ConsoleDisplay - User finished registering for new account. Username: a
+[DEBUG] 2019-02-12 22:29:20.607 [main] UserOracle - Added user to database with user id: 365
+[DEBUG] 2019-02-12 22:29:20.607 [main] ConsoleDisplay - User finished registering for new account. Username: 1
