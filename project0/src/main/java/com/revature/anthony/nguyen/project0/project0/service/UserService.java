@@ -42,6 +42,7 @@ public class UserService {
 		}
 	}
 	
+	
 	public Optional<User> addUser(String username, String password, int adminAccess) throws NoSuchElementException {
 		return userDao.addUser(username, password, adminAccess);
 	}

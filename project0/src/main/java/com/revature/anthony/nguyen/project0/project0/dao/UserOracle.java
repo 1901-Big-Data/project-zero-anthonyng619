@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -36,6 +37,15 @@ public class UserOracle implements UserDao{
 		}
 	}
 	
+	/**
+	 * addUser
+	 * Queries into the database and sets up a User model wrapped in an optional
+	 * to be sent back to the console application
+	 * @param String username
+	 * @param String password
+	 * @param int admin access; 0 or 1 or 2
+	 * @return Optional
+	 */
 	@Override
 	public Optional<User> addUser(String username, String password, int adminAccess) {
 		// Check username valid
@@ -66,6 +76,12 @@ public class UserOracle implements UserDao{
 		}
 	}
 
+	/**
+	 * removeUser
+	 * Removes the user from the database when balance is 0 across all checking accounts.
+	 * @param int userid
+	 * @return Optional
+	 */
 	@Override
 	public Optional<User> removeUser(int userid) {
 		String query = "call deleteuser(?, ?)";
@@ -89,6 +105,12 @@ public class UserOracle implements UserDao{
 		}
 	}
 	
+	/**
+	 * removeUserAsAdmin
+	 * Force removes a user regardless of balance in the user's accounts. WILL BE WIPED.
+	 * @param int userid
+	 * @return Optional
+	 */
 	@
 	Override
 	public Optional<Users> removeUserAsAdmin(int userid) {
@@ -126,6 +148,14 @@ public class UserOracle implements UserDao{
 		}
 	}
 
+	/**
+	 * loginUser
+	 * Queries the username and password to DB and returns a User wrapped in an optional
+	 * upon success.
+	 * @param String username
+	 * @param String password
+	 * @return Optional
+	 */
 	@Override
 	public Optional<User> loginUser(String username, String password) {
 		String query = "select * from p0_users where USERNAME = ? and PASSCODE = ?";
@@ -146,32 +176,14 @@ public class UserOracle implements UserDao{
 		}
 		return Optional.empty();
 	}
-
-	/*
-	@Override
-	public Optional<User> retrieveUser(String username, String password) {
-		String query = "select * from BANKUSERS where USERNAME = ? and PASSCODE = ?";
-		
-		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
-			stmt.setString(1, username);
-			stmt.setString(2, password);
-			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
-				User user = new User();
-				user.setUsername(rs.getString("USERNAME"));
-				user.setPassword(rs.getString("PASSCODE"));
-				user.setFirstName(rs.getString("FIRSTNAME"));
-				user.setLastName(rs.getString("LASTNAME"));
-				user.setBankAccountId(rs.getString("BANK_ACCOUNT_ID"));
-				return Optional.of(user);
-			}
-		} catch(SQLException e) {
-			System.err.println("SQL Exception");
-			return Optional.empty();
-		}
-		return Optional.empty();
-	}*/
 	
+	/**
+	 * checkUsername
+	 * Checks username to see if it contains valid characters or if the username
+	 * already exists on the database.
+	 * @param String username
+	 * @return boolean
+	 */
 	@Override
 	public boolean checkUsername(String username) {
 		Pattern p = Pattern.compile("[^a-zA-Z0-9]");
@@ -196,6 +208,11 @@ public class UserOracle implements UserDao{
 		return false;
 	}
 
+	/**
+	 * retrieveUsersAsAdmin
+	 * Grabs the list of users into a Users model that only the admin has access to.
+	 * @return Optional
+	 */
 	@Override
 	public Optional<Users> retrieveUsersAsAdmin() {
 		String query = "select *  from p0_users";

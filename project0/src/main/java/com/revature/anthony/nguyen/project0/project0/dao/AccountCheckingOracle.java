@@ -34,6 +34,15 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 		}
 	}
 	
+	/**
+	 * deposit
+	 * Deposit an amount into the database. All negatives are handled through exceptions. Grabs
+	 * all user accounts after the deposit and returns it in an AccountChecking model
+	 * @param double amt
+	 * @param int bankId
+	 * @param int userId
+	 * @return Optional
+	 */
 	@Override
 	public Optional<AccountChecking> deposit(double amt, int bankId, int userId) {
 		String query = "call depositmoney(?, ?, ?, ?, ?)";
@@ -75,6 +84,15 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 		}
 	}
 
+	/**
+	 * withdraw
+	 * Withdraw an amount into the database. All negatives are handled through exceptions. Grabs
+	 * all user accounts after the withdraw and returns it in an AccountChecking model
+	 * @param double amt
+	 * @param int bankId
+	 * @param int userId
+	 * @return Optional
+	 */
 	@Override
 	public Optional<AccountChecking> withdraw(double amt, int bankId, int userId) {
 		
@@ -121,6 +139,16 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 		}
 	}
 
+	/**
+	 * transfer
+	 * Transfer an amount from one account into another in the database. All negatives 
+	 * are handled through exceptions. Grabs all user accounts after the transfer and 
+	 * returns it in an AccountChecking model
+	 * @param double amt
+	 * @param int bankId
+	 * @param int userId
+	 * @return Optional
+	 */
 	@Override
 	public Optional<AccountChecking> transfer(double amt, int sourceBankId, int targetBankId, int userId) {
 		String query = "call transfermoney(?, ?, ?, ?, ?, ?)";
@@ -169,26 +197,14 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			return Optional.empty();
 		}
 	}
-
-	/*
-	@Override
-	public Optional<Double> getBalance(String bankAccountId) {
-		String query = "select BALANCE from ACCOUNTS_CHECKING where BANK_ACCOUNT_ID = ?";
-		try(PreparedStatement stmt = DBConnection.get().getConnection().prepareStatement(query)) {
-			stmt.setString(1, bankAccountId);
-			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
-				return Optional.of(rs.getDouble("BALANCE"));
-			}
-		} catch (SQLException e) {
-			log.catching(e);
-			return Optional.empty();
-		}
-		return Optional.empty();
-	}
+	
+	/** 
+	 * retrieveAccounts
+	 * Retrieves the list of accounts held under the user in an AccountChecking model wrapped under
+	 * an Optional.
+	 * @param int userId
+	 * @return Optional
 	 */
-	
-	
 	@Override
 	public Optional<AccountChecking> retrieveAccounts(int userId) {
 		String query = "select * from p0_checking where user_id = ?";
@@ -222,7 +238,13 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 			return Optional.empty();
 		}
 	}
-
+	
+	/**
+	 * createAccount
+	 * Creates an account under the userid provided into the database with an initial balance of 0.
+	 * @param int userId
+	 * @return Optional
+	 */
 	@Override
 	public Optional<AccountInformation> createAccount(int userId) {
 		String query = "call createcheckingaccount(?, ?)";
@@ -243,6 +265,13 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 		}
 	}
 	
+	/**
+	 * deleteAccount
+	 * Deletes an account on the user's request, but will fail if the user has balance in the account.
+	 * @param int bankId
+	 * @param int invokerId
+	 * @return Optional
+	 */
 	@Override
 	public Optional<AccountChecking> deleteAccount(int bankId, int invokerId) {
 		String query = "call deletecheckingaccount(?, ?, ?, ?)";
@@ -289,6 +318,12 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 		}
 	}
 
+	/**
+	 * retrieveAccountsAsAdmin
+	 * Retrieves all accounts in the database which is only accessible by the admin. Stores
+	 * all accounts into an AccountChecking model
+	 * @return Optional
+	 */
 	@Override
 	public Optional<AccountChecking> retrieveAccountsAsAdmin() {
 		String query = "select * from p0_checking";
@@ -320,6 +355,12 @@ public class AccountCheckingOracle implements AccountCheckingDao {
 		}
 	}
 
+	/**
+	 * deleteAccountAsAdmin
+	 * Force delete an account from database regardless of balance.
+	 * @param int bankId
+	 * @return Optional
+	 */
 	@Override
 	public Optional<AccountChecking> deleteAccountAsAdmin(int bankId) {
 		String query = "call deletecheckingaccountasadmin(?, ?, ?)";
