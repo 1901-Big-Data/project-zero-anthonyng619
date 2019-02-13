@@ -4434,3 +4434,36 @@ java.util.NoSuchElementException: No line found
 [DEBUG] 2019-02-12 22:28:34.445 [main] ConsoleDisplay - User finished registering for new account. Username: a
 [DEBUG] 2019-02-12 22:29:20.607 [main] UserOracle - Added user to database with user id: 365
 [DEBUG] 2019-02-12 22:29:20.607 [main] ConsoleDisplay - User finished registering for new account. Username: 1
+[ERROR] 2019-02-12 22:57:57.908 [main] UserOracle - Catching
+java.sql.SQLException: ORA-12899: value too large for column "ROOT"."P0_USERS"."PASSCODE" (actual: 24, maximum: 20)
+ORA-06512: at "ROOT.CREATEUSER", line 7
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:494) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:446) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1054) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:623) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:252) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:612) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:223) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:56) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:907) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1119) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3780) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.T4CCallableStatement.executeInternal(T4CCallableStatement.java:1300) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3887) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4230) ~[ojdbc8.jar:12.2.0.1.0]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1079) ~[ojdbc8.jar:12.2.0.1.0]
+	at com.revature.anthony.nguyen.project0.project0.dao.UserOracle.addUser(UserOracle.java:64) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.service.UserService.addUser(UserService.java:47) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.register(ConsoleDisplay.java:103) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.loginRegister(ConsoleDisplay.java:51) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.mainMenu(ConsoleDisplay.java:154) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.ConsoleDisplay.start(ConsoleDisplay.java:32) [classes/:?]
+	at com.revature.anthony.nguyen.project0.project0.application.App.main(App.java:31) [classes/:?]
+Caused by: oracle.jdbc.OracleDatabaseException: ORA-12899: value too large for column "ROOT"."P0_USERS"."PASSCODE" (actual: 24, maximum: 20)
+ORA-06512: at "ROOT.CREATEUSER", line 7
+
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:498) ~[ojdbc8.jar:12.2.0.1.0]
+	... 21 more
+[DEBUG] 2019-02-12 23:01:23.530 [main] UserOracle - Added user to database with user id: 367
+[DEBUG] 2019-02-12 23:01:23.534 [main] ConsoleDisplay - User finished registering for new account. Username: dogsarecool

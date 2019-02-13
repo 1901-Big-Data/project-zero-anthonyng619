@@ -102,7 +102,7 @@ public class ConsoleDisplay {
 		try {
 			user = UserService.get().addUser(username, password, 0).get();
 		} catch (NoSuchElementException e) {
-			System.out.println("Username is unavailable to use.");
+			System.out.println("Username and password must be under 20 characters.");
 			return;
 		}
 		log.debug("User finished registering for new account. Username: "+username);
