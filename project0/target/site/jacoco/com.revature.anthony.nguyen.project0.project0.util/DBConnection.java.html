@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DBConnection.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">project0</a> &gt; <a href="index.source.html" class="el_package">com.revature.anthony.nguyen.project0.project0.util</a> &gt; <span class="el_source">DBConnection.java</span></div><h1>DBConnection.java</h1><pre class="source lang-java linenums">package com.revature.anthony.nguyen.project0.project0.util;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.SQLTimeoutException;
+import java.util.Properties;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class DBConnection {
+	private static DBConnection dbcon;
+	private Connection conn;
+	private Properties props;
+	private Logger logger;
+<span class="fc" id="L19">	private boolean isAdmin = false;</span>
+	
+<span class="fc" id="L21">	private DBConnection() {</span>
+<span class="fc" id="L22">		this.props = new Properties();</span>
+<span class="fc" id="L23">		logger = LogManager.getLogger(DBConnection.class);</span>
+<span class="fc" id="L24">	}</span>
+	
+	public static DBConnection get() {
+<span class="fc bfc" id="L27" title="All 2 branches covered.">		if(dbcon == null) {</span>
+<span class="fc" id="L28">			dbcon = new DBConnection();</span>
+<span class="fc" id="L29">			return dbcon;</span>
+		} else {
+<span class="fc" id="L31">			return dbcon;</span>
+		}
+	}
+	
+	/** 
+	 * connect
+	 * 
+	 * Attempts to connect to the database provided.
+	 * @return boolean True or false depending if connection was established.
+	 */
+	public boolean connect() {
+		try {
+<span class="fc" id="L43">        	DriverManager.registerDriver(new oracle.jdbc.OracleDriver());</span>
+        	
+        	// Grab config file that stores db information
+<span class="fc" id="L46">        	loadProperties();</span>
+        	
+<span class="fc" id="L48">        	String superusername = this.props.getProperty(&quot;dbsuperuser&quot;);</span>
+<span class="fc" id="L49">        	String superpassword = this.props.getProperty(&quot;dbsuperpassword&quot;);</span>
+        	
+<span class="fc" id="L51">        	String dbUrl = &quot;jdbc:oracle:thin:&quot; + superusername + &quot;/&quot; + superpassword + &quot;@&quot; + this.props.getProperty(&quot;database&quot;) + &quot;:1521:ORCL&quot;;</span>
+<span class="fc" id="L52">        	this.conn = DriverManager.getConnection(dbUrl);</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        	if(conn != null) {</span>
+<span class="fc" id="L54">        		System.out.println(&quot;Connection successfully established.&quot;);</span>
+<span class="fc" id="L55">        		this.isAdmin = true;</span>
+<span class="fc" id="L56">        		return true;</span>
+        	}
+<span class="nc" id="L58">        } catch (SQLTimeoutException e) {</span>
+<span class="nc" id="L59">        	logger.debug(&quot;Timeout value exceeded the limit&quot;);</span>
+<span class="nc" id="L60">        } catch (SQLException e) {</span>
+<span class="nc" id="L61">        	logger.debug(&quot;Failed to authenticate as a super user. Accessing as a normal user.&quot;);</span>
+        	try {
+<span class="nc" id="L63">        		DriverManager.registerDriver(new oracle.jdbc.OracleDriver());</span>
+            	
+            	// Grab config file that stores db information
+<span class="nc" id="L66">            	loadProperties();</span>
+            	
+<span class="nc" id="L68">            	String username = this.props.getProperty(&quot;dbuser&quot;);</span>
+<span class="nc" id="L69">            	String password = this.props.getProperty(&quot;dbpassword&quot;);</span>
+            	
+<span class="nc" id="L71">            	String dbUrl = &quot;jdbc:oracle:thin:&quot; + username + &quot;/&quot; + password + &quot;@&quot; + this.props.getProperty(&quot;database&quot;) + &quot;:1521:ORCL&quot;;</span>
+<span class="nc" id="L72">            	this.conn = DriverManager.getConnection(dbUrl);</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">            	if(conn != null) {</span>
+<span class="nc" id="L74">            		System.out.println(&quot;Connection successfully established.&quot;);</span>
+<span class="nc" id="L75">            		this.isAdmin = false;</span>
+<span class="nc" id="L76">            		return true;</span>
+            	}
+<span class="nc" id="L78">        	} catch (SQLTimeoutException e1) {</span>
+<span class="nc" id="L79">        		logger.catching(e1);</span>
+<span class="nc" id="L80">        	} catch (SQLException e1) {</span>
+<span class="nc" id="L81">        		logger.catching(e1);</span>
+        	}
+        }
+<span class="nc" id="L84">		return false;</span>
+	}
+	
+	private void loadProperties() {
+		try {
+<span class="fc" id="L89">			this.props.load(new FileInputStream(&quot;src/main/resources/config.properties&quot;));</span>
+<span class="pc" id="L90">		} catch(NullPointerException e) {</span>
+<span class="nc" id="L91">			logger.debug(&quot;Please provide a valid config file&quot;);</span>
+<span class="nc" id="L92">		} catch(FileNotFoundException e) {</span>
+<span class="nc" id="L93">			logger.debug(&quot;Invalid file&quot;);</span>
+<span class="nc" id="L94">		} catch(Exception e) {</span>
+<span class="nc" id="L95">			logger.debug(&quot;Reached an error loading config&quot;);</span>
+		}
+<span class="fc" id="L97">	}</span>
+	
+	public Connection getConnection() {
+<span class="fc" id="L100">		return this.conn;</span>
+	}
+	
+	public boolean isAdmin() {
+<span class="nc" id="L104">		return this.isAdmin;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

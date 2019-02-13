@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">project0</a> &gt; <a href="index.source.html" class="el_package">com.revature.anthony.nguyen.project0.project0.service</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package com.revature.anthony.nguyen.project0.project0.service;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.*;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.Properties;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.revature.anthony.nguyen.project0.project0.dao.UserDao;
+import com.revature.anthony.nguyen.project0.project0.dao.UserOracle;
+import com.revature.anthony.nguyen.project0.project0.model.User;
+import com.revature.anthony.nguyen.project0.project0.model.Users;
+
+public class UserService {
+	private static UserService service;
+	private UserDao userDao;
+
+	/**
+	 * Private constructor for DBConnection.
+	 */
+<span class="fc" id="L27">	private UserService() {</span>
+<span class="fc" id="L28">		userDao = UserOracle.get();</span>
+<span class="fc" id="L29">	}</span>
+	
+	/**
+	 * Creates a singleton for DBConnection.
+	 * @return DBConnection The singleton
+	 */
+	public static UserService get() {
+<span class="fc bfc" id="L36" title="All 2 branches covered.">		if(service == null) {</span>
+<span class="fc" id="L37">			service = new UserService();</span>
+<span class="fc" id="L38">			return service;</span>
+		}
+		else {
+<span class="fc" id="L41">			return service;</span>
+		}
+	}
+	
+	
+	public Optional&lt;User&gt; addUser(String username, String password, int adminAccess) throws NoSuchElementException {
+<span class="fc" id="L47">		return userDao.addUser(username, password, adminAccess);</span>
+	}
+	
+	public Optional&lt;User&gt; loginUser(String username, String password) throws NoSuchElementException{
+<span class="fc" id="L51">		return userDao.loginUser(username, password);</span>
+	}
+	
+	public Optional&lt;User&gt; removeUser(int userid) {
+<span class="fc" id="L55">		return userDao.removeUser(userid);</span>
+	}
+	
+	public Optional&lt;Users&gt; removeUserAsAdmin(int userid) {
+<span class="fc" id="L59">		return userDao.removeUserAsAdmin(userid);</span>
+	}
+	
+	public Optional&lt;Users&gt; retrieveUsersAsAdmin() {
+<span class="fc" id="L63">		return userDao.retrieveUsersAsAdmin();</span>
+	}
+	
+	public boolean checkUser(String username) {
+<span class="fc" id="L67">		return userDao.checkUsername(username);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

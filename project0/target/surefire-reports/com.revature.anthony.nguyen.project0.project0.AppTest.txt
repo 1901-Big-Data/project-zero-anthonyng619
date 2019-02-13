@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.revature.anthony.nguyen.project0.project0.AppTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec

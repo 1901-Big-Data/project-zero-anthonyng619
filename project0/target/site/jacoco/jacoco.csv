@@ -1,0 +1,12 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+project0,com.revature.anthony.nguyen.project0.project0.application,ConsoleDisplay,2687,0,347,0,649,0,211,0,15,0
+project0,com.revature.anthony.nguyen.project0.project0.application,App,37,0,2,0,13,0,3,0,2,0
+project0,com.revature.anthony.nguyen.project0.project0.model,AccountChecking,14,12,0,0,7,5,4,2,4,2
+project0,com.revature.anthony.nguyen.project0.project0.model,Users,10,6,0,0,5,3,3,1,3,1
+project0,com.revature.anthony.nguyen.project0.project0.model,AccountInformation,6,20,0,0,3,9,2,4,2,4
+project0,com.revature.anthony.nguyen.project0.project0.model,User,47,28,0,0,20,12,12,3,12,3
+project0,com.revature.anthony.nguyen.project0.project0.dao,AccountCheckingOracle,270,714,74,46,31,181,48,22,0,10
+project0,com.revature.anthony.nguyen.project0.project0.dao,UserOracle,160,404,48,26,15,93,32,13,0,8
+project0,com.revature.anthony.nguyen.project0.project0.service,AccountCheckingService,2,53,1,1,1,14,1,10,0,10
+project0,com.revature.anthony.nguyen.project0.project0.service,UserService,0,48,0,2,0,13,0,9,0,8
+project0,com.revature.anthony.nguyen.project0.project0.util,DBConnection,96,89,3,3,25,23,3,6,1,5
