@@ -308,13 +308,13 @@ public class ConsoleDisplay {
 	public void bankAccountInvocation(int bankId) {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		AccountInformation acc_info = accountChecking.getAccounts().get(bankId);
-		System.out.println("Currently viewing Bank Account Number: " + acc_info.getBankAccountId());
-		System.out.println("Remaining balance: $"+ df.format(acc_info.getBalance()));
 		
 	
 		boolean breaker = false;
 
 		while(!breaker) {
+			System.out.println("Currently viewing Bank Account Number: " + acc_info.getBankAccountId());
+			System.out.println("Remaining balance: $"+ df.format(acc_info.getBalance()));
 			System.out.println("What would you like to do?\n");
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
@@ -440,8 +440,8 @@ public class ConsoleDisplay {
 		boolean breaker = false;
 		while(!breaker) {
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			System.out.println("You have the choice to open either a checking or savings account.");
-			System.out.println("Note: You can set up multiple accounts with us!");
+			System.out.println("You can open a checking account with us!");
+			System.out.println("Note: You can set up multiple accounts if you wish!");
 			System.out.println("\n1. Create a new checking account.");
 			System.out.println("\n0. Return to main menu.");
 			String choice = input.nextLine();
@@ -647,13 +647,13 @@ public class ConsoleDisplay {
 	public void bankInvocationAsAdmin(int index) {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		AccountInformation acc_info = accountChecking.getAccounts().get(index);
-		System.out.println("Currently viewing Bank Account Number: " + acc_info.getBankAccountId());
-		System.out.println("Remaining balance: $"+ df.format(acc_info.getBalance()));
 		
 	
 		boolean breaker = false;
 
 		while(!breaker) {
+			System.out.println("Currently viewing Bank Account Number: " + acc_info.getBankAccountId());
+			System.out.println("Remaining balance: $"+ df.format(acc_info.getBalance()));
 			System.out.println("What would you like to do?\n");
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
@@ -737,6 +737,10 @@ public class ConsoleDisplay {
 					break;
 				}
 				try {
+					if(acc_info.getBankAccountId() == targetid) {
+						System.out.println("Sorry, you can't transfer money to the same account like that.");
+						break;
+					}
 					accountChecking = AccountCheckingService.get().transfer(amount, acc_info.getBankAccountId(), targetid, -1).get();
 					System.out.println("You transferred $" + df.format(amount) + " to the bank account id " + targetid + ".");
 					System.out.println("Your remaining balance is $" + df.format(accountChecking.getAccounts().get(index).getBalance()));
